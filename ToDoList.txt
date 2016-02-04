@@ -1,0 +1,4 @@
+A faire pour les diapo :
+ - diapo présentation : changer 'projet' en 'project'
+ - diapo business object : homogeniser la quantite d'info sur les 2 diapo et uniformiser le style (titre de l'objet métier redondant sur la 1ere diapo mais pas sur la 2nde)
+ - diagramme à refaire en systeme/sous systeme.
