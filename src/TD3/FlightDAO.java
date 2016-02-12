@@ -1,4 +1,2 @@
-import java.util.*;
-public interface FlightDAO{
-    List<Flight> getFlights();
+public interface FlightDAO extends DAO<Flight>{
 }
