@@ -1,2 +1,2 @@
-public interface PlaneDAO{
-}
+
+public interface PlaneDAO extends DAO<Plane>{}

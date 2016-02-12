@@ -1,4 +1,5 @@
+
 public class Crew{
-    String name;
-    Status status;
+    public String name;
+    public CrewStatus status;
 }

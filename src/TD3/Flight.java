@@ -1,7 +1,20 @@
+import java.util.*;
+
 public class Flight{
-    String commercial_number;
-    String ATC_code;
-    Airport departure,arrival;
-    Plane plane;
+
+    public String commercial_number;
+    public String ATC_code;
     
+    public Plane plane;
+    public List<Crew> crew_members;
+
+    public Airport departure_airport;
+    public Airport arrival_airport;
+    public String departure_time;
+    public String  arrival_time;
+
+    public String ofp_url;
+    public String weather_maps_url;
+    public List<String> notam;
+
 }

@@ -1,4 +1,4 @@
 public class Airport{
-    int id;
-    String ICAO_code;
+    public int identifier;
+    public String ICAO_code;
 }

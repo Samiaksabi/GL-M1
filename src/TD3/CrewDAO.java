@@ -1,2 +1,2 @@
-public interface CrewDAO{
-}
+
+public interface CrewDAO extends DAO<Crew>{}

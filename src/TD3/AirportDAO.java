@@ -1,2 +1,2 @@
-public interface AirportDAO{
-}
+
+public interface AirportDAO extends DAO<Airport>{}
