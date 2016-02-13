@@ -5,8 +5,8 @@ import ress.*;
 import java.util.*;
 public class Main {
 	
-	final static int NB_FLIGHTS = 100;
-	final static int NB_CREWS = 1000;
+	final static int NB_FLIGHTS = 10;
+	final static int NB_CREWS = 20;
 	
 	public static List<String> names = new ArrayList<String>();
 	
