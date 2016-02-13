@@ -1,10 +1,13 @@
 package dao;
-import java.util.*;
+
+
+import java.util.Collection;
 
 import ress.Flight;
 
 public interface FlightDAO extends DAO<Flight>{
-    
-    List<Flight> search(String commercial_number);
 
+	 Flight getFlight(int crew_id,int id);
+	 Collection<Flight> getAll(int crew_id);
+	 
 }

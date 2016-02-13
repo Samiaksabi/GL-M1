@@ -11,15 +11,18 @@ import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.servlet.ServletContainer;
 
+import ws.bouchon.*;
 
-
-public class FpsServer {
+public abstract class FpsServer {
 	
-	private Server server;
+	public static Database db;
 	
-	public FpsServer(){
+	private static Server server;
+	
+	public static void init(){
 		// Initialize the server
 		server = new Server();
+		
 
 		// Add a connector
 		ServerConnector connector = new ServerConnector(server);
@@ -30,7 +33,7 @@ public class FpsServer {
 
 		// Configure Jersey
 		ResourceConfig rc = new ResourceConfig();
-		rc.packages(true, "ws");
+		rc.packages(true, "ws.bouchon");
 		rc.register(JacksonFeature.class);
 		rc.register(LoggingFilter.class);
 
@@ -43,9 +46,12 @@ public class FpsServer {
 		ContextHandlerCollection contexts = new ContextHandlerCollection();
 		contexts.setHandlers(new Handler[] { handlerWebServices });
 		server.setHandler(contexts);
+		
+		// Initialize Fake Database
+		FpsServer.db = new Database();
 	}
 	
-	public void start() throws Exception{
+	public static void start() throws Exception{
 		// Start server
 		server.start();	
 	}

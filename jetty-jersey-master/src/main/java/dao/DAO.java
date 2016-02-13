@@ -3,13 +3,10 @@ import java.util.*;
 
 public interface DAO<T>{
 
-    List<T> getList();
-    List<T> getList(int id);
+    Collection<T> getAll();
     T getElement(int id);
-    int getId(T elt);
     void addElement(T elt);
-    void deleteElement(T elt);
     void deleteElement(int id);
-    void modifyElement(int id, T elt);
+    void editElement(int id, T elt);
 
 }
