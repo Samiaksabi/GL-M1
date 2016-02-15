@@ -11,7 +11,7 @@ import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.servlet.ServletContainer;
 
-import ws.bouchon.*;
+import ws.*;
 
 public abstract class FpsServer {
 	
@@ -33,7 +33,7 @@ public abstract class FpsServer {
 
 		// Configure Jersey
 		ResourceConfig rc = new ResourceConfig();
-		rc.packages(true, "ws.bouchon");
+		rc.packages(true, "ws");
 		rc.register(JacksonFeature.class);
 		rc.register(LoggingFilter.class);
 

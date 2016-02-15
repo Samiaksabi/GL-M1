@@ -1,9 +1,10 @@
-package ws.bouchon;
+package ws;
 
 import ress.*;
 import java.util.*;
 import dao.FlightDAO;
 import server.FpsServer;
+import dao.fake.*;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -20,50 +21,50 @@ public class FlightRessource implements FlightDAO{
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/flight_list")
+	@Path("/flight")
 	public Collection<Flight> getAll(){
-		return FpsServer.db.flights.getDb();
+		return FlightRessourceFake.getAll();
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/flight_list/{id}")
+	@Path("/flight/{id}")
 	public Flight getElement(@PathParam("id") int id){
-		return FpsServer.db.flights.get(id);
+		return FlightRessourceFake.getElement(id);
 	}
 	
 	@DELETE
-	@Path("/flight_list/{id}")
+	@Path("/flight/{id}")
 	public void deleteElement(@PathParam("id") int id){
-		FpsServer.db.flights.delete(id);
+		FlightRessourceFake.deleteElement(id);
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/{crew_id}/flight_list")
+	@Path("/{crew_id}/flight")
     public Collection<Flight> getAll(@PathParam("crew_id") int crew_id){
-		return FpsServer.db.getFlights(crew_id);
+		return FlightRessourceFake.getAll(crew_id);
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/{crew_id}/flight_list/{id}")
+	@Path("/{crew_id}/flight/{id}")
     public Flight getFlight(@PathParam("crew_id") int crew_id,@PathParam("id") int id){
-		return FpsServer.db.getFlight(crew_id,id);
+		return FlightRessourceFake.getFlight(crew_id, id);
 	}
 
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/flight_list")
+	@Path("/flight")
 	public void addElement(Flight f){
-		FpsServer.db.flights.add(f);
+		FlightRessourceFake.addElement(f);
 	}
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/flight_list/{id}/edit")
+	@Path("/flight/{id}/edit")
 	public void editElement(@PathParam("id") int id, Flight f){
-		FpsServer.db.flights.edit(id, f);
+		FlightRessourceFake.editElement(id, f);
 	}
 
 }

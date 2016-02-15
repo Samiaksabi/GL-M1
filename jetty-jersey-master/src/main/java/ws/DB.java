@@ -1,4 +1,4 @@
-package ws.bouchon;
+package ws;
 
 import java.util.*;
 
