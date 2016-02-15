@@ -3,7 +3,6 @@ package ws;
 import ress.*;
 import java.util.*;
 import dao.FlightDAO;
-import server.FpsServer;
 import dao.fake.*;
 
 import javax.ws.rs.Consumes;
@@ -68,4 +67,3 @@ public class FlightRessource implements FlightDAO{
 	}
 
 }
-

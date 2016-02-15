@@ -11,6 +11,7 @@ import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.servlet.ServletContainer;
 
+import fakeDB.Database;
 import ws.*;
 
 public abstract class FpsServer {
