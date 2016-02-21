@@ -11,16 +11,13 @@ import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.servlet.ServletContainer;
 
-import fakeDB.Database;
-import ws.*;
 
-public abstract class FpsServer {
+public class FpsServer {
+
 	
-	public static Database db;
+	private Server server;
 	
-	private static Server server;
-	
-	public static void init(){
+	public FpsServer(){
 		// Initialize the server
 		server = new Server();
 		
@@ -47,12 +44,9 @@ public abstract class FpsServer {
 		ContextHandlerCollection contexts = new ContextHandlerCollection();
 		contexts.setHandlers(new Handler[] { handlerWebServices });
 		server.setHandler(contexts);
-		
-		// Initialize Fake Database
-		FpsServer.db = new Database();
 	}
 	
-	public static void start() throws Exception{
+	public void start() throws Exception{
 		// Start server
 		server.start();	
 	}

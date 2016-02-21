@@ -1,13 +1,13 @@
-package fakeDB;
+package database.fake;
 
 import java.util.*;
-
-public class DB<T>{
+import database.DB;
+public class DBFake<T> implements DB<T>{
 	
 	private Hashtable<Integer,T> db;
 	private int key;
 	
-	public DB(){
+	public DBFake(){
 		db = new Hashtable<Integer,T>();
 		key = 0;
 	}
