@@ -17,7 +17,7 @@ public class FpsServer {
 	
 	private Server server;
 	
-	public FpsServer(){
+	public FpsServer(String ws_path){
 		// Initialize the server
 		server = new Server();
 		
@@ -31,7 +31,7 @@ public class FpsServer {
 
 		// Configure Jersey
 		ResourceConfig rc = new ResourceConfig();
-		rc.packages(true, "ws");
+		rc.packages(true, ws_path);
 		rc.register(JacksonFeature.class);
 		rc.register(LoggingFilter.class);
 

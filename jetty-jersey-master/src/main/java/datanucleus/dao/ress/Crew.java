@@ -1,4 +1,4 @@
-package ress;
+package datanucleus.dao.ress;
 
 import javax.jdo.annotations.PersistenceCapable;
 

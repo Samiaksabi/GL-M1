@@ -1,5 +1,5 @@
-package dao;
-import ress.User;
+package datanucleus.dao;
+import datanucleus.dao.ress.User;
 
 public interface UserDAO extends DAO<User>{
     

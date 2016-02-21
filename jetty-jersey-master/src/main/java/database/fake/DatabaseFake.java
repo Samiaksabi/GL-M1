@@ -1,9 +1,9 @@
 package database.fake;
 
 import database.*;
+import datanucleus.dao.ress.*;
 
 import java.util.*;
-import ress.*;
 
 public class DatabaseFake implements Database{
 	

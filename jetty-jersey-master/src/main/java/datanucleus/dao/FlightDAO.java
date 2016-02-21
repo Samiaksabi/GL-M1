@@ -1,9 +1,9 @@
-package dao;
+package datanucleus.dao;
 
 
 import java.util.Collection;
 
-import ress.Flight;
+import datanucleus.dao.ress.Flight;
 
 public interface FlightDAO extends DAO<Flight>{
 

@@ -1,15 +1,15 @@
-package dao.fake;
+package datanucleus.dao.fake;
 
 import java.util.Collection;
 
-import ress.Flight;
-import dao.FlightDAO;
 import database.Database;
 import database.DatabaseFactory;
+import datanucleus.dao.FlightDAO;
+import datanucleus.dao.ress.Flight;
 
-public class FlightRessourceFake implements FlightDAO{
+public class FlightDAOFakeImpl implements FlightDAO{
 
-	private  static Database db = DatabaseFactory.getDatabase();
+	private static Database db = DatabaseFactory.getDatabase();
 	
 	public Collection<Flight> getAll(){
 		return db.getFlights().getDb();

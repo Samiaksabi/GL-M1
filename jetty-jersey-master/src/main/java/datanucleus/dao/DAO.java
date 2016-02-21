@@ -1,4 +1,4 @@
-package dao;
+package datanucleus.dao;
 import java.util.*;
 
 public interface DAO<T>{

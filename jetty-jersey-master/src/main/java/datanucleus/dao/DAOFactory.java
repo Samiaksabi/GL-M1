@@ -1,13 +1,12 @@
 package datanucleus.dao;
 
-import dao.FlightDAO;
-import dao.fake.FlightRessourceFake;
+import datanucleus.dao.fake.FlightDAOFakeImpl;
 
 public class DAOFactory {
 	
-	private static FlightRessourceFake flightRessource = new FlightRessourceFake();
+	private static FlightDAOFakeImpl flightDAO = new FlightDAOFakeImpl();
 	
 	public static FlightDAO getFlightDAO(){
-		return flightRessource;
+		return flightDAO;
 	}
 }

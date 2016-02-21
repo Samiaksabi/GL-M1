@@ -2,11 +2,11 @@ package database;
 
 import java.util.Collection;
 
-import ress.Airport;
-import ress.Crew;
-import ress.Flight;
-import ress.Plane;
-import ress.User;
+import datanucleus.dao.ress.Airport;
+import datanucleus.dao.ress.Crew;
+import datanucleus.dao.ress.Flight;
+import datanucleus.dao.ress.Plane;
+import datanucleus.dao.ress.User;
 
 public interface Database{
 	
