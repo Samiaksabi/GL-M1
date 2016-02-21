@@ -3,7 +3,7 @@ package ws;
 import ress.*;
 import java.util.*;
 import dao.FlightDAO;
-import dao.fake.*;
+import datanucleus.dao.DAOFactory;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -16,54 +16,54 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 
 @Path("/fps")
-public class FlightRessource extends FlightRessourceFake implements FlightDAO{
+public class FlightRessource implements FlightDAO{
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/flight")
 	public Collection<Flight> getAll(){
-		return super.getAll();
+		return DAOFactory.getFlightDAO().getAll();
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/flight/{id}")
 	public Flight getElement(@PathParam("id") int id){
-		return super.getElement(id);
+		return DAOFactory.getFlightDAO().getElement(id);
 	}
 	
 	@DELETE
 	@Path("/flight/{id}")
 	public void deleteElement(@PathParam("id") int id){
-		super.deleteElement(id);
+		DAOFactory.getFlightDAO().deleteElement(id);
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{crew_id}/flight")
     public Collection<Flight> getAll(@PathParam("crew_id") int crew_id){
-		return super.getAll(crew_id);
+		return DAOFactory.getFlightDAO().getAll(crew_id);
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{crew_id}/flight/{id}")
     public Flight getFlight(@PathParam("crew_id") int crew_id,@PathParam("id") int id){
-		return super.getFlight(crew_id, id);
+		return DAOFactory.getFlightDAO().getFlight(crew_id, id);
 	}
 
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/flight")
 	public void addElement(Flight f){
-		super.addElement(f);
+		DAOFactory.getFlightDAO().addElement(f);
 	}
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/flight/{id}/edit")
 	public void editElement(@PathParam("id") int id, Flight f){
-		super.editElement(id, f);
+		DAOFactory.getFlightDAO().editElement(id, f);
 	}
 
 }

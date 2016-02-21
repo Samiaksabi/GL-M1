@@ -9,7 +9,7 @@ import database.DatabaseFactory;
 
 public class FlightRessourceFake implements FlightDAO{
 
-	private Database db = DatabaseFactory.getDatabase();
+	private  static Database db = DatabaseFactory.getDatabase();
 	
 	public Collection<Flight> getAll(){
 		return db.getFlights().getDb();

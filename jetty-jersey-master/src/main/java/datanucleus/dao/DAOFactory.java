@@ -5,7 +5,9 @@ import dao.fake.FlightRessourceFake;
 
 public class DAOFactory {
 	
+	private static FlightRessourceFake flightRessource = new FlightRessourceFake();
+	
 	public static FlightDAO getFlightDAO(){
-		return new FlightRessourceFake();
+		return flightRessource;
 	}
 }
