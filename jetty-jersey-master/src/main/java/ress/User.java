@@ -1,5 +1,8 @@
 package ress;
 
+import javax.jdo.annotations.PersistenceCapable;
+
+@PersistenceCapable
 public class User{
     public String username;
     public String password;

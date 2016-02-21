@@ -7,5 +7,4 @@ public class DAO {
 	public static ActionDao getActionDao() {
 		return new ActionDaoFakeImpl();
 	}
-
 }

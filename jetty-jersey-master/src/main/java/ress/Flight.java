@@ -1,6 +1,9 @@
 package ress;
 import java.util.*;
 
+import javax.jdo.annotations.PersistenceCapable;
+
+@PersistenceCapable
 public class Flight{
 
     public String commercial_number;

@@ -1,5 +1,8 @@
 package ress;
 
+import javax.jdo.annotations.PersistenceCapable;
+
+@PersistenceCapable
 public class Plane{
     
     public int identifier;
