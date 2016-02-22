@@ -17,7 +17,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 
 
-@Path("/fps")
+@Path("")
 public class FlightDAOImpl implements FlightDAO{
 	
 	@GET
