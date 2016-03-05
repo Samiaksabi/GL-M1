@@ -1,11 +1,33 @@
 package datanucleus.dao.ress;
 
-import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.*;
 
 @PersistenceCapable
 public class Plane{
-    
-    public int identifier;
-    public String ICAO_code;
+    @PrimaryKey
+    public String identifier;
+    public String airport_ICAO;
 
+    public Plane(){
+    	
+    }
+    
+    public Plane(String identifier, String airport_ICAO){
+    	this.identifier=identifier;
+    	this.airport_ICAO=airport_ICAO;
+    }
+
+	@Override
+	public String toString() {
+		return "Plane [identifier=" + identifier + ", airport=" + airport_ICAO + "]";
+	}
+	
+	public boolean edit(Plane elt){
+		if(this.identifier!=elt.identifier){
+			return false;
+		}
+		this.airport_ICAO=elt.airport_ICAO;
+		return true;
+	}
+    
 }

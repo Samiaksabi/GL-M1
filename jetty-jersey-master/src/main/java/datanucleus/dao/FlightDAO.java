@@ -7,7 +7,7 @@ import datanucleus.dao.ress.Flight;
 
 public interface FlightDAO extends DAO<Flight>{
 
-	 Flight getFlight(int crew_id,int id);
-	 Collection<Flight> getAll(int crew_id);
+	 Flight getFlight(String crew_name,int id);
+	 Collection<Flight> getAll(String name);
 	 
 }
