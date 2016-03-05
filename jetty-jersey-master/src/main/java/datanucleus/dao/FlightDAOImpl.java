@@ -79,14 +79,6 @@ public class FlightDAOImpl implements FlightDAO {
 		AirportDAO airportDAO=new AirportDAOImpl(this.pmf);
 		
 		if(airportDAO.getElement(elt.departure_airport)==null){
-			System.out.println("airportDAO");
-			//TODO Should throw an Exception
-			return;
-		}
-		
-		PlaneDAO planeDAO=new PlaneDAOImpl(this.pmf);
-		if(planeDAO.getElement(elt.plane)==null){
-			System.out.println("planeDAO");
 			//TODO Should throw an Exception
 			return;
 		}
