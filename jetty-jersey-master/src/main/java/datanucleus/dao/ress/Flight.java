@@ -16,7 +16,7 @@ public class Flight{
     @Join(column="Crew_name_OID")
     @Element(column="Crew_name_EID")
     */
-    public Collection<Crew> crew_members=new ArrayList<Crew>();
+    public Collection<String> crew_members=new ArrayList<String>();
     
     //@PrimaryKey
     public String departure_airport;
@@ -47,9 +47,9 @@ public class Flight{
     @Override
 	public String toString() {
 		return "Flight [commercial_number=" + commercial_number + ", ATC_code=" + ATC_code + ", plane=" + plane
-				+ ", crew_members=" /*+ crew_members*/ + ", departure_airport=" + departure_airport + ", arrival_airport="
+				+ ", crew_members=" + crew_members + ", departure_airport=" + departure_airport + ", arrival_airport="
 				+ arrival_airport + ", departure_time=" + departure_time + ", arrival_time=" + arrival_time
-				+ ", ofp_url=" + ofp_url + ", weather_maps_url=" + weather_maps_url + ", notam=" + /*notam +*/ "]";
+				+ ", ofp_url=" + ofp_url + ", weather_maps_url=" + weather_maps_url + ", notam=" + notam + "]";
 	}
 
 	public boolean edit(Flight elt){
