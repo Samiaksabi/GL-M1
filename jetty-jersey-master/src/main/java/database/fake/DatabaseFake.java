@@ -7,7 +7,7 @@ import java.util.*;
 
 public class DatabaseFake implements Database{
 	
-	public static class DatabaseFakeUtils{
+	/*public static class DatabaseFakeUtils{
 		final static int NB_FLIGHTS = 10;
 		final static int NB_CREWS = 20;
 		public static List<String> names = new ArrayList<String>();
@@ -63,7 +63,7 @@ public class DatabaseFake implements Database{
 				db.flights.add(f.commercial_number,f);
 			}
 		}
-	}
+	}*/
 	
 	private DBFake<Flight> flights;
 	private DBFake<User> users;
