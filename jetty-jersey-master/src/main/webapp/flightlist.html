@@ -83,16 +83,19 @@
 		    n° commercial
 		  </th>
 		  <th>
-		    Departure: Airport
+		    Departure Airport
 		  </th>
 		  <th>
-		    Arrival: Airport
+		    Arrival Airport
 		  </th>
 		  <th>
-		    Departure :Date & Time(Zulu)
+		    Departure : Date & Time(Zulu)
 		  </th>
 		  <th>
-		    Arrival :Date & Time(Zulu)
+		    Arrival : Date & Time(Zulu)
+		  </th>
+		  <th>
+		    DELETE
 		  </th>
 		</tr>
 	      </thead>
@@ -102,20 +105,26 @@
 	    
 	  </div>
 	  
-	  <ul class="pagination pagination-sm">
+	 <!-- <ul class="pagination pagination-sm">
 	    <a href="#">1|</a>
 	    <a href="#">2|</a>
 	    <a href="#">3</a>
-	  </ul>
+	  </ul> -->
 	</div>
       </div>
     </div>
   </div>
 
+  <script src="bootstrap/js/jquery.min.js"></script>
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+  <script src="bootstrap/js/underscore.js"></script>
+  <script src="js/ws_client.js"></script>
+  <script src="js/flightlist_client.js"></script>
+
   <script id="flightListTemplate" type="texte/template">
     <tr>
       <th>
-	<a href=""><%= commercial_number %></a>
+	<a href="edit.html"><%= commercial_number %></a>
       </th>
       <th>
 	<%= departure_airport %>
@@ -129,14 +138,14 @@
       <th>
 	<%= arrival_time %>
       </th>
+      <th>
+	<button onclick="deleteServerData('<%=url%>');location.reload()">
+	  DELETE
+	</button>
+      </th>
     </tr>
   </script>
 
-  <script src="bootstrap/js/jquery.min.js"></script>
-  <script src="bootstrap/js/bootstrap.min.js"></script>
-  <script src="bootstrap/js/underscore.js"></script>
-  <script src="js/ws_client.js"></script>
-  <script src="js/flightlist_client.js"></script>
   <!--<div id="footer">
       <div id="center_footer">					
 	<div id="right_footer">
