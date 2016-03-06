@@ -6,11 +6,20 @@ function getServerData(url,success){
     }).done(success);
 }
 
-function addServerData(url,dataObject){
+function addServerData(url,data){
     $.ajax({
 	type: 'PUT',
 	contentType: 'application/json',
 	url: url,
-	data: JSON.stringify(dataObject)
+	data: JSON.stringify(data)
+    });
+}
+
+function editServerData(url,data){
+    $.ajax({
+	type: "POST",
+	url: url,
+	data: JSON.stringify(data),
+	contentType: "application/json"
     });
 }
