@@ -5,3 +5,12 @@ function getServerData(url,success){
 	url: url
     }).done(success);
 }
+
+function addServerData(url,dataObject){
+    $.ajax({
+	type: 'PUT',
+	contentType: 'application/json',
+	url: url,
+	data: JSON.stringify(dataObject)
+    });
+}
