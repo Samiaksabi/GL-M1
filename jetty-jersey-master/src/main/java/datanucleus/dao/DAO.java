@@ -1,5 +1,5 @@
 package datanucleus.dao;
-import java.util.*;
+import java.util.Collection;
 
 public interface DAO<T>{
 

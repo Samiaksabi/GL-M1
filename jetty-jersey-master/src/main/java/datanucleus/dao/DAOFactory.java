@@ -4,11 +4,10 @@ package datanucleus.dao;
 import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManagerFactory;
 
-import datanucleus.dao.fake.FlightDAOFakeImpl;
 
 public class DAOFactory {
 	
-	/*static private PersistenceManagerFactory pmf=JDOHelper.getPersistenceManagerFactory("Example");
+	static private PersistenceManagerFactory pmf=JDOHelper.getPersistenceManagerFactory("Example");
 	
 	public static AirportDAO getAirportDAO(){
 		return new AirportDAOImpl(pmf);
@@ -24,11 +23,10 @@ public class DAOFactory {
 	
 	public static CrewDAO getCrewDAO(){
 		return new CrewDAOImpl(pmf);
-	}*/
+	}
 	
 	public static FlightDAO getFlightDAO(){
-		return new FlightDAOFakeImpl();
-		//return new FlightDAOImpl(pmf);
+		return new FlightDAOImpl(pmf);
 	}
 	
 }

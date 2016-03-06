@@ -1,7 +1,10 @@
 package datanucleus.dao.ress;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 
-import javax.jdo.annotations.*;
+import javax.jdo.annotations.PersistenceCapable;
 
 @PersistenceCapable
 public class Flight{

@@ -9,7 +9,6 @@ import javax.jdo.PersistenceManagerFactory;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
 
-import datanucleus.dao.ress.Plane;
 import datanucleus.dao.ress.Crew;
 import datanucleus.dao.ress.Flight;
 

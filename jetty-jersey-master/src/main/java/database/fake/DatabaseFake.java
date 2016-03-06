@@ -1,9 +1,17 @@
 package database.fake;
 
-import database.*;
-import datanucleus.dao.ress.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 
-import java.util.*;
+import database.DB;
+import database.Database;
+import datanucleus.dao.ress.Airport;
+import datanucleus.dao.ress.Crew;
+import datanucleus.dao.ress.Flight;
+import datanucleus.dao.ress.Plane;
+import datanucleus.dao.ress.User;
 
 public class DatabaseFake implements Database{
 	

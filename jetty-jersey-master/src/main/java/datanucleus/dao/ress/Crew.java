@@ -1,6 +1,6 @@
 package datanucleus.dao.ress;
 
-import javax.jdo.annotations.*;
+import javax.jdo.annotations.PersistenceCapable;
 
 @PersistenceCapable
 public class Crew extends User{

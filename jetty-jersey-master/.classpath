@@ -29,10 +29,5 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="/home/netbook/.m2/repository/org/datanucleus/datanucleus-core/4.0.3/datanucleus-core-4.0.3.jar"/>
-	<classpathentry kind="lib" path="/home/netbook/.m2/repository/org/datanucleus/datanucleus-api-jdo/4.0.3/datanucleus-api-jdo-4.0.3.jar"/>
-	<classpathentry kind="lib" path="/home/netbook/.m2/repository/org/datanucleus/datanucleus-jodatime/4.0.3/datanucleus-jodatime-4.0.3.jar"/>
-	<classpathentry kind="lib" path="/home/netbook/.m2/repository/org/datanucleus/datanucleus-rdbms/4.0.3/datanucleus-rdbms-4.0.3.jar"/>
-	<classpathentry kind="lib" path="/home/netbook/.m2/repository/hsqldb/hsqldb/1.8.0.4/hsqldb-1.8.0.4.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

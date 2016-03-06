@@ -1,6 +1,9 @@
 package database.fake;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Hashtable;
+import java.util.Iterator;
+
 import database.DB;
 public class DBFake<T> implements DB<T>{
 	
