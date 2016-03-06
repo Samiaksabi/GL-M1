@@ -159,7 +159,9 @@ public class FlightDAOImpl implements FlightDAO {
 			if(!flight.isEmpty()){
 				//for(Airport a:air)
 				Flight f=flight.iterator().next();
+				deleteElement(elt.commercial_number);
 				f.edit(elt);
+				addElement(elt);
 			}
 			tx.commit();
 		} finally {
