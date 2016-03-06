@@ -48,9 +48,9 @@ public class DatabaseFake implements Database{
 				Crew c = new Crew();
 				c.name = rnd_name();
 				if(Math.random() < 0.5)
-					c.status = CrewStatus.PILOT;
+					c.crewStatus = CrewStatus.PILOT;
 				else
-					c.status = CrewStatus.STEWARD;
+					c.crewStatus = CrewStatus.STEWARD;
 				db.crews.add(c);
 			}
 			for(int i = 0; i<NB_FLIGHTS; i++){

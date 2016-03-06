@@ -3,6 +3,7 @@ package datanucleus.dao.dn;
 import java.util.*;
 
 import datanucleus.dao.DAOFactory;
+import datanucleus.dao.DAOFactory;
 import datanucleus.dao.FlightDAO;
 import datanucleus.dao.ress.*;
 
@@ -30,27 +31,27 @@ public class FlightDAOImpl implements FlightDAO{
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/flight/{id}")
-	public Flight getElement(@PathParam("id") int id){
+	public Flight getElement(@PathParam("id") String id){
 		return DAOFactory.getFlightDAO().getElement(id);
 	}
 	
 	@DELETE
 	@Path("/flight/{id}")
-	public void deleteElement(@PathParam("id") int id){
+	public void deleteElement(@PathParam("id") String id){
 		DAOFactory.getFlightDAO().deleteElement(id);
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{crew_id}/flight")
-    public Collection<Flight> getAll(@PathParam("crew_id") int crew_id){
+    public Collection<Flight> getAll(@PathParam("crew_id") String crew_id){
 		return DAOFactory.getFlightDAO().getAll(crew_id);
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{crew_id}/flight/{id}")
-    public Flight getFlight(@PathParam("crew_id") int crew_id,@PathParam("id") int id){
+    public Flight getFlight(@PathParam("crew_id") String crew_id,@PathParam("id") String id){
 		return DAOFactory.getFlightDAO().getFlight(crew_id, id);
 	}
 
@@ -67,5 +68,11 @@ public class FlightDAOImpl implements FlightDAO{
 	public void editElement(@PathParam("id") int id, Flight f){
 		DAOFactory.getFlightDAO().editElement(id, f);
 	}
+
+	public void editElement(String name, Flight elt) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

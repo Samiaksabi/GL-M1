@@ -4,9 +4,9 @@ import java.util.*;
 public interface DAO<T>{
 
     Collection<T> getAll();
-    T getElement(int id);
+    T getElement(String name);
     void addElement(T elt);
-    void deleteElement(int id);
-    void editElement(int id, T elt);
+    void deleteElement(String name);
+    void editElement(String name, T elt);
 
 }

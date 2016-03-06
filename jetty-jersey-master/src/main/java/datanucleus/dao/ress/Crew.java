@@ -1,9 +1,18 @@
 package datanucleus.dao.ress;
 
-import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.*;
 
 @PersistenceCapable
 public class Crew extends User{
-    public String name;
-    public CrewStatus status;
+	
+    public CrewStatus crewStatus;
+	
+	public Crew(){
+		
+	}
+	
+	public Crew(String name, String password, String mail, UserStatus status, CrewStatus crewStatus){
+		super(name,password,mail,status);
+		this.crewStatus=crewStatus;
+	}
 }
