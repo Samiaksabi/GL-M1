@@ -1,227 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <title>Flight Planification</title>
+  <link rel="shortcut icon" href="images/avion1.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="css/layout.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="css/menu.css" type="text/css" media="screen">
 
-	<title>Flight Planification</title>
-	<link rel="shortcut icon" href="images/avion1.ico" type="image/x-icon" />
-	<link rel="stylesheet" href="css/layout.css" type="text/css" media="screen">
-	<link rel="stylesheet" href="css/menu.css" type="text/css" media="screen">
+  <meta name="description" content="Source code generated using layoutit.com">
+  <meta name="author" content="LayoutIt!">
 
-	<meta name="description" content="Source code generated using layoutit.com">
-	<meta name="author" content="LayoutIt!">
-
-	<!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
-	<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
-	<!--<link href="bootstrap/css/style.css" rel="stylesheet">-->
+  <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+  <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+  <!--<link href="bootstrap/css/style.css" rel="stylesheet">-->
 
 </head>
 <body>
 
-	<div class="containerE">
-		<div class="content">
-			<div class="container-fluid">
-				<div class="row">
-
-					<div class="col-md-6">
-						<ul id="nav" class="menu">
-							<li><a href="home.html" class="current">Home</a></li>
-							<li><a href="#" >Flights</a>
-								<ul class="subs">
-									<li><a href="flightlist.html">List</a></li>
-									<li><a href="add.html">Add</a></li>
-									<li><a href="edit.html">Edit</a></li>
-									<li><a href="delete.html">Delete</a></li>
-								</ul>
-							</li>
-							<li><a href="#album">Gallery</a></li>
-							<li><a href="#contact">Contact</a></li>
-						</ul>
-					</div>
-					<div class="col-md-3"></div>
-					<div class="col-md-3">
-						<aside>
-							<a href="index.html">
-								<div id="login">
-									<div class="wrap">
-										<input id="login" type="submit" value="Log out" class="login" />
-									</div>
-								</div>
-							</a>
-						</aside>
-					</div>
-				</div>
-			</div>
+  <div class="containerE">
+    <div class="content">
+      <div class="container-fluid">
+	<div class="row">
+	  
+	  <div class="col-md-6">
+	    <ul id="nav" class="menu">
+	      <li><a href="home.html" class="current">Home</a></li>
+	      <li><a href="#" >Flights</a>
+		<ul class="subs">
+		  <li><a href="flightlist.html">List</a></li>
+		  <li><a href="add.html">Add</a></li>
+		  <li><a href="edit.html">Edit</a></li>
+		  <li><a href="delete.html">Delete</a></li>
+		</ul>
+	      </li>
+	      <li><a href="#album">Gallery</a></li>
+	      <li><a href="#contact">Contact</a></li>
+	    </ul>
+	  </div>
+	  <div class="col-md-3"></div>
+	  <div class="col-md-3">
+	    <aside>
+	      <a href="index.html">
+		<div id="login">
+		  <div class="wrap">
+		    <input id="login" type="submit" value="Log out" class="login" />
+		  </div>
 		</div>
+	      </a>
+	    </aside>
+	  </div>
 	</div>
-	<div class="div_center">
-		<div class="container-fluid col-md-10 col-md-offset-1">
-			<div class="row">
-				<div class="col-md-12 fond">
-					<div class="page-header">
-						<h1 align="center">
-							Flights List
-						</h1>
-					</div> 
+      </div>
+    </div>
+  </div>
+  <div class="div_center">
+    <div class="container-fluid col-md-10 col-md-offset-1">
+      <div class="row">
+	<div class="col-md-12 fond">
+	  <div class="page-header">
+	    <h1 align="center">
+	      Flights List
+	    </h1>
+	  </div> 
+	  
+	  
+	  <div class="form-group">
 
+	    <select class="combobox">
+	      <option value="PA">n° commercial</option>
+	      <option value="CT">Departure: Airport</option>
+	      <option value="NY">Arrival: Airport</option>
+	    </select>
 
-					<div class="form-group">
+	  </div>
 
-						<select class="combobox">
-							<option value="PA">n° commercial</option>
-							<option value="CT">Departure: Airport</option>
-							<option value="NY">Arrival: Airport</option>
-						</select>
-
-						<script type="text/javascript">
-							$(document).ready(function(){
-								$('.combobox').combobox();
-							});
-						</script>
-					</div> 
-					<div class="table-responsive " >
-
-						<table class="table  table-bordered ">
-							<thead>
-								<tr>
-									<th>
-										n° commercial
-									</th>
-									<th>
-										Departure: Airport
-									</th>
-									<th>
-										Arrival: Airport
-									</th>
-									<th>
-										Departuere :Date & Time(Zulu)
-									</th>
-									<th>
-										Arrival :Date & Time(Zulu)
-									</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<th>
-										<a href="">TVF1234</a>
-									</th>
-									<th>
-										CDG
-									</th>
-									<th>
-										DAJ
-									</th>
-									<th>
-										25/02/2016 - 08:00
-									</th>
-									<th>
-										25/02/2016 - 22:00
-									</th>
-								</tr>
-								<tr class="active">
-									<th>
-										<a href="">TVF1234</a>
-									</th>
-									<th>
-										CDG
-									</th>
-									<th>
-										DAJ
-									</th>
-									<th>
-										25/02/2016 - 08:00
-									</th>
-									<th>
-										25/02/2016 - 22:00
-									</th>
-								</tr>
-								<tr class="success">
-
-									<th>
-										<a href="">TVF1234</a>
-									</th>
-									<th>
-										CDG
-									</th>
-									<th>
-										DAJ
-									</th>
-									<th>
-										25/02/2016 - 08:00
-									</th>
-									<th>
-										25/02/2016 - 22:00
-									</th>
-								</tr>
-								<tr class="warning">
-
-									<th>
-										<a href="">TVF1234</a>
-									</th>
-									<th>
-										CDG
-									</th>
-									<th>
-										DAJ
-									</th>
-									<th>
-										25/02/2016 - 08:00
-									</th>
-									<th>
-										25/02/2016 - 22:00
-									</th>
-								</tr>
-								<tr class="danger">
-
-									<th>
-										<a href="">TVF1234</a>
-									</th>
-									<th>
-										CDG
-									</th>
-									<th>
-										DAJ
-									</th>
-									<th>
-										25/02/2016 - 08:00
-									</th>
-									<th>
-										25/02/2016 - 22:00
-									</th>
-								</tr>
-							</tbody>
-						</table>
-
-					</div>
-
-					<ul class="pagination pagination-sm">
-						<a href="#">1|</a>
-						<a href="#">2|</a>
-						<a href="#">3</a>
-					</ul>
-				</div>
-			</div>
-		</div>
+	  <div class="table-responsive " >
+	    
+	    <table class="table  table-bordered ">
+	      <thead>
+		<tr>
+		  <th>
+		    n° commercial
+		  </th>
+		  <th>
+		    Departure: Airport
+		  </th>
+		  <th>
+		    Arrival: Airport
+		  </th>
+		  <th>
+		    Departure :Date & Time(Zulu)
+		  </th>
+		  <th>
+		    Arrival :Date & Time(Zulu)
+		  </th>
+		</tr>
+	      </thead>
+	      <tbody id="template_anchor">
+	      </tbody>
+	    </table>
+	    
+	  </div>
+	  
+	  <ul class="pagination pagination-sm">
+	    <a href="#">1|</a>
+	    <a href="#">2|</a>
+	    <a href="#">3</a>
+	  </ul>
 	</div>
-	<script src="../js/jquery.min.js"></script>
-	<script src="../js/bootstrap.min.js"></script>
-	<script src="../js/scripts.js"></script>
-	<!--<div id="footer">
-		<div id="center_footer">					
-			<div id="right_footer">
-				<a href="home.html">HOME</a>
-				<a href="flightlist.html">FLIGHTLIST</a>
-				<a href="#album">GALLERY</a>
-				<a href="#contact"l>CONTACT US</a>
-			</div> 
+      </div>
+    </div>
+  </div>
 
-			<span>© Planification Flights 2016 </span>
+  <script id="flightListTemplate" type="texte/template">
+    <tr>
+      <th>
+	<a href=""><%= commercial_number %></a>
+      </th>
+      <th>
+	<%= departure_airport %>
+      </th>
+      <th>
+	<%= arrival_airport %>
+      </th>
+      <th>
+	<%= departure_time %>
+      </th>
+      <th>
+	<%= arrival_time %>
+      </th>
+    </tr>
+  </script>
 
-		</div> 
-	</div>-->
+  <script src="bootstrap/js/jquery.min.js"></script>
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+  <script src="bootstrap/js/underscore.js"></script>
+  <script src="js/ws_client.js"></script>
+  <script src="js/flightlist_client.js"></script>
+  <!--<div id="footer">
+      <div id="center_footer">					
+	<div id="right_footer">
+	  <a href="home.html">HOME</a>
+	  <a href="flightlist.html">FLIGHTLIST</a>
+	  <a href="#album">GALLERY</a>
+	  <a href="#contact"l>CONTACT US</a>
+	</div> 
+	
+	<span>© Planification Flights 2016 </span>
+	
+      </div> 
+  </div>-->
 </div>
 </body>
 </html>
