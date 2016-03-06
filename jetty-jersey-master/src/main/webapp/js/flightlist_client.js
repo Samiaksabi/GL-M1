@@ -13,11 +13,12 @@ function hydrateFlightList(data,template){
 	"arrival_airport":JSON.stringify(data.arrival_airport),
 	"departure_time":JSON.stringify(data.departure_time),
 	"arrival_time":JSON.stringify(data.arrival_time),
+	"url": "/ws/flight/" + data.commercial_number
     });
     $("#template_anchor").append(html);
 }
 
 $( document ).ready(function() {
     flightListTemplate = _.template($('#flightListTemplate').html());
-    getServerData("http://localhost:8080/ws/flight",flightTempGen);
+    getServerData("/ws/flight",flightTempGen);
 });
