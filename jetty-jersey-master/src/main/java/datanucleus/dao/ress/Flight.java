@@ -56,10 +56,16 @@ public class Flight{
 	}
 
 	public boolean edit(Flight elt){
-		if(this.commercial_number!=elt.commercial_number || this.departure_airport!=elt.departure_airport || this.departure_time!=elt.departure_time){
+		if(this.commercial_number!=elt.commercial_number || this.departure_airport!=elt.departure_airport){
 			return false;
 		}
-		//TODO
+		this.ATC_code=elt.ATC_code;
+		this.plane=elt.plane;
+		this.arrival_airport=elt.arrival_airport;
+		this.departure_time=elt.departure_time;
+		this.arrival_time=elt.arrival_time;
+		this.ofp_url=elt.ofp_url;
+		this.weather_maps_url=elt.weather_maps_url;
 		return true;
 	}
 }
