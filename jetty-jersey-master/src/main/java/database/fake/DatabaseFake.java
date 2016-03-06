@@ -51,16 +51,16 @@ public class DatabaseFake implements Database{
 					c.crewStatus = CrewStatus.PILOT;
 				else
 					c.crewStatus = CrewStatus.STEWARD;
-				db.crews.add(c);
+				db.crews.add(c.name,c);
 			}
 			for(int i = 0; i<NB_FLIGHTS; i++){
 				Flight f = new Flight();
 				f.ATC_code = rnd_code(10);
 				f.commercial_number = rnd_code(10);
-				f.crew_members = new ArrayList<Crew>();
+				f.crew_members = new ArrayList<String>();
 				for(int j = 0;j<10;j++)
-					f.crew_members.add(db.crews.get((int)(Math.random()*(NB_CREWS-1))));
-				db.flights.add(f);
+					f.crew_members.add(db.crews.get((int)(Math.random()*(NB_CREWS-1))).name);
+				db.flights.add(f.commercial_number,f);
 			}
 		}
 	}
@@ -79,8 +79,8 @@ public class DatabaseFake implements Database{
 		planes   = new DBFake<Plane>();
 	}
 	
-	public Collection<Flight> getFlights(int crew_id){
-		Crew c = crews.get(crew_id);
+	public Collection<Flight> getFlights(String crew){
+		Crew c = crews.get(crew);
 		Iterator<Flight> it = flights.getDb().iterator();
 		Flight f;
 		List<Flight> res = new ArrayList<Flight>();
@@ -92,8 +92,8 @@ public class DatabaseFake implements Database{
 		return res;
 	}
 	
-	public Flight getFlight(int crew_id, int id){
-		Collection<Flight> fc = getFlights(crew_id);
+	public Flight getFlight(String crew, int id){
+		Collection<Flight> fc = getFlights(crew);
 		Iterator<Flight> it = fc.iterator();
 		for(int i = 0; i<id;i++)
 			it.next();

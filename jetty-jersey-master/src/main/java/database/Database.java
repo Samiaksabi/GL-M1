@@ -10,8 +10,8 @@ import datanucleus.dao.ress.User;
 
 public interface Database{
 	
-	public Collection<Flight> getFlights(int crew_id);
-	public Flight getFlight(int crew_id, int id);
+	public Collection<Flight> getFlights(String crew);
+	public Flight getFlight(String crew, int id);
 	
 	public DB<Flight> getFlights();
 

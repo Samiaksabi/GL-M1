@@ -3,7 +3,6 @@ package datanucleus.dao.dn;
 import java.util.*;
 
 import datanucleus.dao.DAOFactory;
-import datanucleus.dao.DAOFactory;
 import datanucleus.dao.FlightDAO;
 import datanucleus.dao.ress.*;
 
@@ -19,12 +18,13 @@ import javax.ws.rs.core.MediaType;
 
 
 @Path("")
-public class FlightDAOImpl implements FlightDAO{
+public class FlightDAOWS implements FlightDAO{
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/flight")
 	public Collection<Flight> getAll(){
+		//return new ArrayList<Flight>();
 		return DAOFactory.getFlightDAO().getAll();
 	}
 	
@@ -51,7 +51,7 @@ public class FlightDAOImpl implements FlightDAO{
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{crew_id}/flight/{id}")
-    public Flight getFlight(@PathParam("crew_id") String crew_id,@PathParam("id") String id){
+    public Flight getFlight(@PathParam("crew_id") String crew_id,@PathParam("id") int id){
 		return DAOFactory.getFlightDAO().getFlight(crew_id, id);
 	}
 
@@ -65,14 +65,14 @@ public class FlightDAOImpl implements FlightDAO{
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/flight/{id}/edit")
-	public void editElement(@PathParam("id") int id, Flight f){
+	public void editElement(@PathParam("id") String id, Flight f){
 		DAOFactory.getFlightDAO().editElement(id, f);
 	}
 
-	public void editElement(String name, Flight elt) {
+	/*public void editElement(String name, Flight elt) {
 		// TODO Auto-generated method stub
 		
-	}
+	}*/
 
 
 }

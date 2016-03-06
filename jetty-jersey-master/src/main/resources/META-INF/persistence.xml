@@ -5,13 +5,12 @@
 
     <!-- Test configuration -->
     <persistence-unit name="Example">
- <!--   <class>com.example.datanucleus.dao.Action</class> -->
-    	<class>db.Airport</class>
-    	<class>db.Crew</class>
-    	<class>db.Flight</class>
- <!--   <class>db.Plane</class>   -->
-    	<class>db.User</class>
-        <exclude-unlisted-classes/>
+    	<class>datanucleus.dao.ress.Airport</class>
+    	<class>datanucleus.dao.ress.Crew</class>
+    	<class>datanucleus.dao.ress.Flight</class>
+    	<class>datanucleus.dao.ress.User</class>
+    	<class>datanucleus.dao.ress.Plane   </class>
+    	<exclude-unlisted-classes/>
         
         <properties>
             <property name="javax.jdo.option.ConnectionURL" value="jdbc:hsqldb:mem:example"/>

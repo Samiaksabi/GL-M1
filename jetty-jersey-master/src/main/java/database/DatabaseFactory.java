@@ -6,7 +6,7 @@ public class DatabaseFactory {
 	
 	public static Database getDatabase(){
 		DatabaseFake db = new DatabaseFake();
-		DatabaseFake.DatabaseFakeUtils.populate_db(db);
+		//DatabaseFake.DatabaseFakeUtils.populate_db(db);
 		return db;
 	}
 	

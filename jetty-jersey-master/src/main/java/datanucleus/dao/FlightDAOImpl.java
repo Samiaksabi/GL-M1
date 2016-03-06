@@ -17,7 +17,7 @@ import datanucleus.dao.ress.Flight;
 public class FlightDAOImpl implements FlightDAO {
 	
 	private PersistenceManagerFactory pmf;
-
+	
 	public FlightDAOImpl(PersistenceManagerFactory pmf) {
 		this.pmf = pmf;
 	}
@@ -181,5 +181,5 @@ public class FlightDAOImpl implements FlightDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 }
