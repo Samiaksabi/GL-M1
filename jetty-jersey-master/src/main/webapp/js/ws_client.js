@@ -23,3 +23,10 @@ function editServerData(url,data){
 	contentType: "application/json"
     });
 }
+
+function deleteServerData(url){
+    $.ajax({
+	type: "DELETE",
+	url: url
+    });
+}
