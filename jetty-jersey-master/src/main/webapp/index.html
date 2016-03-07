@@ -1,38 +1,45 @@
 ﻿<!DOCTYPE html>
 <html lang="fr" >
-    <head>
-        <meta charset="Ansi" />
-        <title>Flight planning</title>
-		<link rel="shortcut icon" href="images/avion1.ico" type="image/x-icon" />
-        <link rel="stylesheet" href="css/layout.css" type="text/css" media="screen">
-        <link rel="stylesheet" href="css/login.css" type="text/css" media="screen">		
-    </head>
-    <body >
-		<div id="fleche">
-			<a href="#top" title="Retournez en haut de la page" class="zone">
-			<img src="images/fleche.png" border="0"/>
-			</a>
-		</div>
-		<div class="login-box">
-			<div class="box-header">
-				<h2>Log In</h2>
-			</div>
-			<label for="username">Username</label>
-			<br/>
-			<input type="text" id="username">
-			<br/>
-			<label for="password">Password</label>
-			<br/>
-			<input type="password" id="password">
-			<br/>
-			<a href="home.html"><button type="submit">Sign In</button></a>
-			<br/>
-			<a href="#"><p class="small">Forgot your password?</p></a>
-		</div>
-        <footer>
-			<center>
-				Copyright 2016 &copy;
-			</center>
-		</footer>
-    </body>
+  <head>
+    <meta charset="Ansi" />
+    <title>Flight planning</title>
+    <link rel="shortcut icon" href="images/avion1.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="css/layout.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="css/login.css" type="text/css" media="screen">		
+  </head>
+  <body >
+    <div id="fleche">
+      <a href="#top" title="Retournez en haut de la page" class="zone">
+	<img src="images/fleche.png" border="0"/>
+      </a>
+    </div>
+    <form id="login_form">
+      <div class="login-box">
+	<div class="box-header">
+	  <h2>Log In</h2>
+	</div>
+	<label for="username">Username</label>
+	<br/>
+	<input type="text" id="username">
+	<br/>
+	<label for="password">Password</label>
+	<br/>
+	<input type="password" id="password">
+	<br/>
+	<button type="submit" form="login_form">Sign In</button>
+	<br/>
+	<a href="#"><p class="small">Forgot your password?</p></a>
+      </div>
+    </form>
+      <footer>
+	<center>
+	  Copyright 2016 &copy;
+	</center>
+      </footer>
+      <script src="bootstrap/js/jquery.min.js"></script>
+      <script src="bootstrap/js/bootstrap.min.js"></script>
+      <script src="bootstrap/js/underscore.js"></script>
+      <script src="js/ws_client.js"></script>
+      <script src="js/login.js"></script>
+  </body>
 </html>

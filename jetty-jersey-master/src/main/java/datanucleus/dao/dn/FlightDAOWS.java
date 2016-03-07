@@ -72,11 +72,11 @@ public class FlightDAOWS implements FlightDAO{
 	@GET
 	@Produces("text/plain")
 	@Path("/login/{name}/{password}")
-	public String login(@PathParam("name") String name, @PathParam("password") String password){
+	public String login(@PathParam("name") String name, @PathParam("password") String password) throws Exception{
 		if (DAOFactory.getUserDAO().login(name, password))
 			return "SUCCESS";
 		else
-			return "FAIL";
+			throw new Exception();
 	}
 
 	/*public void editElement(String name, Flight elt) {

@@ -142,7 +142,7 @@ public class UserDAOImpl implements UserDAO {
 
 	public boolean login(String name, String password) {
 		User user=this.getElement(name);
-		return user.getPassword()==password;
+		return user.getPassword().equals(password);
 	}
 
 }
