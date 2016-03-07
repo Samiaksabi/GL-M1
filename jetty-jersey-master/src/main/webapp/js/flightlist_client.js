@@ -11,8 +11,8 @@ function hydrateFlightList(data,template){
 	"commercial_number":data.commercial_number,
 	"departure_airport":data.departure_airport,
 	"arrival_airport":data.arrival_airport,
-	"departure_time":JSON.stringify(data.departure_time),
-	"arrival_time":JSON.stringify(data.arrival_time),
+	"departure_time":new Date(data.departure_time).toUTCString(),
+	"arrival_time":new Date(data.arrival_time).toUTCString(),
 	"url": "/ws/flight/" + data.commercial_number
     });
     $("#template_anchor").append(html);

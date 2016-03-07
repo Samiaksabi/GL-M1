@@ -75,9 +75,9 @@ public class FlightDAOImpl implements FlightDAO {
 
 	public void addElement(Flight elt) {
 		
-		AirportDAO airportDAO=new AirportDAOImpl(this.pmf);
+		//AirportDAO airportDAO=new AirportDAOImpl(this.pmf);
 		
-		if(airportDAO.getElement(elt.departure_airport)==null){
+		if(!elt.isValid()){
 			//TODO Should throw an Exception
 			return;
 		}
@@ -147,6 +147,8 @@ public class FlightDAOImpl implements FlightDAO {
 	}
 
 	public void editElement(String commercialNumber, Flight elt) {
+		if(!elt.isValid())
+			return;
 		Collection<Flight> flight = null;
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
@@ -159,8 +161,8 @@ public class FlightDAOImpl implements FlightDAO {
 			if(!flight.isEmpty()){
 				//for(Airport a:air)
 				Flight f=flight.iterator().next();
-				deleteElement(elt.commercial_number);
 				f.edit(elt);
+				deleteElement(elt.commercial_number);
 				addElement(elt);
 			}
 			tx.commit();

@@ -40,12 +40,14 @@ public class DAOFactory {
 	public static void populate_db(){
 		Airport a = new Airport("CDG");
 		getAirportDAO().addElement(a);
+		Airport a2 = new Airport("ORY");
+		getAirportDAO().addElement(a2);
 		Crew c = new Crew("AlbertLepilote","password","albert@pilote.com",UserStatus.CREW, CrewStatus.PILOT);
 		getCrewDAO().addElement(c);
 		getUserDAO().addElement(new User("Albert","pass","albert@pilote.com",UserStatus.CREW));
 		Plane p = new Plane("TVZ-222","CDG");
 		getPlaneDAO().addElement(p);
-		Flight f = new Flight("CN-42","CDG","CDG", new Date(),new Date());
+		Flight f = new Flight("CN-42","CDG","ORY", new Date(),new Date());
 		getFlightDAO().addElement(f);
 	}
 	

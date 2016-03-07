@@ -22,8 +22,8 @@ function form(){
 	    ',"crew_members":[]' +
 	    ',"departure_airport":' + string(departure_airport) +
 	    ',"arrival_airport":'   + string(arrival_airport) +
-	    ',"departure_time":'    + departure_date +
-	    ',"arrival_time":'      + arrival_date +
+	    ',"departure_time":'    + Date.parse(departure_date) +
+	    ',"arrival_time":'      + Date.parse(arrival_date) +
 	    ',"ofp_url":null' +
 	    ',"weather_maps_url":null' +
 	    ',"notam":[]}';
@@ -31,6 +31,7 @@ function form(){
 	console.log(json_str);
 	var json = JSON.parse(json_str);
 	editServerData("/ws/flight/" + commercial_number + "/edit",json);
+	$(location).attr('href',"flightlist.html");
     });
 }
 

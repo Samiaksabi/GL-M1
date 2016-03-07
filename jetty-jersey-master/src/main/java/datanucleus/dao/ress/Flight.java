@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.jdo.annotations.PersistenceCapable;
 
+import datanucleus.dao.DAOFactory;
+
 @PersistenceCapable
 public class Flight{
 
@@ -68,5 +70,12 @@ public class Flight{
 		this.ofp_url=elt.ofp_url;
 		this.weather_maps_url=elt.weather_maps_url;
 		return true;
+	}
+	
+	public boolean isValid(){
+		return !(DAOFactory.getAirportDAO().getElement(departure_airport)==null
+				|| DAOFactory.getAirportDAO().getElement(arrival_airport) == null
+				|| departure_time.getTime() > arrival_time.getTime()
+				|| departure_airport.equals(arrival_airport));
 	}
 }
