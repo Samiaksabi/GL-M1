@@ -1,11 +1,10 @@
 
-
 function string(e){
     return '"' + e + '"';
 }
 
 function form(){
-    $("#add_form").submit(function(e){ // On sélectionne le formulaire par son identifiant
+    $("#edit_form").submit(function(e){ // On sélectionne le formulaire par son identifiant
 	e.preventDefault(); // on empêche le bouton d'envoyer le formulaire
 	var commercial_number = $("#commercial_number").val();
 	var atc_number = $("#atc_number").val();
@@ -31,7 +30,7 @@ function form(){
 	//var donnees = $("#add_form").serialize(); // On créer une variable contenant le formulaire sérialisé
 	console.log(json_str);
 	var json = JSON.parse(json_str);
-	addServerData("/ws/flight",json);
+	editServerData("/ws/flight/" + commercial_number + "/edit",json);
     });
 }
 

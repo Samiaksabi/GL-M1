@@ -31,7 +31,7 @@
 		  <li><a href="flightlist.html">List</a></li>
 		  <li><a href="add.html">Add</a></li>
 		  <li><a href="edit.html">Edit</a></li>
-		  <li><a href="delete.html">Delete</a></li>
+		  <!--<li><a href="delete.html">Delete</a></li>-->
 		</ul>
 	      </li>
 	      <li><a href="home.html#album">Gallery</a></li>
@@ -125,35 +125,35 @@
 		<tr class="active">
 		  <td>
 		    <label class="col-sm-4 control-label" for="formGroupInputLarge">
-		      Departure-Date && Time(Zulu)
+		      Departure-Date
 		    </label>
 		  </td>
 		  <td>
 		    <input class="form-control" type="date" id="departure_date">
-		    <input class="form-control" type="time" id="departure_time">
+		    <!--<input class="form-control" type="time" id="departure_time">-->
 		  </td>
 		</tr>
 		<tr class="active">	
 		  <td>
 		    <label class="col-sm-4 control-label" for="formGroupInputLarge">
-		      Arrival-Date && Time(Zulu)
+		      Arrival-Date
 		    </label>
 		  </td>
 		  <td>
 		    <input class="form-control" type="date" id="arrival_date">
-		    <input class="form-control" type="time" id="arrival_time">
+		    <!--<input class="form-control" type="time" id="arrival_time">-->
 		  </td>
 		</tr>
-		<!--<tr class="active">
+		<tr class="active">
 		  <td>
 		    <label class="col-sm-4 control-label" for="formGroupInputLarge">
-		      Flight ID*
+		      Plane ID*
 		    </label>
 		  </td>
 		  <td>
-		    <input class="form-control" type="text" id="flight_id">
+		    <input class="form-control" type="text" id="plane_id">
 		  </td>
-		</tr>-->
+		</tr>
 		<tr class="active">
 		  <td>
 		    <label for="exampleInputFile">
@@ -163,12 +163,12 @@
 		  <td>	
 		    <input id="exampleInputFile" type="file">
 		  </td>
-		</tr>		
+		</tr>	
 		
 	      </tbody>
 	    </table>
 	  </div>
-	  <div class="col-md-6">
+<!--	  <div class="col-md-6">
 	    <table class="table">
 	      <thead>
 		<tr>
@@ -282,9 +282,11 @@
 	    </table>
 	  </div>
 	</div>
+      </div>-->
+	</div>
       </div>
     </form>
-
+    
     <div class="container-fluid">
       <div class="row">
 	<div class="col-md-6">
@@ -307,7 +309,7 @@
 	      <tr>
 		<td>
 		  <button type="reset" class="btn btn-default" form="add_form">
-		    Cancel
+		    Reset
 		  </button>
 		</td>
 	      </tr>
@@ -317,11 +319,11 @@
       </div>
     </div>
   </div>
-</div>
-<script src="bootstrap/js/jquery.min.js"></script>
-<script src="bootstrap/js/bootstrap.min.js"></script>
-<script src="bootstrap/js/underscore.js"></script>
-<script src="js/ws_client.js"></script>
-<script src="js/addFlight.js"></script>
+
+  <script src="bootstrap/js/jquery.min.js"></script>
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+  <script src="bootstrap/js/underscore.js"></script>
+  <script src="js/ws_client.js"></script>
+  <script src="js/addFlight.js"></script>
 </body>
 </html>

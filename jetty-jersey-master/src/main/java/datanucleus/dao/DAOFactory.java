@@ -12,7 +12,7 @@ import datanucleus.dao.ress.*;
 
 public class DAOFactory {
 	
-	/*static private PersistenceManagerFactory pmf=JDOHelper.getPersistenceManagerFactory("Example");
+	static private PersistenceManagerFactory pmf=JDOHelper.getPersistenceManagerFactory("Example");
 	
 	public static AirportDAO getAirportDAO(){
 		return new AirportDAOImpl(pmf);
@@ -32,18 +32,19 @@ public class DAOFactory {
 	
 	public static FlightDAO getFlightDAO(){
 		return new FlightDAOImpl(pmf);
-	}*/
-	public static FlightDAO getFlightDAO(){
-		return new FlightDAOFakeImpl();
 	}
+	/*public static FlightDAO getFlightDAO(){
+		return new FlightDAOFakeImpl();
+	}*/
 	
 	public static void populate_db(){
-		/*Airport a = new Airport("CDG");
+		Airport a = new Airport("CDG");
 		getAirportDAO().addElement(a);
-		Crew c = new Crew("Albert Lepilote","password","albert@pilote.com",UserStatus.CREW, CrewStatus.PILOT);
+		Crew c = new Crew("AlbertLepilote","password","albert@pilote.com",UserStatus.CREW, CrewStatus.PILOT);
 		getCrewDAO().addElement(c);
+		getUserDAO().addElement(new User("Albert","pass","albert@pilote.com",UserStatus.CREW));
 		Plane p = new Plane("TVZ-222","CDG");
-		getPlaneDAO().addElement(p);*/
+		getPlaneDAO().addElement(p);
 		Flight f = new Flight("CN-42","CDG","CDG", new Date(),new Date());
 		getFlightDAO().addElement(f);
 	}

@@ -56,11 +56,12 @@ public class Flight{
 	}
 
 	public boolean edit(Flight elt){
-		if(this.commercial_number!=elt.commercial_number || this.departure_airport!=elt.departure_airport){
+		if(this.commercial_number!=elt.commercial_number){
 			return false;
 		}
 		this.ATC_code=elt.ATC_code;
 		this.plane=elt.plane;
+		this.departure_airport = elt.departure_airport;
 		this.arrival_airport=elt.arrival_airport;
 		this.departure_time=elt.departure_time;
 		this.arrival_time=elt.arrival_time;

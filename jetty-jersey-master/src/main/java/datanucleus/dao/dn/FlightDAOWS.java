@@ -69,6 +69,16 @@ public class FlightDAOWS implements FlightDAO{
 		DAOFactory.getFlightDAO().editElement(id, f);
 	}
 
+	@GET
+	@Produces("text/plain")
+	@Path("/login/{name}/{password}")
+	public String login(@PathParam("name") String name, @PathParam("password") String password){
+		if (DAOFactory.getUserDAO().login(name, password))
+			return "SUCCESS";
+		else
+			return "FAIL";
+	}
+
 	/*public void editElement(String name, Flight elt) {
 		// TODO Auto-generated method stub
 		
