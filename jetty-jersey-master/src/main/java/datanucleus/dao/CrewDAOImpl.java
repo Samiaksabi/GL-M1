@@ -21,15 +21,14 @@ public class CrewDAOImpl implements CrewDAO{
 	
 	@SuppressWarnings("unchecked")
 	public Collection<Crew> getAll() {
-		Collection<Crew> crew;
 		Collection<Crew> detached;
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
-			Query q = pm.newQuery("SELECT FROM "+Crew.class.getName());
+			Query q = pm.newQuery(Crew.class);
 
-			crew = (List<Crew>) q.execute();
+			Collection<Crew> crew = (List<Crew>) q.execute();
 			detached = (List<Crew>) pm.detachCopyAll(crew);
 
 			tx.commit();
@@ -42,21 +41,20 @@ public class CrewDAOImpl implements CrewDAO{
 		return detached;
 	}
 
-	public Crew getElement(String name) {
-		Collection<Crew> crew;
-		Collection<Crew> detached;
+	public Crew getElement(String userName) {
+		Crew detached;
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
-			Query q=pm.newQuery("SELECT FROM "+Crew.class.getName()+" WHERE name == \""+name+"\"");
-			/*Query q = pm.newQuery(Airport.class);
-			q.declareParameters("int id");
-			q.setFilter("identifier == id");
-			 */
 			
-			crew = (List<Crew>) q.execute(/*id*/);
-			detached = (List<Crew>) pm.detachCopyAll(crew);
+			Query q = pm.newQuery(Crew.class);
+			q.declareParameters("String name");
+			q.setFilter("userName == name");
+			q.setUnique(true);
+			
+			Crew crew = (Crew) q.execute(userName);
+			detached = (Crew) pm.detachCopy(crew);
 
 			tx.commit();
 		} finally {
@@ -65,10 +63,8 @@ public class CrewDAOImpl implements CrewDAO{
 			}
 			pm.close();
 		}
-		if(detached.isEmpty()){
-			return null;
-		}
-		return detached.iterator().next();
+		
+		return detached;
 
 	}
 
@@ -89,23 +85,19 @@ public class CrewDAOImpl implements CrewDAO{
 		}
 	}
 
-	public void deleteElement(String name) {
-		Collection<Crew> crew = null;
+	public void deleteElement(String userName) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
+				
+			Query q = pm.newQuery(Crew.class);
+			q.declareParameters("String name");
+			q.setFilter("userName == name");
+			q.setUnique(true);
 			
-			Query q=pm.newQuery("SELECT FROM "+Crew.class.getName()+" WHERE name == \""+name+"\"");
-			/*
-			Query q = pm.newQuery(Airport.class);
-			q.declareParameters("int id");
-			q.setFilter("username == user");
-			 
-			airport = (Airport) q.execute(id);
-			*/
-			crew = (List<Crew>) q.execute();
-			pm.deletePersistentAll(crew);
+			Crew crew = (Crew) q.execute(userName);
+			pm.deletePersistent(crew);
 
 			tx.commit();
 		} finally {
@@ -115,24 +107,24 @@ public class CrewDAOImpl implements CrewDAO{
 			pm.close();
 		}
 		return;
-
-		
 	}
 
-	public void editElement(String name, Crew elt) {
-		Collection<Crew> crew = null;
+	public void editElement(String userName, Crew elt) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
-			Query q=pm.newQuery("SELECT FROM "+Crew.class.getName()+" WHERE name == \""+name+"\"");
 			
-					
-			crew = (List<Crew>) q.execute();
-			if(!crew.isEmpty()){
-				User u=crew.iterator().next();
-				u.edit(elt);
+			Query q = pm.newQuery(Crew.class);
+			q.declareParameters("String name");
+			q.setFilter("userName == name");
+			q.setUnique(true);
+			
+			Crew crew = (Crew) q.execute(userName);
+			if(crew!=null){
+				crew.edit(elt);
 			}
+			
 			tx.commit();
 		} finally {
 			if (tx.isActive()) {

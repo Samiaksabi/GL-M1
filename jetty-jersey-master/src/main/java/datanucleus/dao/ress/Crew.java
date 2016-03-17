@@ -11,8 +11,17 @@ public class Crew extends User{
 		
 	}
 	
-	public Crew(String name, String password, String mail, UserStatus status, CrewStatus crewStatus){
-		super(name,password,mail,status);
+	public Crew(String userName, String firstName, String lastName, String password, String mail, UserStatus status, CrewStatus crewStatus){
+		super(userName,firstName,lastName,password,mail,status);
 		this.crewStatus=crewStatus;
 	}
+
+	@Override
+	public String toString() {
+		return "Crew [crewStatus=" + crewStatus + ", userName=" + userName + ", firstName=" + firstName + ", lastName="
+				+ lastName + ", mail=" + mail + ", status=" + status + "]";
+	}
+	
+	
+	
 }

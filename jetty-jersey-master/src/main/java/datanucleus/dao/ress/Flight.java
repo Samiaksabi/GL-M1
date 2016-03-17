@@ -4,38 +4,48 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import javax.jdo.annotations.DatastoreIdentity;
+import javax.jdo.annotations.Element;
+import javax.jdo.annotations.IdGeneratorStrategy;
+import javax.jdo.annotations.Join;
 import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.PrimaryKey;
 
 import datanucleus.dao.DAOFactory;
 
 @PersistenceCapable
 public class Flight{
-
-	//@PrimaryKey
+	
+	@PrimaryKey
+    @Persistent(valueStrategy=IdGeneratorStrategy.INCREMENT)
+    String identifier;
+	
     public String commercial_number;
     public String ATC_code;
     
     public String plane;
-  /*
-    @Persistent(table="Flight_Crew")
-    @Join(column="Crew_name_OID")
-    @Element(column="Crew_name_EID")
+
+    //@Element(types=datanucleus.dao.ress.Crew.class)
+    /*
+    @Element(types=datanucleus.dao.ress.Crew.class)
+    @Join(table="Crew")
     */
+    @Persistent(defaultFetchGroup = "true")
     public Collection<String> crew_members=new ArrayList<String>();
     
-    //@PrimaryKey
     public String departure_airport;
     
     public String arrival_airport;
     
-    //@PrimaryKey
     public Date departure_time;
     public Date  arrival_time;
 
     public String ofp_url;
     public String weather_maps_url;
-   // @Element
-   public List<String> notam =new ArrayList<String>();
+   
+    @Persistent(defaultFetchGroup = "true")
+    public List<String> notam =new ArrayList<String>();
     
     public Flight(){
     	
@@ -46,15 +56,16 @@ public class Flight{
     	this.departure_airport=departureAirport;
     	this.arrival_airport=arrivalAirport;
     	this.departure_time=departureTime;
-    	this.arrival_time=arrivalTime;    	
+    	this.arrival_time=arrivalTime;
     }
-    
-    @Override
+
+	@Override
 	public String toString() {
-		return "Flight [commercial_number=" + commercial_number + ", ATC_code=" + ATC_code + ", plane=" + plane
-				+ ", crew_members=" + crew_members + ", departure_airport=" + departure_airport + ", arrival_airport="
-				+ arrival_airport + ", departure_time=" + departure_time + ", arrival_time=" + arrival_time
-				+ ", ofp_url=" + ofp_url + ", weather_maps_url=" + weather_maps_url + ", notam=" + notam + "]";
+		return "Flight [id=" + identifier + ", commercial_number=" + commercial_number + ", ATC_code=" + ATC_code + ", plane="
+				+ plane + ", crew_members=" + crew_members + ", departure_airport=" + departure_airport
+				+ ", arrival_airport=" + arrival_airport + ", departure_time=" + departure_time + ", arrival_time="
+				+ arrival_time + ", ofp_url=" + ofp_url + ", weather_maps_url=" + weather_maps_url + ", notam=" + notam
+				+ "]";
 	}
 
 	public boolean edit(Flight elt){

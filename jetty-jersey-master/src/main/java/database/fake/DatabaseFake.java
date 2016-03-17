@@ -127,6 +127,11 @@ public class DatabaseFake implements Database{
 	public DB<Plane> getPlanes() {
 		return planes;
 	}
+
+	public Flight getFlight(String crew, String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 }

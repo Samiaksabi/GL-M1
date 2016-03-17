@@ -6,32 +6,37 @@ import java.util.Date;
 import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManagerFactory;
 
-import datanucleus.dao.fake.FlightDAOFakeImpl;
 import datanucleus.dao.ress.*;
 
 
 public class DAOFactory {
 	
-	static private PersistenceManagerFactory pmf=JDOHelper.getPersistenceManagerFactory("Example");
+	static final private PersistenceManagerFactory pmf=JDOHelper.getPersistenceManagerFactory("FlightPlanificationSystemDataBase");
+	
+	static final private AirportDAO airportDAO=new AirportDAOImpl(DAOFactory.pmf);
+	static final private PlaneDAO planeDAO=new PlaneDAOImpl(DAOFactory.pmf);
+	static final private UserDAO userDAO=new UserDAOImpl(DAOFactory.pmf);
+	static final private CrewDAO crewDAO=new CrewDAOImpl(DAOFactory.pmf);
+	static final private FlightDAO flightDAO=new FlightDAOImpl(DAOFactory.pmf);
 	
 	public static AirportDAO getAirportDAO(){
-		return new AirportDAOImpl(pmf);
+		return DAOFactory.airportDAO;
 	}
 
 	public static PlaneDAO getPlaneDAO(){
-		return new PlaneDAOImpl(pmf);
+		return DAOFactory.planeDAO;
 	}
 	
 	public static UserDAO getUserDAO(){
-		return new UserDAOImpl(pmf);
+		return DAOFactory.userDAO;
 	}
 	
 	public static CrewDAO getCrewDAO(){
-		return new CrewDAOImpl(pmf);
+		return DAOFactory.crewDAO;
 	}
 	
 	public static FlightDAO getFlightDAO(){
-		return new FlightDAOImpl(pmf);
+		return DAOFactory.flightDAO;
 	}
 	/*public static FlightDAO getFlightDAO(){
 		return new FlightDAOFakeImpl();
@@ -42,9 +47,9 @@ public class DAOFactory {
 		getAirportDAO().addElement(a);
 		Airport a2 = new Airport("ORY");
 		getAirportDAO().addElement(a2);
-		Crew c = new Crew("AlbertLepilote","password","albert@pilote.com",UserStatus.CREW, CrewStatus.PILOT);
+		Crew c = new Crew("AlbertLepilote","Albert","Pilote","password","albert@pilote.com",UserStatus.CREW, CrewStatus.PILOT);
 		getCrewDAO().addElement(c);
-		getUserDAO().addElement(new User("AlbertCCO","password","albert@cco.com",UserStatus.CCO));
+		getUserDAO().addElement(new User("AlbertCCO","Albert","Machin","password","albert@cco.com",UserStatus.CCO));
 		Plane p = new Plane("TVZ-222","CDG");
 		getPlaneDAO().addElement(p);
 		Flight f = new Flight("CN-42","CDG","ORY", new Date(),new Date());
