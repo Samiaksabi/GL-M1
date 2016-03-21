@@ -16,6 +16,13 @@ function form(){
 	//var departure_time = $("#departure_time").val();
 	var arrival_date = $("#arrival_date").val();
 	//var arrival_time = $("#arrival_time").val();
+	/*var json = {"commercial_number":string(commercial_number),
+		   "ATC_code":string(atc_number),
+		   "plane":string(plane_id),
+		   "crew_members":[],
+		   "departure_airport":string(departure_airport),
+		   "arrival_airport":string(arrival_airport),
+		   }*/
 	var json_str =
 	    '{"commercial_number":' + string(commercial_number) +
 	    ',"ATC_code":'          + string(atc_number) +
