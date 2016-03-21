@@ -27,7 +27,7 @@ public class FlightDAOFakeImpl implements FlightDAO{
 		return db.getFlights(crew);
 	}
 	
-    public Flight getFlight(String crew,int id){
+    public Flight getFlight(String crew,String id){
 		return db.getFlight(crew,id);
 	}
 

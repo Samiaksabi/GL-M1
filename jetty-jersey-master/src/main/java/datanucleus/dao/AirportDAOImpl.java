@@ -21,15 +21,14 @@ public class AirportDAOImpl implements AirportDAO {
 
 	@SuppressWarnings("unchecked")
 	public Collection<Airport> getAll() {
-		Collection<Airport> airport;
 		Collection<Airport> detached;
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
-			Query q = pm.newQuery("SELECT FROM "+Airport.class.getName());
+			Query q = pm.newQuery(Airport.class);
 
-			airport = (List<Airport>) q.execute();
+			Collection<Airport> airport= (List<Airport>) q.execute();
 			detached = (List<Airport>) pm.detachCopyAll(airport);
 
 			tx.commit();
@@ -44,20 +43,18 @@ public class AirportDAOImpl implements AirportDAO {
 
 	@SuppressWarnings("unchecked")
 	public Airport getElement(String airportICAO) {
-		Collection<Airport> airport;
-		Collection<Airport> detached;
+		Airport detached;
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
-			Query q=pm.newQuery("SELECT FROM "+Airport.class.getName()+" WHERE ICAO_code == \""+airportICAO+"\"");
-			/*Query q = pm.newQuery(Airport.class);
-			q.declareParameters("int id");
-			q.setFilter("identifier == id");
-			 */
+			Query q = pm.newQuery(Airport.class);
+			q.declareParameters("String airportICAO");
+			q.setFilter("ICAO_code == airportICAO");
+			q.setUnique(true);
 			
-			airport = (List<Airport>) q.execute(/*id*/);
-			detached = (List<Airport>) pm.detachCopyAll(airport);
+			Airport airport=(Airport) q.execute(airportICAO);
+			detached = (Airport) pm.detachCopy(airport);
 
 			tx.commit();
 		} finally {
@@ -66,10 +63,8 @@ public class AirportDAOImpl implements AirportDAO {
 			}
 			pm.close();
 		}
-		if(detached.isEmpty()){
-			return null;
-		}
-		return detached.iterator().next();
+		
+		return detached;
 	}
 
 	public void addElement(Airport elt) {
@@ -92,22 +87,20 @@ public class AirportDAOImpl implements AirportDAO {
 
 	@SuppressWarnings("unchecked")
 	public void deleteElement(String airportICAO) {
-		Collection<Airport> airport = null;
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
 			
-			Query q=pm.newQuery("SELECT FROM "+Airport.class.getName()+" WHERE ICAO_code == \""+airportICAO+"\"");
-			/*
 			Query q = pm.newQuery(Airport.class);
-			q.declareParameters("int id");
-			q.setFilter("username == user");
-			 
-			airport = (Airport) q.execute(id);
-			*/
-			airport = (List<Airport>) q.execute();
-			pm.deletePersistentAll(airport);
+			
+			q.declareParameters("String airportICAO");
+			q.setFilter("ICAO_code == airportICAO");
+			q.setUnique(true);
+			
+			Airport airport = (Airport) q.execute(airportICAO);
+			
+			pm.deletePersistent(airport);
 
 			tx.commit();
 		} finally {
@@ -121,20 +114,22 @@ public class AirportDAOImpl implements AirportDAO {
 
 	@SuppressWarnings("unchecked")
 	public void editElement(String airportICAO, Airport elt) {
-		Collection<Airport> airport = null;
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
-			Query q=pm.newQuery("SELECT FROM "+Airport.class.getName()+" WHERE ICAO_code == \""+airportICAO+"\"");
+			Query q = pm.newQuery(Airport.class);
 			
-					
-			airport = (List<Airport>) q.execute();
-			if(!airport.isEmpty()){
-				//for(Airport a:air)
-				Airport air=airport.iterator().next();
-				air.edit(elt);
+			q.declareParameters("String airportICAO");
+			q.setFilter("ICAO_code == airportICAO");
+			q.setUnique(true);
+			
+			Airport airport = (Airport) q.execute(airportICAO);
+			
+			if(airport!=null){
+				airport.edit(elt);
 			}
+			
 			tx.commit();
 		} finally {
 			if (tx.isActive()) {

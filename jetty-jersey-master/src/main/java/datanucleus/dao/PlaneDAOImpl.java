@@ -20,15 +20,14 @@ public class PlaneDAOImpl implements PlaneDAO {
 
 	@SuppressWarnings("unchecked")
 	public Collection<Plane> getAll() {
-		Collection<Plane> plane;
 		Collection<Plane> detached;
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
-			Query q = pm.newQuery("SELECT FROM "+Plane.class.getName());
+			Query q = pm.newQuery(Plane.class);
 
-			plane = (List<Plane>) q.execute();
+			Collection<Plane> plane = (List<Plane>) q.execute();
 			detached = (List<Plane>) pm.detachCopyAll(plane);
 
 			tx.commit();
@@ -42,20 +41,18 @@ public class PlaneDAOImpl implements PlaneDAO {
 	}
 
 	public Plane getElement(String id) {
-		Collection<Plane> plane;
-		Collection<Plane> detached;
+		Plane detached;
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
-			Query q=pm.newQuery("SELECT FROM "+Plane.class.getName()+" WHERE identifier == \""+id+"\"");
-			/*Query q = pm.newQuery(Airport.class);
-			q.declareParameters("int id");
+			Query q = pm.newQuery(Plane.class);
+			q.declareParameters("String id");
 			q.setFilter("identifier == id");
-			 */
+			q.setUnique(true);
 			
-			plane = (List<Plane>) q.execute(/*id*/);
-			detached = (List<Plane>) pm.detachCopyAll(plane);
+			Plane plane = (Plane) q.execute(id);
+			detached = (Plane) pm.detachCopy(plane);
 
 			tx.commit();
 		} finally {
@@ -64,16 +61,14 @@ public class PlaneDAOImpl implements PlaneDAO {
 			}
 			pm.close();
 		}
-		if(detached.isEmpty()){
-			return null;
-		}
-		return detached.iterator().next();
+		
+		return detached;
 	}
 
 	public void addElement(Plane elt) {
 		
-		AirportDAO airportDAO=new AirportDAOImpl(this.pmf);
-		if(airportDAO.getElement(elt.airport_ICAO)==null){
+		AirportDAO airportDAO=DAOFactory.getAirportDAO();
+		if(airportDAO.getElement(elt.airport)==null){
 			
 			//TODO
 			/* Should throw an Exception here*/
@@ -86,8 +81,6 @@ public class PlaneDAOImpl implements PlaneDAO {
 		try {
 			tx.begin();
 			
-			
-
 			pm.makePersistent(elt);
 
 			tx.commit();
@@ -101,22 +94,19 @@ public class PlaneDAOImpl implements PlaneDAO {
 	}
 
 	public void deleteElement(String id) {
-		Collection<Plane> plane = null;
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
 			
-			Query q=pm.newQuery("SELECT FROM "+Plane.class.getName()+" WHERE identifier == \""+id+"\"");
-			/*
-			Query q = pm.newQuery(Airport.class);
-			q.declareParameters("int id");
-			q.setFilter("username == user");
-			 
-			airport = (Airport) q.execute(id);
-			*/
-			plane = (List<Plane>) q.execute();
-			pm.deletePersistentAll(plane);
+			Query q = pm.newQuery(Plane.class);
+			q.declareParameters("String id");
+			q.setFilter("identifier == id");
+			q.setUnique(true);
+			
+			Plane plane = (Plane) q.execute(id);
+			
+			pm.deletePersistent(plane);
 
 			tx.commit();
 		} finally {
@@ -129,19 +119,22 @@ public class PlaneDAOImpl implements PlaneDAO {
 	}
 
 	public void editElement(String id, Plane elt) {
-		Collection<Plane> plane = null;
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
-			Query q=pm.newQuery("SELECT FROM "+Plane.class.getName()+" WHERE identifier == \""+id+"\"");
 			
-					
-			plane = (List<Plane>) q.execute();
-			if(!plane.isEmpty()){
-				Plane p=plane.iterator().next();
-				p.edit(elt);
+			Query q = pm.newQuery(Plane.class);
+			q.declareParameters("String id");
+			q.setFilter("identifier == id");
+			q.setUnique(true);
+			
+			Plane plane = (Plane) q.execute(id);
+			
+			if(plane!=null){
+				plane.edit(elt);
 			}
+			
 			tx.commit();
 		} finally {
 			if (tx.isActive()) {

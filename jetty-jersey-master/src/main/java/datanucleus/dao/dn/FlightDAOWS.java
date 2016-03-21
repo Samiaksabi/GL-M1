@@ -51,7 +51,7 @@ public class FlightDAOWS implements FlightDAO{
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{crew_id}/flight/{id}")
-    public Flight getFlight(@PathParam("crew_id") String crew_id,@PathParam("id") int id){
+    public Flight getFlight(@PathParam("crew_id") String crew_id,@PathParam("id") String id){
 		return DAOFactory.getFlightDAO().getFlight(crew_id, id);
 	}
 

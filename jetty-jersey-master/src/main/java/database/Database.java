@@ -11,7 +11,7 @@ import datanucleus.dao.ress.User;
 public interface Database{
 	
 	public Collection<Flight> getFlights(String crew);
-	public Flight getFlight(String crew, int id);
+	public Flight getFlight(String crew, String id);
 	
 	public DB<Flight> getFlights();
 

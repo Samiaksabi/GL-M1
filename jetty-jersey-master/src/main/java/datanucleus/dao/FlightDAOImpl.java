@@ -1,6 +1,5 @@
 package datanucleus.dao;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -9,7 +8,6 @@ import javax.jdo.PersistenceManagerFactory;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
 
-import datanucleus.dao.ress.Crew;
 import datanucleus.dao.ress.Flight;
 
 
@@ -22,15 +20,14 @@ public class FlightDAOImpl implements FlightDAO {
 	}
 
 	public Collection<Flight> getAll() {
-		Collection<Flight> flight = null;
-		Collection<Flight> detached = new ArrayList<Flight>();
+		Collection<Flight> detached;
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
-			Query q = pm.newQuery("SELECT FROM "+Flight.class.getName());
+			Query q = pm.newQuery(Flight.class);
 
-			flight = (List<Flight>) q.execute();
+			Collection<Flight> flight = (List<Flight>) q.execute();
 			detached = (List<Flight>) pm.detachCopyAll(flight);
 
 			tx.commit();
@@ -43,21 +40,20 @@ public class FlightDAOImpl implements FlightDAO {
 		return detached;
 	}
 
-	public Flight getElement(String commercialNumber) {
-		Collection<Flight> flight = null;
-		Collection<Flight> detached = new ArrayList<Flight>();
+	public Flight getElement(String id) {
+		Flight detached;
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
-			Query q=pm.newQuery("SELECT FROM "+Flight.class.getName()+" WHERE commercial_number == \""+commercialNumber+"\"");
-			/*Query q = pm.newQuery(Airport.class);
-			q.declareParameters("int id");
-			q.setFilter("identifier == id");
-			 */
 			
-			flight = (List<Flight>) q.execute(/*id*/);
-			detached = (List<Flight>) pm.detachCopyAll(flight);
+			Query q = pm.newQuery(Flight.class);
+			q.declareParameters("String id");
+			q.setFilter("identifier == id");
+			q.setUnique(true);
+			
+			Flight flight = (Flight) q.execute(id);
+			detached = (Flight) pm.detachCopy(flight);
 
 			tx.commit();
 		} finally {
@@ -66,10 +62,8 @@ public class FlightDAOImpl implements FlightDAO {
 			}
 			pm.close();
 		}
-		if(detached.isEmpty()){
-			return null;
-		}
-		return detached.iterator().next();
+		
+		return detached;
 
 	}
 
@@ -87,26 +81,22 @@ public class FlightDAOImpl implements FlightDAO {
 		try {
 			tx.begin();
 			
-			Query q=pm.newQuery("SELECT FROM "+Flight.class.getName()+" WHERE commercial_number == \""+elt.commercial_number+"\"");
-			/*Query q = pm.newQuery(Airport.class);
-			q.declareParameters("int id");
-			q.setFilter("identifier == id");
-			 */
+			Query q = pm.newQuery(Flight.class);
 			
+			q.declareImports("import java.util.Date");
+			q.declareParameters("String commercialNumber,Date departureTime, String departureAirport");
+			q.setFilter("departure_airport == departureAirport && commercial_number == commercialNumber && departure_time == departureTime");
+			q.setUnique(true);
 			
-			boolean volExistant=false;
+			Flight flight = (Flight) q.execute(elt.commercial_number,elt.departure_time,elt.departure_airport);
 			
-			List<Flight>flight = (List<Flight>) q.execute();
-			for(Flight f:flight){
-				if(f.departure_time.equals(elt.departure_time) && f.departure_airport.equals(elt.departure_airport)){
-					volExistant=true;
-					break;
-				}
-			}
-
-			if(!volExistant){
+			if(flight==null){
 				pm.makePersistent(elt);
 			}
+			else{
+				//TODO Should throw an Exception
+			}
+			
 			tx.commit();
 		} finally {
 			if (tx.isActive()) {
@@ -116,23 +106,20 @@ public class FlightDAOImpl implements FlightDAO {
 		}
 	}
 
-	public void deleteElement(String commercialNumber) {
-		Collection<Crew> crew = null;
+	public void deleteElement(String id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
 			
-			Query q=pm.newQuery("SELECT FROM "+Flight.class.getName()+" WHERE commercial_number == \""+commercialNumber+"\"");
-			/*
-			Query q = pm.newQuery(Airport.class);
-			q.declareParameters("int id");
-			q.setFilter("username == user");
-			 
-			airport = (Airport) q.execute(id);
-			*/
-			crew = (List<Crew>) q.execute();
-			pm.deletePersistentAll(crew);
+			Query q = pm.newQuery(Flight.class);
+			q.declareParameters("String id");
+			q.setFilter("identifier == id");
+			q.setUnique(true);
+			
+			Flight flight = (Flight) q.execute(id);
+			
+			pm.deletePersistent(flight);
 
 			tx.commit();
 		} finally {
@@ -146,24 +133,27 @@ public class FlightDAOImpl implements FlightDAO {
 		
 	}
 
-	public void editElement(String commercialNumber, Flight elt) {
+	public void editElement(String id, Flight elt) {
 		if(!elt.isValid())
 			return;
-		Collection<Flight> flight = null;
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
-			Query q=pm.newQuery("SELECT FROM "+Flight.class.getName()+" WHERE commercial_number == \""+commercialNumber+"\"");
 			
-					
-			flight = (List<Flight>) q.execute();
-			if(!flight.isEmpty()){
-				//for(Airport a:air)
-				Flight f=flight.iterator().next();
-				f.edit(elt);
+			Query q = pm.newQuery(Flight.class);
+			q.declareParameters("String id");
+			q.setFilter("identifier == id");
+			q.setUnique(true);
+			
+			Flight flight = (Flight) q.execute(id);
+	
+			if(flight!=null){
+				flight.edit(elt);
+				/*
 				deleteElement(elt.commercial_number);
 				addElement(elt);
+				*/
 			}
 			tx.commit();
 		} finally {
@@ -175,14 +165,38 @@ public class FlightDAOImpl implements FlightDAO {
 		
 	}
 
-	public Flight getFlight(String crew_name, int id) {
+	public Flight getFlight(String crew_name, String id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public Collection<Flight> getAll(String crew_name) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Collection<Flight> detached;
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			
+			Query q = pm.newQuery(Flight.class);
+			q.declareParameters("String crewName");
+			q.setFilter("crew_members.contains(crewName)");
+			
+			Collection<Flight> flight = (List<Flight>) q.execute(crew_name);
+			detached = (List<Flight>) pm.detachCopyAll(flight);
+
+			tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
+		if(detached.isEmpty()){
+			return null;
+		}
+		
+		return detached;
 	}
 	
 }

@@ -19,15 +19,14 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	public Collection<User> getAll() {
-		Collection<User> user;
 		Collection<User> detached;
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
-			Query q = pm.newQuery("SELECT FROM "+User.class.getName());
+			Query q = pm.newQuery(User.class);
 
-			user = (List<User>) q.execute();
+			Collection<User> user= (List<User>) q.execute();
 			detached = (List<User>) pm.detachCopyAll(user);
 
 			tx.commit();
@@ -41,21 +40,20 @@ public class UserDAOImpl implements UserDAO {
 
 	}
 
-	public User getElement(String name) {
-		Collection<User> user;
-		Collection<User> detached;
+	public User getElement(String userName) {
+		User detached;
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
-			Query q=pm.newQuery("SELECT FROM "+User.class.getName()+" WHERE name == \""+name+"\"");
-			/*Query q = pm.newQuery(Airport.class);
-			q.declareParameters("int id");
-			q.setFilter("identifier == id");
-			 */
 			
-			user = (List<User>) q.execute(/*id*/);
-			detached = (List<User>) pm.detachCopyAll(user);
+			Query q = pm.newQuery(User.class);
+			q.declareParameters("String s");
+			q.setFilter("userName == s");
+			q.setUnique(true);
+			
+			User user = (User) q.execute(userName);
+			detached = (User) pm.detachCopy(user);
 
 			tx.commit();
 		} finally {
@@ -64,10 +62,7 @@ public class UserDAOImpl implements UserDAO {
 			}
 			pm.close();
 		}
-		if(detached.isEmpty()){
-			return null;
-		}
-		return detached.iterator().next();
+		return detached;
 	}
 
 	public void addElement(User elt) {
@@ -87,23 +82,20 @@ public class UserDAOImpl implements UserDAO {
 		}
 	}
 
-	public void deleteElement(String name) {
-		Collection<User> user = null;
+	public void deleteElement(String userName) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
+				
+			Query q = pm.newQuery(User.class);
+			q.declareParameters("String s");
+			q.setFilter("userName == s");
+			q.setUnique(true); 
 			
-			Query q=pm.newQuery("SELECT FROM "+User.class.getName()+" WHERE name == \""+name+"\"");
-			/*
-			Query q = pm.newQuery(Airport.class);
-			q.declareParameters("int id");
-			q.setFilter("username == user");
-			 
-			airport = (Airport) q.execute(id);
-			*/
-			user = (List<User>) q.execute();
-			pm.deletePersistentAll(user);
+			User user= (User) q.execute(userName);
+			
+			pm.deletePersistent(user);
 
 			tx.commit();
 		} finally {
@@ -116,20 +108,23 @@ public class UserDAOImpl implements UserDAO {
 		
 	}
 
-	public void editElement(String name, User elt) {
-		Collection<User> user = null;
+	public void editElement(String userName, User elt) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
-			Query q=pm.newQuery("SELECT FROM "+User.class.getName()+" WHERE name == \""+name+"\"");
 			
-					
-			user = (List<User>) q.execute();
-			if(!user.isEmpty()){
-				User u=user.iterator().next();
-				u.edit(elt);
+			Query q = pm.newQuery(User.class);
+			q.declareParameters("String s");
+			q.setFilter("userName == s");
+			q.setUnique(true);
+			
+			User user = (User) q.execute(userName);
+			
+			if(user!=null){
+				user.edit(elt);
 			}
+			
 			tx.commit();
 		} finally {
 			if (tx.isActive()) {
