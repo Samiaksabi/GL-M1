@@ -49,7 +49,8 @@ public class DAOFactory {
 		getAirportDAO().addElement(a2);
 		Crew c = new Crew("AlbertLepilote","Albert","Pilote","password","albert@pilote.com",UserStatus.CREW, CrewStatus.PILOT);
 		getCrewDAO().addElement(c);
-		getUserDAO().addElement(new User("AlbertCCO","Albert","Machin","password","albert@cco.com",UserStatus.CCO));
+		User u = new User("AlbertCCO","Albert","Machin","password","albert@cco.com",UserStatus.CCO);
+		getUserDAO().addElement(u);
 		Plane p = new Plane("TVZ-222","CDG");
 		getPlaneDAO().addElement(p);
 		Flight f = new Flight("CN-42","CDG","ORY", new Date(),new Date());

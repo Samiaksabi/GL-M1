@@ -19,7 +19,7 @@ public class Flight{
 	
 	@PrimaryKey
     @Persistent(valueStrategy=IdGeneratorStrategy.INCREMENT)
-    String identifier;
+    public String identifier;
 	
     public String commercial_number;
     public String ATC_code;
@@ -57,6 +57,7 @@ public class Flight{
     	this.arrival_airport=arrivalAirport;
     	this.departure_time=departureTime;
     	this.arrival_time=arrivalTime;
+    	this.identifier = "";
     }
 
 	@Override

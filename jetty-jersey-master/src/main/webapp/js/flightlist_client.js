@@ -13,7 +13,7 @@ function hydrateFlightList(data,template){
 	"arrival_airport":data.arrival_airport,
 	"departure_time":new Date(data.departure_time).toUTCString(),
 	"arrival_time":new Date(data.arrival_time).toUTCString(),
-	"url": "/ws/flight/" + data.commercial_number
+	"url": "/ws/flight/" + data.identifier
     });
     $("#template_anchor").append(html);
 }
