@@ -13,11 +13,11 @@ public class DAOFactory {
 	
 	static final private PersistenceManagerFactory pmf=JDOHelper.getPersistenceManagerFactory("FlightPlanificationSystemDataBase");
 	
-	static final private AirportDAO airportDAO=new AirportDAOImpl(DAOFactory.pmf);
-	static final private PlaneDAO planeDAO=new PlaneDAOImpl(DAOFactory.pmf);
-	static final private UserDAO userDAO=new UserDAOImpl(DAOFactory.pmf);
-	static final private CrewDAO crewDAO=new CrewDAOImpl(DAOFactory.pmf);
-	static final private FlightDAO flightDAO=new FlightDAOImpl(DAOFactory.pmf);
+	static final private AirportDAO airportDAO=new AirportDAOImpl(pmf);
+	static final private PlaneDAO planeDAO=new PlaneDAOImpl(pmf);
+	static final private UserDAO userDAO=new UserDAOImpl(pmf);
+	static final private CrewDAO crewDAO=new CrewDAOImpl(pmf);
+	static final private FlightDAO flightDAO=new FlightDAOImpl(pmf);
 	
 	public static AirportDAO getAirportDAO(){
 		return DAOFactory.airportDAO;

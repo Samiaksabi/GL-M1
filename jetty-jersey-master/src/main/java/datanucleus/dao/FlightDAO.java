@@ -9,5 +9,6 @@ public interface FlightDAO extends DAO<Flight>{
 
 	 Flight getFlight(String crew_userName,String id);
 	 Collection<Flight> getAll(String userName);
+	 //void importExcelFile(FileInputStream excelFile) throws IOException;
 	 
 }

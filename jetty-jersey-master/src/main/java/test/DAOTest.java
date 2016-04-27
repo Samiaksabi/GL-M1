@@ -110,6 +110,35 @@ public class DAOTest {
 		}
 		
 	}
+
+	@Test
+	public void testAirport2(){
+		System.out.println("Test Airport 2 :\n");
+		
+		AirportDAO airportDAO=DAOFactory.getAirportDAO();
+		
+		airportDAO.addElement(new Airport("Elie"));
+		airportDAO.addElement(new Airport("Samia"));
+		airportDAO.addElement(new Airport("Tantely"));
+		
+		airportDAO.deleteElement("Samia");
+		
+		Airport a=airportDAO.getElement("Elie");
+		System.out.println(a);
+		
+
+		Collection<Airport> b=airportDAO.getAll();
+		
+		if(b.isEmpty()){
+			System.out.println("Empty");
+		}
+		
+		for(Airport air:b){
+			System.out.println(air);
+		}
+		
+	}
+
 	
 	@Test
 	public void testPlane(){
@@ -172,4 +201,5 @@ public class DAOTest {
 		}
 		*/
 	}
+	
 }

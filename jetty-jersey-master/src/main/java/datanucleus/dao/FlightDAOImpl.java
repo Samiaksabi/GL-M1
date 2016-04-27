@@ -1,12 +1,21 @@
 package datanucleus.dao;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.Collection;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
+
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Row;
 
 import datanucleus.dao.ress.Flight;
 
@@ -197,6 +206,35 @@ public class FlightDAOImpl implements FlightDAO {
 		}
 		
 		return detached;
+	}
+
+	public void importExcelFile(FileInputStream excelFile) throws IOException{
+		HSSFWorkbook wb = new HSSFWorkbook(excelFile);
+		HSSFSheet sheet = wb.getSheetAt(0);
+		
+		for (Iterator<Row> rowIt = sheet.rowIterator(); rowIt.hasNext();) {
+			try{
+				HSSFRow row = (HSSFRow) rowIt.next();
+				Flight flight=this.createFlightFromRow(row);
+				this.addElement(flight);
+			}catch(NullPointerException e){
+				// TODO Logger here
+			}catch(IllegalStateException e){
+				// TODO Logger here
+			}
+		}
+		wb.close();
+	}
+	
+	private Flight createFlightFromRow(HSSFRow row) throws NullPointerException, IllegalStateException{
+		
+		String commercialNumber=row.getCell(0).getStringCellValue();
+		Date departureDate=row.getCell(1).getDateCellValue();
+		Date arrivalDate=row.getCell(2).getDateCellValue();
+		String departureAirport=row.getCell(3).getStringCellValue();
+		String arrivalAirport=row.getCell(4).getStringCellValue();
+		
+		return new Flight(commercialNumber,departureAirport,arrivalAirport,departureDate, arrivalDate);
 	}
 	
 }
