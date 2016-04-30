@@ -6,7 +6,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import datanucleus.dao.DAOFactory;
+import datanucleus.dao.DAOAccessor;
+import datanucleus.dao.ress.User;
 
 @Path("")
 public class LoginWS {
@@ -15,9 +16,9 @@ public class LoginWS {
 	@Produces(MediaType.APPLICATION_JSON)
 	//@Produces("text/plain")
 	@Path("/login/{name}/{password}")
-	public String login(@PathParam("name") String name, @PathParam("password") String password) throws Exception{
-		if (DAOFactory.getUserDAO().login(name, password)){
-			return null;
+	public User login(@PathParam("name") String name, @PathParam("password") String password) throws Exception{
+		if (DAOAccessor.getUserDAO().login(name, password)){
+			return DAOAccessor.getUserDAO().getElement(name);
 		}
 		else
 			throw new Exception();

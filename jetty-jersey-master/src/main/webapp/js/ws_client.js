@@ -11,7 +11,7 @@ function addServerData(url,data){
 	type: 'PUT',
 	contentType: 'application/json',
 	url: url,
-	data: JSON.stringify(data)
+	data: data
     });
 }
 
@@ -19,7 +19,7 @@ function editServerData(url,data){
     $.ajax({
 	type: "POST",
 	url: url,
-	data: JSON.stringify(data),
+	data: data,
 	contentType: "application/json"
     });
 }

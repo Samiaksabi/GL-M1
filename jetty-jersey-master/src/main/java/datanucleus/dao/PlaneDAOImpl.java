@@ -67,7 +67,7 @@ public class PlaneDAOImpl implements PlaneDAO {
 
 	public void addElement(Plane elt) {
 		
-		AirportDAO airportDAO=DAOFactory.getAirportDAO();
+		AirportDAO airportDAO=DAOAccessor.getAirportDAO();
 		if(airportDAO.getElement(elt.airport)==null){
 			
 			//TODO

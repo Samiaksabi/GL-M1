@@ -2,8 +2,10 @@ function string(e){
     return '"' + e + '"';
 }
 
-function login(s){
-    $(location).attr('href',"home.html");
+function login(user){
+    console.log(user);
+    if(user.status == "CCO")
+	$(location).attr('href',"CCOflightlist.html");
 }
 
 function form(){

@@ -12,9 +12,7 @@ function form(){
 	var departure_airport = $("#departure_airport").val();
 	var arrival_airport = $("#arrival_airport").val();
 	var departure_date = $("#departure_date").val();
-	//var departure_time = $("#departure_time").val();
 	var arrival_date = $("#arrival_date").val();
-	//var arrival_time = $("#arrival_time").val();
 	var json_str =
 	    '{"commercial_number":' + string(commercial_number) +
 	    ',"ATC_code":'          + string(atc_number) +
@@ -27,11 +25,9 @@ function form(){
 	    ',"ofp_url":null' +
 	    ',"weather_maps_url":null' +
 	    ',"notam":[]}';
-	//var donnees = $("#add_form").serialize(); // On créer une variable contenant le formulaire sérialisé
 	console.log(json_str);
-	var json = JSON.parse(json_str);
-	editServerData("/ws/flight/" + commercial_number + "/edit",json);
-	$(location).attr('href',"flightlist.html");
+	editServerData("/ws/flight/" + commercial_number + "/edit",json_str);
+	$(location).attr('href',"CCOflightlist.html");
     });
 }
 
