@@ -46,7 +46,7 @@ public class FpsServer {
 		ResourceHandler handlerPortal = new ResourceHandler();
 		handlerPortal.setResourceBase("src/main/webapp");
 		handlerPortal.setDirectoriesListed(false);
-		handlerPortal.setWelcomeFiles(new String[] { "home.html" });
+		handlerPortal.setWelcomeFiles(new String[] { "login.html" });
 		ContextHandler handlerPortalctx = new ContextHandler();
 		handlerPortalctx.setContextPath("/");
 		handlerPortalctx.setHandler(handlerPortal);

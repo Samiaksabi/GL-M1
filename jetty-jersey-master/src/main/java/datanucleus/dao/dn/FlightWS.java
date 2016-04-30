@@ -15,10 +15,11 @@ import javax.ws.rs.core.MediaType;
 import datanucleus.dao.DAOFactory;
 import datanucleus.dao.FlightDAO;
 import datanucleus.dao.ress.Flight;
+import datanucleus.dao.ress.User;
 
 
 @Path("")
-public class FlightDAOWS implements FlightDAO{
+public class FlightWS implements FlightDAO{
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -67,16 +68,6 @@ public class FlightDAOWS implements FlightDAO{
 	@Path("/flight/{id}/edit")
 	public void editElement(@PathParam("id") String id, Flight f){
 		DAOFactory.getFlightDAO().editElement(id, f);
-	}
-
-	@GET
-	@Produces("text/plain")
-	@Path("/login/{name}/{password}")
-	public String login(@PathParam("name") String name, @PathParam("password") String password) throws Exception{
-		if (DAOFactory.getUserDAO().login(name, password))
-			return "SUCCESS";
-		else
-			throw new Exception();
 	}
 
 	/*public void editElement(String name, Flight elt) {
