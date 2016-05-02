@@ -5,6 +5,7 @@
 
     <!-- Test configuration -->
     <persistence-unit name="FlightPlanificationSystemDataBase">
+    	
     	<class>datanucleus.dao.ress.Airport</class>
     	<class>datanucleus.dao.ress.Crew</class>
     	<class>datanucleus.dao.ress.Flight</class>

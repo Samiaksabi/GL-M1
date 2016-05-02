@@ -8,10 +8,14 @@ import javax.jdo.PersistenceManagerFactory;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import datanucleus.dao.ress.User;
 
 public class UserDAOImpl implements UserDAO {
 	
+	private static Logger logger = LogManager.getLogger(UserDAOImpl.class);
 	private PersistenceManagerFactory pmf;
 
 	public UserDAOImpl(PersistenceManagerFactory pmf) {
@@ -135,9 +139,9 @@ public class UserDAOImpl implements UserDAO {
 		
 	}
 
-	public boolean login(String name, String password) {
-		User user=this.getElement(name);
-		return user.getPassword().equals(password);
+	public boolean login(String user_name, String password) {
+		User user=this.getElement(user_name);
+		return user.isCorrectPassword(password);
 	}
 
 }

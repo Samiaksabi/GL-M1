@@ -16,6 +16,14 @@ public class Crew extends User{
 		this.crewStatus=crewStatus;
 	}
 
+	public CrewStatus getCrewStatus() {
+		return crewStatus;
+	}
+
+	public void setCrewStatus(CrewStatus crewStatus) {
+		this.crewStatus = crewStatus;
+	}
+
 	@Override
 	public String toString() {
 		return "Crew [crewStatus=" + crewStatus + ", userName=" + userName + ", firstName=" + firstName + ", lastName="

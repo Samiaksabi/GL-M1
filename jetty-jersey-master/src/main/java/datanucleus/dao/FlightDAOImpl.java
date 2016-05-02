@@ -1,6 +1,8 @@
 package datanucleus.dao;
 
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Date;
@@ -12,6 +14,8 @@ import javax.jdo.PersistenceManagerFactory;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -22,6 +26,7 @@ import datanucleus.dao.ress.Flight;
 
 public class FlightDAOImpl implements FlightDAO {
 	
+	private static Logger logger = LogManager.getLogger(FlightDAOImpl.class);
 	private PersistenceManagerFactory pmf;
 	
 	public FlightDAOImpl(PersistenceManagerFactory pmf) {
@@ -178,6 +183,36 @@ public class FlightDAOImpl implements FlightDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public void addCrew(String crew_name, String id){
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			
+			Query q = pm.newQuery(Flight.class);
+			q.declareParameters("String id");
+			q.setFilter("identifier == id");
+			q.setUnique(true);
+			
+			Flight flight = (Flight) q.execute(id);
+
+			if(flight==null){
+				//TODO Logger here
+			}
+			else{
+				flight.addCrew(crew_name);
+			}
+			
+			tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
+		
+	}
 
 	public Collection<Flight> getAll(String crew_name) {
 		
@@ -208,8 +243,9 @@ public class FlightDAOImpl implements FlightDAO {
 		return detached;
 	}
 
-	public void importExcelFile(FileInputStream excelFile) throws IOException{
-		HSSFWorkbook wb = new HSSFWorkbook(excelFile);
+	public void importExcelFile(File excelFile) throws FileNotFoundException, IOException{
+		HSSFWorkbook wb = new HSSFWorkbook(new FileInputStream(excelFile));
+		
 		HSSFSheet sheet = wb.getSheetAt(0);
 		
 		for (Iterator<Row> rowIt = sheet.rowIterator(); rowIt.hasNext();) {

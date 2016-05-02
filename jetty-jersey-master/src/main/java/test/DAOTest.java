@@ -8,6 +8,8 @@ import java.util.Date;
 import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManagerFactory;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -17,6 +19,9 @@ import datanucleus.dao.*;
 import datanucleus.dao.ress.*;
 
 public class DAOTest {
+	
+	private static Logger logger = LogManager.getLogger(DAOTest.class);
+	
 	/*
 	@Test
 	public void test(){
@@ -110,7 +115,7 @@ public class DAOTest {
 		}
 		
 	}
-
+/*
 	@Test
 	public void testAirport2(){
 		System.out.println("Test Airport 2 :\n");
@@ -138,14 +143,14 @@ public class DAOTest {
 		}
 		
 	}
-
+*/
 	
 	@Test
 	public void testPlane(){
 		System.out.println("Test Plane :\n");
 		
-		PlaneDAO planeDAO=DAOFactory.getPlaneDAO();
-
+		PlaneDAOImpl planeDAO=(PlaneDAOImpl) DAOFactory.getPlaneDAO();
+		
 		//planeDAO.addElement(new Plane("Elie"));
 		planeDAO.addElement(new Plane("TBS-253","Elie"));
 		
@@ -179,15 +184,36 @@ public class DAOTest {
 		Date date1=new SimpleDateFormat("yyyy-MM-dd").parse("2007-03-06");
 		Date date2=new SimpleDateFormat("yyyy-MM-dd").parse("2007-03-07");
 		
-		flightDAO.addElement(new Flight("AF057","Elie","Tantely",date1,new Date()));
-		flightDAO.addElement(new Flight("AF057","Elie","Tantely",date2,new Date()));
-		flightDAO.addElement(new Flight("AF057","Elie","Tantely",date1,new Date()));
-		flightDAO.addElement(new Flight("AF057","Tantely","Elie",date1,new Date()));
-
+		Flight f1=new Flight("AF057","Elie","Tantely",date1,new Date());
+		Flight f2=new Flight("AF057","Elie","Tantely",date2,new Date());
+		Flight f3=new Flight("AF057","Elie","Tantely",date1,new Date());
+		Flight f4=new Flight("AF057","Tantely","Elie",date1,new Date());
+		
+		flightDAO.addElement(f1);
+		flightDAO.addElement(f2);
+		flightDAO.addElement(f3);
+		flightDAO.addElement(f4);
+		
+		/*
+		Plane p=DAOFactory.getPlaneDAO().getElement("TBS-253");
+		System.out.println(p);
+		f1.setPlane(p);
+		*/
+		/*
+		f1.setPlane(new Plane("test","test"));
+		flightDAO.editElement("1", f1);
+		*/
 		//flightDAO.deleteElement("AF057");
 		//flightDAO.addNotam("AF057", "Super");
 		
-		Collection<Flight> flight=flightDAO.getAll();
+		flightDAO.addCrew("test", "1");
+		flightDAO.addCrew("te", "1");
+		flightDAO.addCrew("tes", "1");
+		flightDAO.addCrew("test", "1");
+		
+		flightDAO.addCrew("test", "3");
+		
+		Collection<Flight> flight=flightDAO.getAll("test");
 		
 		for(Flight f:flight){
 			System.out.println(f);

@@ -8,11 +8,15 @@ import javax.jdo.PersistenceManagerFactory;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import datanucleus.dao.ress.Crew;
 import datanucleus.dao.ress.User;
 
 public class CrewDAOImpl implements CrewDAO{
 
+	private static Logger logger = LogManager.getLogger(CrewDAOImpl.class);
 	private PersistenceManagerFactory pmf;
 
 	public CrewDAOImpl(PersistenceManagerFactory pmf) {

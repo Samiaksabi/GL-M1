@@ -1,5 +1,6 @@
 package datanucleus.dao.dn;
 
+import java.io.File;
 import java.util.Collection;
 
 import javax.ws.rs.Consumes;
@@ -15,6 +16,7 @@ import javax.ws.rs.core.MediaType;
 import datanucleus.dao.DAOFactory;
 import datanucleus.dao.FlightDAO;
 import datanucleus.dao.ress.Flight;
+import server.FpsServer;
 
 
 @Path("")
@@ -69,6 +71,13 @@ public class FlightDAOWS implements FlightDAO{
 		DAOFactory.getFlightDAO().editElement(id, f);
 	}
 
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/{crew_name}/flight/{id}")
+	public void addCrew(@PathParam("crew_name") String crew_name, @PathParam("id") String id) {
+		DAOFactory.getFlightDAO().addCrew(crew_name, id);
+	}
+	
 	@GET
 	@Produces("text/plain")
 	@Path("/login/{name}/{password}")
@@ -83,6 +92,5 @@ public class FlightDAOWS implements FlightDAO{
 		// TODO Auto-generated method stub
 		
 	}*/
-
 
 }

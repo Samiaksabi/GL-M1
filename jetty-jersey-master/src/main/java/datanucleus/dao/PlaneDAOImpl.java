@@ -8,10 +8,14 @@ import javax.jdo.PersistenceManagerFactory;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import datanucleus.dao.ress.Plane;
 
 public class PlaneDAOImpl implements PlaneDAO {
 	
+	private static Logger logger = LogManager.getLogger(PlaneDAOImpl.class);
 	private PersistenceManagerFactory pmf;
 
 	public PlaneDAOImpl(PersistenceManagerFactory pmf) {
@@ -73,7 +77,7 @@ public class PlaneDAOImpl implements PlaneDAO {
 			//TODO
 			/* Should throw an Exception here*/
 			
-			return;
+			//return;
 		}
 		
 		PersistenceManager pm = pmf.getPersistenceManager();

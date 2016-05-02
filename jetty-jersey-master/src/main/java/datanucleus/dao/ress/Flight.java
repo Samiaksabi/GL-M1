@@ -2,16 +2,14 @@ package datanucleus.dao.ress;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.LinkedHashSet;
 import java.util.List;
 
-import javax.jdo.annotations.DatastoreIdentity;
-import javax.jdo.annotations.Element;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.Join;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
-
 import datanucleus.dao.DAOFactory;
 
 @PersistenceCapable
@@ -26,13 +24,9 @@ public class Flight{
     
     public String plane;
 
-    //@Element(types=datanucleus.dao.ress.Crew.class)
-    /*
-    @Element(types=datanucleus.dao.ress.Crew.class)
-    @Join(table="Crew")
-    */
     @Persistent(defaultFetchGroup = "true")
-    public Collection<String> crew_members=new ArrayList<String>();
+    @Join
+    public Collection<String> crew_members=new LinkedHashSet<String>();
     
     public String departure_airport;
     
@@ -45,6 +39,7 @@ public class Flight{
     public String weather_maps_url;
    
     @Persistent(defaultFetchGroup = "true")
+    @Join
     public List<String> notam =new ArrayList<String>();
     
     public Flight(){
@@ -59,6 +54,98 @@ public class Flight{
     	this.arrival_time=arrivalTime;
     	this.identifier = "";
     }
+    
+    public void addCrew(String crew_username){
+    	this.crew_members.add(crew_username);
+    }
+	
+    public String getPlane() {
+		return plane;
+	}
+
+	public void setPlane(String plane) {
+		this.plane = plane;
+	}
+    
+	public String getCommercial_number() {
+		return commercial_number;
+	}
+
+	public void setCommercial_number(String commercial_number) {
+		this.commercial_number = commercial_number;
+	}
+
+	public String getATC_code() {
+		return ATC_code;
+	}
+
+	public void setATC_code(String aTC_code) {
+		ATC_code = aTC_code;
+	}
+
+	public Collection<String> getCrew_members() {
+		return crew_members;
+	}
+
+	public void setCrew_members(Collection<String> crew_members) {
+		this.crew_members = crew_members;
+	}
+
+	public String getDeparture_airport() {
+		return departure_airport;
+	}
+
+	public void setDeparture_airport(String departure_airport) {
+		this.departure_airport = departure_airport;
+	}
+
+	public String getArrival_airport() {
+		return arrival_airport;
+	}
+
+	public void setArrival_airport(String arrival_airport) {
+		this.arrival_airport = arrival_airport;
+	}
+
+	public Date getDeparture_time() {
+		return departure_time;
+	}
+
+	public void setDeparture_time(Date departure_time) {
+		this.departure_time = departure_time;
+	}
+
+	public Date getArrival_time() {
+		return arrival_time;
+	}
+
+	public void setArrival_time(Date arrival_time) {
+		this.arrival_time = arrival_time;
+	}
+
+	public String getOfp_url() {
+		return ofp_url;
+	}
+
+	public void setOfp_url(String ofp_url) {
+		this.ofp_url = ofp_url;
+	}
+
+	public String getWeather_maps_url() {
+		return weather_maps_url;
+	}
+
+	public void setWeather_maps_url(String weather_maps_url) {
+		this.weather_maps_url = weather_maps_url;
+	}
+
+	public List<String> getNotam() {
+		return notam;
+	}
+
+	public void setNotam(List<String> notam) {
+		this.notam = notam;
+	}
 
 	@Override
 	public String toString() {
@@ -68,9 +155,9 @@ public class Flight{
 				+ arrival_time + ", ofp_url=" + ofp_url + ", weather_maps_url=" + weather_maps_url + ", notam=" + notam
 				+ "]";
 	}
-
+	
 	public boolean edit(Flight elt){
-		if(this.commercial_number!=elt.commercial_number){
+		if(!this.identifier.equals(elt.identifier)){
 			return false;
 		}
 		this.ATC_code=elt.ATC_code;

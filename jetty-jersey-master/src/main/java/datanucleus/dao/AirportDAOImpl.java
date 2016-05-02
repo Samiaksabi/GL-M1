@@ -8,11 +8,16 @@ import javax.jdo.PersistenceManagerFactory;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import datanucleus.dao.ress.Airport;
+import test.DAOTest;
 
 
 public class AirportDAOImpl implements AirportDAO {
 	
+	private static Logger logger = LogManager.getLogger(AirportDAOImpl.class);
 	private PersistenceManagerFactory pmf;
 
 	public AirportDAOImpl(PersistenceManagerFactory pmf) {
@@ -66,7 +71,7 @@ public class AirportDAOImpl implements AirportDAO {
 		
 		return detached;
 	}
-
+	
 	public void addElement(Airport elt) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();

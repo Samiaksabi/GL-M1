@@ -38,4 +38,9 @@ public class FlightDAOFakeImpl implements FlightDAO{
 	public void editElement(String id, Flight f){
 		db.getFlights().edit(id, f);
 	}
+
+	public void addCrew(String crew_name, String id) {
+		// TODO Auto-generated method stub
+		
+	}
 }
