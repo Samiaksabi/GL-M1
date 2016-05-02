@@ -73,6 +73,11 @@ public class CrewDAOImpl implements CrewDAO{
 	}
 
 	public void addElement(Crew elt) {
+		
+		if(this.getElement(elt.userName)!=null){
+			logger.error("Can't add Crew because this username already exist in the database.");
+			return;
+		}
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
@@ -101,6 +106,9 @@ public class CrewDAOImpl implements CrewDAO{
 			q.setUnique(true);
 			
 			Crew crew = (Crew) q.execute(userName);
+			if(crew==null){
+				logger.warn("Can't delete Crew because this username doesn't exist in the database.");
+			}
 			pm.deletePersistent(crew);
 
 			tx.commit();
@@ -127,6 +135,9 @@ public class CrewDAOImpl implements CrewDAO{
 			Crew crew = (Crew) q.execute(userName);
 			if(crew!=null){
 				crew.edit(elt);
+			}
+			else{
+				logger.error("Can't edit Crew because this username doesn't exist in the database.");
 			}
 			
 			tx.commit();

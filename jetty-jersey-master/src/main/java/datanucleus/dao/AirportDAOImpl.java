@@ -73,13 +73,18 @@ public class AirportDAOImpl implements AirportDAO {
 	}
 	
 	public void addElement(Airport elt) {
+		
+		if(this.getElement(elt.ICAO_code)!=null){
+			logger.error("Airport can't be added because already exist in the database.");
+			return;
+		}
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
-
+		
 			pm.makePersistent(elt);
-
+				
 			tx.commit();
 		} finally {
 			if (tx.isActive()) {
@@ -104,7 +109,9 @@ public class AirportDAOImpl implements AirportDAO {
 			q.setUnique(true);
 			
 			Airport airport = (Airport) q.execute(airportICAO);
-			
+			if(airport==null){
+				logger.warn("Airport can't be deleted because doesn't exist in the database.");
+			}
 			pm.deletePersistent(airport);
 
 			tx.commit();
@@ -133,6 +140,9 @@ public class AirportDAOImpl implements AirportDAO {
 			
 			if(airport!=null){
 				airport.edit(elt);
+			}
+			else{
+				logger.error("Airport can't be edited because doesn't exist in the database.");
 			}
 			
 			tx.commit();

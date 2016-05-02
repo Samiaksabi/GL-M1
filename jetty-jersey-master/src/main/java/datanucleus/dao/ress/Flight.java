@@ -172,10 +172,12 @@ public class Flight{
 		return true;
 	}
 	
+	/*
 	public boolean isValid(){
 		return !(DAOAccessor.getAirportDAO().getElement(departure_airport)==null
 				|| DAOAccessor.getAirportDAO().getElement(arrival_airport) == null
 				|| departure_time.getTime() > arrival_time.getTime()
 				|| departure_airport.equals(arrival_airport));
 	}
+	*/
 }

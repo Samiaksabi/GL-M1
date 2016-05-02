@@ -70,11 +70,16 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	public void addElement(User elt) {
+		
+		if(this.getElement(elt.userName)!=null){
+			logger.error("Can't add User because this username already exist in the database.");
+			return;
+		}
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
-
+			
 			pm.makePersistent(elt);
 
 			tx.commit();
@@ -98,7 +103,9 @@ public class UserDAOImpl implements UserDAO {
 			q.setUnique(true); 
 			
 			User user= (User) q.execute(userName);
-			
+			if(user==null){
+				logger.warn("Can't delete User because this username doesn't exist in the database.");
+			}
 			pm.deletePersistent(user);
 
 			tx.commit();
@@ -127,6 +134,9 @@ public class UserDAOImpl implements UserDAO {
 			
 			if(user!=null){
 				user.edit(elt);
+			}
+			else{
+				logger.error("Can't edit User because this username doesn't exist in the database.");
 			}
 			
 			tx.commit();

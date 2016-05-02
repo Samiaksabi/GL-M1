@@ -83,10 +83,7 @@ public class FlightDAOImpl implements FlightDAO {
 
 	public void addElement(Flight elt) {
 		
-		//AirportDAO airportDAO=new AirportDAOImpl(this.pmf);
-		
-		if(!elt.isValid()){
-			//TODO Should throw an Exception
+		if(!isValid(elt)){
 			return;
 		}
 		
@@ -108,7 +105,7 @@ public class FlightDAOImpl implements FlightDAO {
 				pm.makePersistent(elt);
 			}
 			else{
-				//TODO Should throw an Exception
+				logger.error("This flight already exist in the database.");
 			}
 			
 			tx.commit();
@@ -132,7 +129,9 @@ public class FlightDAOImpl implements FlightDAO {
 			q.setUnique(true);
 			
 			Flight flight = (Flight) q.execute(id);
-			
+			if(flight==null){
+				logger.warn("Flight can't be deleted because doesn't exist in the database.");
+			}
 			pm.deletePersistent(flight);
 
 			tx.commit();
@@ -148,7 +147,7 @@ public class FlightDAOImpl implements FlightDAO {
 	}
 
 	public void editElement(String id, Flight elt) {
-		if(!elt.isValid())
+		if(!isValid(elt))
 			return;
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
@@ -161,14 +160,13 @@ public class FlightDAOImpl implements FlightDAO {
 			q.setUnique(true);
 			
 			Flight flight = (Flight) q.execute(id);
-	
 			if(flight!=null){
 				flight.edit(elt);
-				/*
-				deleteElement(elt.commercial_number);
-				addElement(elt);
-				*/
 			}
+			else{
+				logger.error("Flight can't be edited because doesn't exist in the database.");
+			}
+			
 			tx.commit();
 		} finally {
 			if (tx.isActive()) {
@@ -177,6 +175,27 @@ public class FlightDAOImpl implements FlightDAO {
 			pm.close();
 		}
 		
+	}
+	
+	private static boolean isValid(Flight flight){
+		
+		if(DAOAccessor.getAirportDAO().getElement(flight.departure_airport)==null){
+			logger.error("The departure airport is not in the database.");
+			return false;
+		}
+		if(DAOAccessor.getAirportDAO().getElement(flight.arrival_airport) == null){
+			logger.error("The arrival airport is not in the database.");
+			return false;
+		}
+		if(flight.departure_time.getTime() > flight.arrival_time.getTime()){
+			logger.error("Flight departure date > Flight arrival date.");
+			return false;
+		}
+		if(flight.departure_airport.equals(flight.arrival_airport)){
+			logger.error("The departure and arrival airport are the same.");
+			return false;
+		}
+		return true;
 	}
 
 	public Flight getFlight(String crew_name, String id) {
@@ -198,7 +217,7 @@ public class FlightDAOImpl implements FlightDAO {
 			Flight flight = (Flight) q.execute(id);
 
 			if(flight==null){
-				//TODO Logger here
+				logger.error("Can't add crew because the flight doesn't exist in the database.");
 			}
 			else{
 				flight.addCrew(crew_name);
@@ -249,14 +268,15 @@ public class FlightDAOImpl implements FlightDAO {
 		HSSFSheet sheet = wb.getSheetAt(0);
 		
 		for (Iterator<Row> rowIt = sheet.rowIterator(); rowIt.hasNext();) {
+			HSSFRow row=null;
 			try{
-				HSSFRow row = (HSSFRow) rowIt.next();
+				row = (HSSFRow) rowIt.next();
 				Flight flight=this.createFlightFromRow(row);
 				this.addElement(flight);
 			}catch(NullPointerException e){
-				// TODO Logger here
+				logger.error("NullPointerException on line "+row.getRowNum());
 			}catch(IllegalStateException e){
-				// TODO Logger here
+				logger.error("IllegalStateException on line "+row.getRowNum());
 			}
 		}
 		wb.close();

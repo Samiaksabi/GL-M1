@@ -73,11 +73,12 @@ public class PlaneDAOImpl implements PlaneDAO {
 		
 		AirportDAO airportDAO=DAOAccessor.getAirportDAO();
 		if(airportDAO.getElement(elt.airport)==null){
-			
-			//TODO
-			/* Should throw an Exception here*/
-			
-			//return;
+			logger.error("Can't add Plane because the plane airport location doesn't exist in the database");
+			return;
+		}
+		if(this.getElement(elt.identifier)!=null){
+			logger.error("Can't add Plane because this identifier already exist in the database.");
+			return;
 		}
 		
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -109,7 +110,9 @@ public class PlaneDAOImpl implements PlaneDAO {
 			q.setUnique(true);
 			
 			Plane plane = (Plane) q.execute(id);
-			
+			if(plane==null){
+				logger.warn("Can't delete Plane because this identifier doesn't exist in the database.");
+			}
 			pm.deletePersistent(plane);
 
 			tx.commit();
@@ -137,6 +140,9 @@ public class PlaneDAOImpl implements PlaneDAO {
 			
 			if(plane!=null){
 				plane.edit(elt);
+			}
+			else{
+				logger.error("Can't edit Plane because this identifier doesn't exist in the database.");
 			}
 			
 			tx.commit();
