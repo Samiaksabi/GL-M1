@@ -9,34 +9,34 @@ import javax.jdo.PersistenceManagerFactory;
 import datanucleus.dao.ress.*;
 
 
-public class DAOFactory {
+public class DAOAccessor {
 	
 	static final private PersistenceManagerFactory pmf=JDOHelper.getPersistenceManagerFactory("FlightPlanificationSystemDataBase");
-	
-	static final private AirportDAO airportDAO=new AirportDAOImpl(pmf);
-	static final private PlaneDAO planeDAO=new PlaneDAOImpl(pmf);
-	static final private UserDAO userDAO=new UserDAOImpl(pmf);
-	static final private CrewDAO crewDAO=new CrewDAOImpl(pmf);
-	static final private FlightDAO flightDAO=new FlightDAOImpl(pmf);
+
+	static final private AirportDAO airportDAO=new AirportDAOImpl(DAOAccessor.pmf);
+	static final private PlaneDAO planeDAO=new PlaneDAOImpl(DAOAccessor.pmf);
+	static final private UserDAO userDAO=new UserDAOImpl(DAOAccessor.pmf);
+	static final private CrewDAO crewDAO=new CrewDAOImpl(DAOAccessor.pmf);
+	static final private FlightDAO flightDAO=new FlightDAOImpl(DAOAccessor.pmf);
 	
 	public static AirportDAO getAirportDAO(){
-		return DAOFactory.airportDAO;
+		return DAOAccessor.airportDAO;
 	}
 
 	public static PlaneDAO getPlaneDAO(){
-		return DAOFactory.planeDAO;
+		return DAOAccessor.planeDAO;
 	}
 	
 	public static UserDAO getUserDAO(){
-		return DAOFactory.userDAO;
+		return DAOAccessor.userDAO;
 	}
 	
 	public static CrewDAO getCrewDAO(){
-		return DAOFactory.crewDAO;
+		return DAOAccessor.crewDAO;
 	}
 	
 	public static FlightDAO getFlightDAO(){
-		return DAOFactory.flightDAO;
+		return DAOAccessor.flightDAO;
 	}
 	/*public static FlightDAO getFlightDAO(){
 		return new FlightDAOFakeImpl();

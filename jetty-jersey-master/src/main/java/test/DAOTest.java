@@ -92,7 +92,7 @@ public class DAOTest {
 	public void testAirport(){
 		System.out.println("Test Airport :\n");
 		
-		AirportDAO airportDAO=DAOFactory.getAirportDAO();
+		AirportDAO airportDAO=DAOAccessor.getAirportDAO();
 		
 		airportDAO.addElement(new Airport("Elie"));
 		airportDAO.addElement(new Airport("Samia"));
@@ -149,8 +149,9 @@ public class DAOTest {
 	public void testPlane(){
 		System.out.println("Test Plane :\n");
 		
-		PlaneDAOImpl planeDAO=(PlaneDAOImpl) DAOFactory.getPlaneDAO();
-		
+		PlaneDAO planeDAO=DAOAccessor.getPlaneDAO();
+
+
 		//planeDAO.addElement(new Plane("Elie"));
 		planeDAO.addElement(new Plane("TBS-253","Elie"));
 		
@@ -165,8 +166,8 @@ public class DAOTest {
 	public void testUserAndCrew(){
 		System.out.println("Test User & Crew :\n");
 	
-		UserDAO userDAO=DAOFactory.getUserDAO();
-		CrewDAO crewDAO=DAOFactory.getCrewDAO();
+		UserDAO userDAO=DAOAccessor.getUserDAO();
+		CrewDAO crewDAO=DAOAccessor.getCrewDAO();
 		
 		userDAO.addElement(new User("alex2","Alex","Ashokoumar","pass","test@eu.com",UserStatus.CREW));
 		System.out.println(userDAO.getElement("alex2"));
@@ -179,7 +180,7 @@ public class DAOTest {
 	@Test
 	public void testFlight() throws ParseException{
 		System.out.println("\nTest Flight :\n");
-		FlightDAO flightDAO=DAOFactory.getFlightDAO();
+		FlightDAO flightDAO=DAOAccessor.getFlightDAO();
 		
 		Date date1=new SimpleDateFormat("yyyy-MM-dd").parse("2007-03-06");
 		Date date2=new SimpleDateFormat("yyyy-MM-dd").parse("2007-03-07");
