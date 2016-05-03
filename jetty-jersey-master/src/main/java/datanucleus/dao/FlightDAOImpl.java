@@ -202,7 +202,13 @@ public class FlightDAOImpl implements FlightDAO {
 	}
 
 	public Flight getFlight(String crew_name, String id) {
-		// TODO Auto-generated method stub
+		Collection<Flight> flights = getAll(crew_name);
+		Iterator<Flight> it = flights.iterator();
+		while(it.hasNext()){
+			Flight f = it.next();
+			if(f.identifier.equals(id))
+				return f;
+		}
 		return null;
 	}
 	

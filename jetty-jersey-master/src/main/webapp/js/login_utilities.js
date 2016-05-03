@@ -9,16 +9,22 @@ function login(user){
     $.cookie("pwd", user.password);
 }
 
-function logout(){
+function clearCookies(){
     $.removeCookie("status");
     $.removeCookie("username");
     $.removeCookie("pwd");
-    location.href = "\login.html";
+    $.removeCookie("edit_id");
+    $.removeCookie("view_id");
+}
+
+function logout(){
+    clearCookies();
+    location.href = "login.html";
 }
 
 function checkLoggedAsCCO(){
     if ($.cookie("status") != "CCO"){
-	location.href = "login.html";
+	logout();
 	return false;
     }
     else
@@ -27,7 +33,7 @@ function checkLoggedAsCCO(){
 
 function checkLogged(){
     if($.cookie("username") == undefined){
-	location.href = "login.html";
+	logout();
 	return false;
     }
     else
@@ -36,7 +42,7 @@ function checkLogged(){
 
 function checkLoggedAsCrew(){
     if ($.cookie("status") != "CREW"){
-	location.href = "login.html";
+	logout();
 	return false;
     }
     else

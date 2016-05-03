@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Flight planning</title>
+    <link rel="shortcut icon" href="images/avion1.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="css/layout.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="css/menu.css" type="text/css" media="screen">
+
+    <meta name="description" content="Source code generated using layoutit.com">
+    <meta name="author" content="LayoutIt!">
+
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  </head>
+  <body>
+
+    <script src="js/lib/jquery.min.js"></script>
+    <script src="js/lib/jquery.cookie.js"></script>
+    <script src="js/login_utilities.js"></script>
+    <script id="crewListTemplate" type="texte/template">
+      <tr>
+	<th>
+	  <%= name %>
+	</th>
+	<th>
+	  <%= profession %>
+	</th>
+      </tr>
+    </script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/lib/underscore.js"></script>
+    <script src="js/ws_client.js"></script>
+    <script src="js/viewflight.js"></script>
+    <script>
+      checkLoggedAsCrew();
+    </script>
+
+    <div class="containerE">
+      <div class="content">
+	<div class="container-fluid">
+	  <div class="row">
+
+	    <div class="col-md-6">
+	    </div>
+	    <div class="col-md-3"></div>
+	    <div class="col-md-3">
+	      <aside>
+		<a href="index.html">
+		  <div id="login">
+		    <div class="wrap">
+		      <form id="logout_form">
+			<input id="login" type="submit" value="Log out" class="login" />
+		      </form>
+		    </div>
+		  </div>
+		</a>
+	      </aside>
+	    </div>
+	  </div>
+	</div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <a href="crewflightlist.html">
+	Back
+      </a>
+    </div>
+
+    <h1 align="center">Flight Details</h1>
+    <div class="div_center">
+      <div class="container-fluid">
+	<div class="row">
+	  <div class="col-md-6">
+	    <table class="table">
+	      <thead>
+		<tr>
+		  <td></td>
+		  <td>
+		  </td>
+		</tr>
+	      </thead>
+	      <tbody>
+		<tr class="active">
+		  <td>
+		    <label class="col-sm-4 control-label" for="formGroupInputLarge">
+		      Commercial Number
+		    </label>
+		  </td>
+		  <td id="commercial_number_td">
+		  </td>
+		</tr>
+		<tr class="active">
+		  <td>
+		    <label class="col-sm-4 control-label" for="formGroupInputLarge">
+		      ATC Number
+		    </label>
+		  </td>
+		  <td id="atc_number_td">
+		  </td>
+		</tr>
+		<tr class="active">
+		  <td>
+		    <label class="col-sm-4 control-label" for="formGroupInputLarge">
+		      Plane ID
+		    </label>
+		  </td>
+		  <td id="plane_id_td">
+		  </td>
+		</tr>
+		<tr class="active">
+		  <td>
+		    <label class="col-sm-4 control-label" for="formGroupInputLarge">
+		      Departure Airport
+		    </label>
+		  </td>
+		  <td id="departure_airport_td">
+		  </td>
+		</tr>
+		<tr class="active">
+		  <td>
+		    <label class="col-sm-4 control-label" for="formGroupInputLarge">
+		      Arrival Airport
+		    </label>
+		  </td>
+		  <td id="arrival_airport_td">
+		  </td>
+		</tr>
+		<tr class="active">
+		  <td>
+		    <label class="col-sm-4 control-label" for="formGroupInputLarge">
+		      Departure Date
+		    </label>
+		  </td>
+		  <td id="departure_date_td">
+		  </td>
+		</tr>
+		<tr class="active">
+		  <td>
+		    <label class="col-sm-4 control-label" for="formGroupInputLarge">
+		      Arrival Date
+		    </label>
+		  </td>
+		  <td id="arrival_date_td">
+		  </td>
+		</tr>		
+	      </tbody>
+	    </table>
+	  </div>
+
+	  <div class="col-md-6">
+	    <table class="table">
+	      <thead>
+		<tr>
+		  <th>
+		    Crew
+		  </th>
+		</tr>
+		<tr>
+		  <td>Name</td>
+		  <td>Profession</td>
+		</tr>
+	      </thead>
+	      <tbody id="template_anchor">
+	      </tbody>
+	    </table>
+	  </div>
+	</div>
+      </div>
+    </div>	  
+  </body>
+</html>
