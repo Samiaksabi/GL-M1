@@ -49,6 +49,16 @@ function fill(flight){
 	var html = 'None';
 	$("#weather_map_td").append(html);
     }
+
+    if(flight.notam != null){
+	var html = '<a href=' + flight.notam + '>NOTAM</a>';
+	$("#notam_td").append(html);
+    }
+    else{
+	var html = 'None';
+	$("#notam_td").append(html);
+    }
+
 }
 
 var crewListTemplate;

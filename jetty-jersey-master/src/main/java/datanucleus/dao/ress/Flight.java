@@ -39,10 +39,8 @@ public class Flight{
 
     public String ofp_url;
     public String weather_maps_url;
-   
-    @Persistent(defaultFetchGroup = "true")
-    @Join
-    public List<String> notam =new ArrayList<String>();
+  
+    public String notam;
     
     public Flight(){
     	
@@ -143,11 +141,11 @@ public class Flight{
 		this.weather_maps_url = weather_maps_url;
 	}
 
-	public List<String> getNotam() {
+	public String getNotam() {
 		return notam;
 	}
 
-	public void setNotam(List<String> notam) {
+	public void setNotam(String notam) {
 		this.notam = notam;
 	}
 
@@ -173,6 +171,7 @@ public class Flight{
 		this.crew_members=elt.crew_members;
 		this.ofp_url=elt.ofp_url;
 		this.weather_maps_url=elt.weather_maps_url;
+		this.notam = elt.notam;
 		return true;
 	}
 	

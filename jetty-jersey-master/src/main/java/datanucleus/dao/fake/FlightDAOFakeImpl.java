@@ -61,4 +61,14 @@ public class FlightDAOFakeImpl implements FlightDAO{
 		// TODO Auto-generated method stub
 		
 	}
+
+	public void importLeafletFile(InputStream stream) throws FileNotFoundException, IOException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void importNotamFile(InputStream stream, String id) throws FileNotFoundException, IOException {
+		// TODO Auto-generated method stub
+		
+	}
 }

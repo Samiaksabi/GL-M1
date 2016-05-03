@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
 
+import javax.ws.rs.PathParam;
+
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
 import datanucleus.dao.ress.Crew;
@@ -20,4 +22,6 @@ public interface FlightDAO extends DAO<Flight>{
 	 void importExcelFile(InputStream stream) throws FileNotFoundException, IOException;
 	 void importOfpFile(InputStream stream, String id) throws FileNotFoundException, IOException;
 	 void importWeatherMap(InputStream stream, String id) throws FileNotFoundException, IOException;
+	 void importLeafletFile(InputStream stream) throws FileNotFoundException, IOException;
+	 void importNotamFile(InputStream stream, String id) throws FileNotFoundException, IOException;
 }

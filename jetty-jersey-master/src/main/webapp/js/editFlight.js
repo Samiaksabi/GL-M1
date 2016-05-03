@@ -1,6 +1,11 @@
 
 var ofpIsSet = false;
 var wmIsSet = false;
+var notamIsSet = false;
+
+var ofpok = true;
+var wmok = true;
+var notamok = true;
 
 function string(e){
     return '"' + e + '"';
@@ -11,6 +16,7 @@ function submit_form(){
 	e.preventDefault(); // on empêche le bouton d'envoyer le formulaire
 	var ofp_url = null;
 	var weather_maps_url = null;
+	var notam = null;
 
 	if($('#ofpInputFile')[0].files[0] != undefined){
 	    uploadOfp();
@@ -30,6 +36,14 @@ function submit_form(){
 	    weather_maps_url = string(weather_maps_url);
 	}
 
+	if($('#notamInputFile')[0].files[0] != undefined){
+	    uploadNotam();
+	    notamIsSet = true;
+	}
+	if(notamIsSet){
+	    notam = "/data/" + $.cookie("edit_id") + "_notam.txt";
+	    notam = string(notam);
+	}
 
 	var commercial_number = $("#commercial_number").val();
 	var atc_number = $("#atc_number").val();
@@ -51,14 +65,18 @@ function submit_form(){
 	    ',"arrival_time":'      + Date.parse(arrival_date) +
 	    ',"ofp_url":'           + ofp_url +
 	    ',"weather_maps_url":'  + weather_maps_url +
-	    ',"notam":[]}';
+	    ',"notam":'             + notam + '}';
 	console.log(json_str);
 	editServerData("/ws/flight/" + $.cookie("edit_id") + "/edit",json_str);
+
+	//while(!(ofpok && wmok && notamok)){}
+
 	$(location).attr('href',"CCOflightlist.html");
     });
 }
 
 function uploadOfp(){
+    ofpok = false;
     var formData = new FormData();
     formData.append('file', $('#ofpInputFile')[0].files[0]);
     var url = '/ws/flight/' + $.cookie('edit_id') + '/uploadofp';
@@ -69,11 +87,30 @@ function uploadOfp(){
 	processData: false,  // tell jQuery not to process the data
 	contentType: false,  // tell jQuery not to set contentType
 	success : function(data) {
+	    ofpok = true;
+	}
+    });
+}
+
+function uploadNotam(){
+    notamok = false;
+    var formData = new FormData();
+    formData.append('file', $('#notamInputFile')[0].files[0]);
+    var url = '/ws/flight/' + $.cookie('edit_id') + '/uploadnotam';
+    $.ajax({
+	url : url,
+	type : 'POST',
+	data : formData,
+	processData: false,  // tell jQuery not to process the data
+	contentType: false,  // tell jQuery not to set contentType
+	success : function(data) {
+	    notamok = true;
 	}
     });
 }
 
 function uploadWeatherMap(){
+    wmok = false;
     var formData = new FormData();
     formData.append('file', $('#weatherMapInputFile')[0].files[0]);
     var url = '/ws/flight/' + $.cookie('edit_id') + '/uploadweathermap';
@@ -84,6 +121,7 @@ function uploadWeatherMap(){
 	processData: false,  // tell jQuery not to process the data
 	contentType: false,  // tell jQuery not to set contentType
 	success : function(data) {
+	    wmok = true;
 	}
     });
 }
@@ -132,6 +170,14 @@ function fillForm(flight){
     }
     var html = '<input id="weatherMapInputFile" type="file">';
     $("#weather_map_td").append(html);
+
+    if(flight.notam != null){
+	var html = '<a href=' + flight.notam + '>NOTAM</a>';
+	$("#notam_td").append(html);
+	notamIsSet = true;
+    }
+    var html = '<input id="notamInputFile" type="file">';
+    $("#notam_td").append(html);
 }
 
 
@@ -189,6 +235,15 @@ function crewMembersToString(){
     return res;
 }
 
+function waitSeconds(iMilliSeconds) {
+    var counter= 0
+        , start = new Date().getTime()
+        , end = 0;
+    while (counter < iMilliSeconds) {
+        end = new Date().getTime();
+        counter = end - start;
+    }
+}
 
 $( document ).ready(function() {
     crewListTemplate = _.template($('#crewListTemplate').html());

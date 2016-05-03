@@ -358,5 +358,48 @@ public class FlightDAOImpl implements FlightDAO {
 		    logger.error("Error while uploading weather map : " + exception.getMessage());
 		}
 	}
+
+	public void importLeafletFile(InputStream stream) throws FileNotFoundException, IOException {
+		try
+		{
+			String url = "src/main/webapp/data/leaflet.jpg";
+			File f = new File(url);
+			OutputStream os = new FileOutputStream(f);
+			byte[] b = new byte[2048];
+			int length;
+			while ((length = stream.read(b)) != -1) {
+				os.write(b, 0, length);
+			}
+		}
+		catch (IOException exception)
+		{
+		    logger.error("Error while uploading leaflet : " + exception.getMessage());
+		}
+		
+	}
+
+	public void importNotamFile(InputStream stream, String id) throws FileNotFoundException, IOException {
+		try
+		{
+			String url = "src/main/webapp/data/" + id + "_notam.txt";
+			File f = new File(url);
+
+		    PrintWriter pw = new PrintWriter (new BufferedWriter (new FileWriter (f)));
+		    int i = 0;
+		    while(true){
+		    	i = stream.read();
+		    	if(i!=-1)
+		    		pw.print((char)i);
+		    	else
+		    		break;
+		    }
+		    pw.close();
+		}
+		catch (IOException exception)
+		{
+		    logger.error("Error while uploading notam : " + exception.getMessage());
+		}
+		
+	}
 	
 }

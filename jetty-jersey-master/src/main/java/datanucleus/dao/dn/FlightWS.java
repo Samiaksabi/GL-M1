@@ -90,6 +90,13 @@ public class FlightWS implements FlightDAO{
 	public void importExcelFile(@FormDataParam("file") InputStream stream) throws FileNotFoundException, IOException {
 		DAOAccessor.getFlightDAO().importExcelFile(stream);
 	}
+	
+	@POST
+	@Path("/flight/uploadleaflet")
+	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	public void importLeafletFile(@FormDataParam("file") InputStream stream) throws FileNotFoundException, IOException {
+		DAOAccessor.getFlightDAO().importLeafletFile(stream);
+	}
 
 	@POST
 	@Path("/flight/{id}/uploadofp")
@@ -97,6 +104,14 @@ public class FlightWS implements FlightDAO{
 	public void importOfpFile(@FormDataParam("file") InputStream stream, @PathParam("id") String id) throws FileNotFoundException, IOException {
 		DAOAccessor.getFlightDAO().importOfpFile(stream,id);
 	}
+	
+	@POST
+	@Path("/flight/{id}/uploadnotam")
+	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	public void importNotamFile(@FormDataParam("file") InputStream stream, @PathParam("id") String id) throws FileNotFoundException, IOException {
+		DAOAccessor.getFlightDAO().importNotamFile(stream,id);
+	}
+	
 	
 	@POST
 	@Path("/flight/{id}/uploadweathermap")
