@@ -1,4 +1,6 @@
 
+var ofpIsSet = false;
+
 function string(e){
     return '"' + e + '"';
 }
@@ -6,6 +8,15 @@ function string(e){
 function submit_form(){
     $("#edit_form").submit(function(e){ // On sélectionne le formulaire par son identifiant
 	e.preventDefault(); // on empêche le bouton d'envoyer le formulaire
+	var ofp_url = null;
+	if($('#ofpInputFile')[0].files[0] != undefined){
+	    uploadOfp();
+	    ofpIsSet = true;
+	}
+	if(ofpIsSet){
+	    ofp_url = "/data/" + $.cookie("edit_id") + "_ofp.txt";
+	    ofp_url = string(ofp_url);
+	}
 	var commercial_number = $("#commercial_number").val();
 	var atc_number = $("#atc_number").val();
 	var plane_id = $("#plane_id").val();
@@ -24,12 +35,27 @@ function submit_form(){
 	    ',"arrival_airport":'   + string(arrival_airport) +
 	    ',"departure_time":'    + Date.parse(departure_date) +
 	    ',"arrival_time":'      + Date.parse(arrival_date) +
-	    ',"ofp_url":null' +
+	    ',"ofp_url":'           + ofp_url +
 	    ',"weather_maps_url":null' +
 	    ',"notam":[]}';
 	console.log(json_str);
 	editServerData("/ws/flight/" + $.cookie("edit_id") + "/edit",json_str);
 	$(location).attr('href',"CCOflightlist.html");
+    });
+}
+
+function uploadOfp(){
+    var formData = new FormData();
+    formData.append('file', $('#ofpInputFile')[0].files[0]);
+    var url = '/ws/flight/' + $.cookie('edit_id') + '/uploadofp';
+    $.ajax({
+	url : url,
+	type : 'POST',
+	data : formData,
+	processData: false,  // tell jQuery not to process the data
+	contentType: false,  // tell jQuery not to set contentType
+	success : function(data) {
+	}
     });
 }
 
@@ -61,6 +87,13 @@ function fillForm(flight){
     $("#arrival_date_td").append(html);
     for(var i = 0; i<flight.crew_members.length;i++)
 	getServerData("/ws/crew/"+flight.crew_members[i],addCrew);
+    if(flight.ofp_url != null){
+	var html = '<a href=' + flight.ofp_url + '>OFP</a>';
+	$("#ofp_td").append(html);
+	ofpIsSet = true;
+    }
+    var html = '<input id="ofpInputFile" type="file">';
+    $("#ofp_td").append(html);
 }
 
 

@@ -1,0 +1,2 @@
+2016-05-03 15:05:04,277 ERROR [qtp1457048287-15] dao.FlightDAOImpl (FlightDAOImpl.java:114) - This flight already exist in the database.
+2016-05-03 15:05:04,282 ERROR [qtp1457048287-15] dao.FlightDAOImpl (FlightDAOImpl.java:114) - This flight already exist in the database.

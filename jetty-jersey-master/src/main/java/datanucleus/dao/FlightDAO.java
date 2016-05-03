@@ -16,5 +16,5 @@ public interface FlightDAO extends DAO<Flight>{
 	 Collection<Flight> getAll(String userName);
 	 void addCrew(String crew_name, String id);
 	 void importExcelFile(InputStream stream) throws FileNotFoundException, IOException;
-	 
+	 void importOfpFile(InputStream stream, String id) throws FileNotFoundException, IOException;
 }

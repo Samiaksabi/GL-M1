@@ -84,14 +84,18 @@ public class FlightWS implements FlightDAO{
 	}
 
 	@POST
-	@Path("/flight/upload")
+	@Path("/flight/uploadxls")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	public void importExcelFile(@FormDataParam("file") InputStream stream) throws FileNotFoundException, IOException {
 		DAOAccessor.getFlightDAO().importExcelFile(stream);
-		// TODO Auto-generated method stub
-		
 	}
 
+	@POST
+	@Path("/flight/{id}/uploadofp")
+	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	public void importOfpFile(@FormDataParam("file") InputStream stream, @PathParam("id") String id) throws FileNotFoundException, IOException {
+		DAOAccessor.getFlightDAO().importOfpFile(stream,id);
+	}
 
 	/*public void editElement(String name, Flight elt) {
 		// TODO Auto-generated method stub

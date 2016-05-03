@@ -1,10 +1,13 @@
 package datanucleus.dao;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -311,6 +314,25 @@ public class FlightDAOImpl implements FlightDAO {
 		String arrivalAirport = row.getCell(6).getStringCellValue();
 		
 		return new Flight(commercialNumber,ATC_code,plane,departureAirport,arrivalAirport,departureDate, arrivalDate);
+	}
+
+	public void importOfpFile(InputStream stream, String id) throws FileNotFoundException, IOException {
+		String url = "src/main/webapp/data/" + id + "_ofp.txt";
+		File f = new File(url);
+		try
+		{
+		    PrintWriter pw = new PrintWriter (new BufferedWriter (new FileWriter (f)));
+		    int i = 0;
+		    while(i!=-1){
+		    	i = stream.read();
+		    	pw.print((char)i);
+		    }
+		    pw.close();
+		}
+		catch (IOException exception)
+		{
+		    logger.error("Error while uploading ofp : " + exception.getMessage());
+		}
 	}
 	
 }

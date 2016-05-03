@@ -29,7 +29,7 @@ function upload(){
     var formData = new FormData();
     formData.append('file', $('#inputFile')[0].files[0]);
     $.ajax({
-	url : '/ws/flight/upload',
+	url : '/ws/flight/uploadxls',
 	type : 'POST',
 	data : formData,
 	processData: false,  // tell jQuery not to process the data
