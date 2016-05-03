@@ -323,9 +323,12 @@ public class FlightDAOImpl implements FlightDAO {
 		{
 		    PrintWriter pw = new PrintWriter (new BufferedWriter (new FileWriter (f)));
 		    int i = 0;
-		    while(i!=-1){
+		    while(true){
 		    	i = stream.read();
-		    	pw.print((char)i);
+		    	if(i!=-1)
+		    		pw.print((char)i);
+		    	else
+		    		break;
 		    }
 		    pw.close();
 		}

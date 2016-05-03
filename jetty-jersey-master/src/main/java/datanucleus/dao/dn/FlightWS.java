@@ -96,7 +96,6 @@ public class FlightWS implements FlightDAO{
 	public void importOfpFile(@FormDataParam("file") InputStream stream, @PathParam("id") String id) throws FileNotFoundException, IOException {
 		DAOAccessor.getFlightDAO().importOfpFile(stream,id);
 	}
-
 	/*public void editElement(String name, Flight elt) {
 		// TODO Auto-generated method stub
 		
