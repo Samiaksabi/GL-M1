@@ -47,12 +47,6 @@
 
 		<!-- DataNucleus -->
 		<dependency>
-			<groupId>javax.jdo</groupId>
-			<artifactId>jdo-api</artifactId>
-			<version>3.1-rc1</version>
-		</dependency>
-	
-		<dependency>
 			<groupId>org.datanucleus</groupId>
 			<artifactId>datanucleus-core</artifactId>
 			<version>4.0.3</version>
@@ -73,6 +67,13 @@
 			<version>4.0.3</version>
 		</dependency>
 		
+		<dependency>
+			<groupId>javax.jdo</groupId>
+			<artifactId>jdo-api</artifactId>
+			<version>3.1-rc1</version>
+		</dependency>
+		
+		<!-- HSQLDB -->
 		<dependency>
 			<groupId>hsqldb</groupId>
 			<artifactId>hsqldb</artifactId>
@@ -97,6 +98,33 @@
     		<artifactId>log4j-core</artifactId>
     		<version>2.5</version>
   		</dependency>
+  		
+  		<!-- JavaMail -->
+  		<dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4.3</version>
+        </dependency>
+        
+        <!-- Quartz -->
+        <dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+			<version>2.2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz-jobs</artifactId>
+			<version>2.2.2</version>
+		</dependency>
+		
+		<!-- SLF4J NOP Binding -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-nop</artifactId>
+			<version>1.7.21</version>
+		</dependency>
+        
 	</dependencies>
 
 </project>
