@@ -14,7 +14,9 @@ function submit_form(){
 	var departure_date = $("#departure_date").val();
 	var arrival_date = $("#arrival_date").val();
 	var json_str =
-	    '{"commercial_number":' + string(commercial_number) +
+	    '{' +
+	    '"identifier":'         + string($.cookie("edit_id")) +
+	    ',"commercial_number":' + string(commercial_number) +
 	    ',"ATC_code":'          + string(atc_number) +
 	    ',"plane":'             + string(plane_id) +
 	    ',"crew_members":'      + crewMembersToString() +

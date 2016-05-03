@@ -168,6 +168,7 @@ public class Flight{
 		this.arrival_airport=elt.arrival_airport;
 		this.departure_time=elt.departure_time;
 		this.arrival_time=elt.arrival_time;
+		this.crew_members=elt.crew_members;
 		this.ofp_url=elt.ofp_url;
 		this.weather_maps_url=elt.weather_maps_url;
 		return true;

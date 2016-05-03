@@ -163,8 +163,6 @@ public class FlightDAOImpl implements FlightDAO {
 			Flight flight = (Flight) q.execute(id);
 			if(flight!=null){
 				flight.edit(elt);
-				deleteElement(flight.identifier);
-				addElement(elt);
 			}
 			else{
 				logger.error("Flight can't be edited because doesn't exist in the database.");
