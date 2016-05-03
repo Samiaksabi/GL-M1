@@ -53,7 +53,7 @@ public class DAOAccessor {
 		getUserDAO().addElement(u);
 		Plane p = new Plane("TVZ-222","CDG");
 		getPlaneDAO().addElement(p);
-		Flight f = new Flight("CN-42","CDG","ORY", new Date(),new Date());
+		Flight f = new Flight("CN-42","AAZ","TZ-23","CDG","ORY", new Date(),new Date());
 		getFlightDAO().addElement(f);
 	}
 	

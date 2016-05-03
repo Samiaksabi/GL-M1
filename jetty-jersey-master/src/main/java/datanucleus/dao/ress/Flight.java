@@ -48,8 +48,10 @@ public class Flight{
     	
     }
     
-    public Flight(String commercialNumber,String departureAirport,String arrivalAirport, Date departureTime, Date arrivalTime){
+    public Flight(String commercialNumber, String ATC_code, String plane,String departureAirport,String arrivalAirport, Date departureTime, Date arrivalTime){
     	this.commercial_number=commercialNumber;
+    	this.ATC_code = ATC_code;
+    	this.plane = plane;
     	this.departure_airport=departureAirport;
     	this.arrival_airport=arrivalAirport;
     	this.departure_time=departureTime;

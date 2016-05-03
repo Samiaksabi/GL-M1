@@ -24,6 +24,23 @@ function logout_form(){
 	logout();
     });
 }
+//only works with .xls files
+function upload(){
+    var formData = new FormData();
+    formData.append('file', $('#inputFile')[0].files[0]);
+    $.ajax({
+	url : '/ws/flight/upload',
+	type : 'POST',
+	data : formData,
+	processData: false,  // tell jQuery not to process the data
+	contentType: false,  // tell jQuery not to set contentType
+	success : function(data) {
+	    location.reload();
+//            console.log(data);
+//            alert(data);
+	}
+    });
+}
 
 $( document ).ready(function() {
     logout_form();

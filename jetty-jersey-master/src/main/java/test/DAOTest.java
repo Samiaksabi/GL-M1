@@ -185,10 +185,10 @@ public class DAOTest {
 		Date date1=new SimpleDateFormat("yyyy-MM-dd").parse("2007-03-06");
 		Date date2=new SimpleDateFormat("yyyy-MM-dd").parse("2007-03-07");
 		
-		Flight f1=new Flight("AF057","Elie","Tantely",date1,new Date());
-		Flight f2=new Flight("AF057","Elie","Tantely",date2,new Date());
-		Flight f3=new Flight("AF057","Elie","Tantely",date1,new Date());
-		Flight f4=new Flight("AF057","Tantely","Elie",date1,new Date());
+		Flight f1=new Flight("AF057","","","Elie","Tantely",date1,new Date());
+		Flight f2=new Flight("AF057","","","Elie","Tantely",date2,new Date());
+		Flight f3=new Flight("AF057","","","Elie","Tantely",date1,new Date());
+		Flight f4=new Flight("AF057","","","Tantely","Elie",date1,new Date());
 		
 		flightDAO.addElement(f1);
 		flightDAO.addElement(f2);

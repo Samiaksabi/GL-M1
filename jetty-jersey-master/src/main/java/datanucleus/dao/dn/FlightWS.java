@@ -1,6 +1,9 @@
 package datanucleus.dao.dn;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Collection;
 
 import javax.ws.rs.Consumes;
@@ -18,7 +21,8 @@ import datanucleus.dao.FlightDAO;
 import datanucleus.dao.ress.Flight;
 import server.FpsServer;
 import datanucleus.dao.ress.User;
-
+import org.glassfish.jersey.media.multipart.MultiPart;
+import org.glassfish.jersey.media.multipart.FormDataParam;
 
 @Path("")
 public class FlightWS implements FlightDAO{
@@ -77,6 +81,15 @@ public class FlightWS implements FlightDAO{
 	@Path("/{crew_name}/flight/{id}")
 	public void addCrew(@PathParam("crew_name") String crew_name, @PathParam("id") String id) {
 		DAOAccessor.getFlightDAO().addCrew(crew_name, id);
+	}
+
+	@POST
+	@Path("/flight/upload")
+	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	public void importExcelFile(@FormDataParam("file") InputStream stream) throws FileNotFoundException, IOException {
+		DAOAccessor.getFlightDAO().importExcelFile(stream);
+		// TODO Auto-generated method stub
+		
 	}
 
 

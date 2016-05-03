@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -17,6 +18,7 @@ import javax.jdo.Transaction;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -278,8 +280,8 @@ public class FlightDAOImpl implements FlightDAO {
 		return res;
 	}
 
-	public void importExcelFile(File excelFile) throws FileNotFoundException, IOException{
-		HSSFWorkbook wb = new HSSFWorkbook(new FileInputStream(excelFile));
+	public void importExcelFile(InputStream stream) throws FileNotFoundException, IOException{
+		HSSFWorkbook wb = new HSSFWorkbook(stream);
 		
 		HSSFSheet sheet = wb.getSheetAt(0);
 		
@@ -300,13 +302,15 @@ public class FlightDAOImpl implements FlightDAO {
 	
 	private Flight createFlightFromRow(HSSFRow row) throws NullPointerException, IllegalStateException{
 		
-		String commercialNumber=row.getCell(0).getStringCellValue();
-		Date departureDate=row.getCell(1).getDateCellValue();
-		Date arrivalDate=row.getCell(2).getDateCellValue();
-		String departureAirport=row.getCell(3).getStringCellValue();
-		String arrivalAirport=row.getCell(4).getStringCellValue();
+		String commercialNumber = row.getCell(0).getStringCellValue();
+		String ATC_code = row.getCell(1).getStringCellValue();
+		String plane = row.getCell(2).getStringCellValue();
+		Date departureDate = row.getCell(3).getDateCellValue();
+		Date arrivalDate = row.getCell(4).getDateCellValue();
+		String departureAirport = row.getCell(5).getStringCellValue();
+		String arrivalAirport = row.getCell(6).getStringCellValue();
 		
-		return new Flight(commercialNumber,departureAirport,arrivalAirport,departureDate, arrivalDate);
+		return new Flight(commercialNumber,ATC_code,plane,departureAirport,arrivalAirport,departureDate, arrivalDate);
 	}
 	
 }
