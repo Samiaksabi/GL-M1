@@ -78,16 +78,7 @@ public class FlightWS implements FlightDAO{
 	public void addCrew(@PathParam("crew_name") String crew_name, @PathParam("id") String id) {
 		DAOAccessor.getFlightDAO().addCrew(crew_name, id);
 	}
-	
-	@GET
-	@Produces("text/plain")
-	@Path("/login/{name}/{password}")
-	public String login(@PathParam("name") String name, @PathParam("password") String password) throws Exception{
-		if (DAOAccessor.getUserDAO().login(name, password))
-			return "SUCCESS";
-		else
-			throw new Exception();
-	}
+
 
 	/*public void editElement(String name, Flight elt) {
 		// TODO Auto-generated method stub

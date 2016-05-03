@@ -1,12 +1,3 @@
-function string(e){
-    return '"' + e + '"';
-}
-
-function login(user){
-    console.log(user);
-    if(user.status == "CCO")
-	$(location).attr('href',"CCOflightlist.html");
-}
 
 function form(){
     $("#login_form").submit(function(e){ // On sélectionne le formulaire par son identifiant

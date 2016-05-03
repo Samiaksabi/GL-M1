@@ -17,6 +17,33 @@
 
   </head>
   <body>
+
+  <script src="js/lib/jquery.min.js"></script>
+  <script src="js/lib/jquery.cookie.js"></script>
+  <script src="js/login_utilities.js"></script>
+  <script id="crewListTemplate" type="texte/template">
+    <tr id=<%= crew_table_id %>>
+      <th>
+	<%= name %>
+      </th>
+      <th>
+	<%= profession %>
+      </th>
+      <th>
+	<button type="submit" onclick="$(<%=crew_table_id_removal%>).remove();currentCrew[<%=id%>] = undefined" form="add_crew">
+	  Remove
+	</button>
+      </th>
+    </tr>
+  </script>
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+  <script src="js/lib/underscore.js"></script>
+  <script src="js/ws_client.js"></script>
+  <script src="js/editFlight.js"></script>
+  <script>
+    checkLoggedAsCCO();
+  </script>
+
     <div class="containerE">
       <div class="content">
 	<div class="container-fluid">
@@ -42,7 +69,9 @@
 		<a href="index.html">
 		  <div id="login">
 		    <div class="wrap">
-		      <input id="login" type="submit" value="Log out" class="login" />
+		      <form id="logout_form">
+			<input id="login" type="submit" value="Log out" class="login" />
+		      </form>
 		    </div>
 		  </div>
 		</a>
@@ -81,8 +110,7 @@
 			Commercial Number
 		      </label>
 		    </td>
-		    <td>
-		      <input class="form-control" type="text" id="commercial_number">
+		    <td id="commercial_number_td">
 		    </td>
 		  </tr>
 		  <tr class="active">
@@ -91,8 +119,7 @@
 			ATC Number
 		      </label>
 		    </td>
-		    <td>
-		      <input class="form-control" type="text" id="atc_number">
+		    <td id="atc_number_td">
 		    </td>
 		  </tr>
 		  <tr class="active">
@@ -101,8 +128,7 @@
 			Plane ID
 		      </label>
 		    </td>
-		    <td>
-		      <input class="form-control" type="text" id="plane_id">
+		    <td id="plane_id_td">
 		    </td>
 		  </tr>
 		  <tr class="active">
@@ -111,8 +137,7 @@
 			Departure Airport
 		      </label>
 		    </td>
-		    <td>
-		      <input class="form-control" type="text" id="departure_airport">
+		    <td id="departure_airport_td">
 		    </td>
 		  </tr>
 		  <tr class="active">
@@ -121,8 +146,7 @@
 			Arrival Airport
 		      </label>
 		    </td>
-		    <td>
-		      <input class="form-control" type="text" id="arrival_airport">
+		    <td id="arrival_airport_td">
 		    </td>
 		  </tr>
 		  <tr class="active">
@@ -131,8 +155,7 @@
 			Departure Date
 		      </label>
 		    </td>
-		    <td>
-		      <input class="form-control" type="text" id="departure_date">
+		    <td id="departure_date_td">
 		    </td>
 		  </tr>
 		  <tr class="active">
@@ -141,8 +164,7 @@
 			Arrival Date
 		      </label>
 		    </td>
-		    <td>
-		      <input class="form-control" type="text" id="arrival_date">
+		    <td id="arrival_date_td">
 		    </td>
 		  </tr>
 		  <tr class="active">
@@ -191,120 +213,34 @@
 		</tbody>
 	      </table>
 	    </div>
-	    <!--<div class="col-md-6">
+
+	    <div class="col-md-6">
+	      <form id="add_crew">
 		<table class="table">
 		  <thead>
 		    <tr>
-		      <td></td>
-		      <td>
-			<h3>Crew</h3>
-		      </td>
+		      <th>
+			Crew
+		      </th>
+		    </tr>
+		    <tr>
+		      <td>Name</td>
+		      <td>Profession</td>
+		      <td>Remove</td>
+		    </tr>
+		    <tr>
+		      <input type="text" id="new_crew" placeholder="FirstName LastName">
+		      <button type="submit" onclick="onCrewSubmit();" form="add_crew">
+			Add Crew Member
+		      </button>
 		    </tr>
 		  </thead>
-		  <tbody>
-		    <tr>
-		      <td>Select</td>
-		      <td>
-			Job
-		      </td>
-		      <td>
-			Name
-		      </td>
-		    </tr>
-		    <tr class="active">
-		      <td>
-			<label>
-			  <input type="checkbox" value="">
-			</label>
-		      </td>
-		      <td>
-			Pilot
-		      </td>
-		      <td>
-			Tekkal Karim
-		      </td>
-		    </tr>
-		    <tr class="active">
-		      <td>
-			<label>
-			  <input type="checkbox" value="">
-			</label>
-		      </td>
-		      <td>
-			Pilot
-		      </td>
-		      <td>
-			Gustavo Pietri
-		      </td>
-		    </tr>
-		    <tr class="active">
-		      <td>
-			<label>
-			  <input type="checkbox" value="">
-			</label>
-		      </td>
-		      <td>
-			Co-Pilot
-		      </td>
-		      <td>
-			Kachour Naouel
-		      </td>
-		    </tr>
-		    <tr class="active">
-		      <td>
-			<label>
-			  <input type="checkbox" value="">
-			</label>
-		      </td>
-		      <td>
-			Co-Pilot
-		      </td>
-		      <td>
-			Tantely Nirina
-		      </td>
-		    </tr>
-		    <tr class="active">
-		      <td>
-			<label>
-			  <input type="checkbox" value="">
-			</label>
-		      </td>
-		      <td>
-			Steward
-		      </td>
-		      <td>
-			Ashokoumar Alex
-		      </td>
-		    </tr>
-		    <tr class="active">
-		      <td>
-			<label>
-			  <input type="checkbox" value="">
-			</label>
-		      </td>
-		      <td>
-			Stewardess
-		      </td>
-		      <td>
-			Ksabi Samia
-		      </td>
-		    </tr>
-		    <tr class="active">
-		      <td>
-			<label>
-			  <input type="checkbox" value="">
-			</label>
-		      </td>
-		      <td>
-			Stewardess
-		      </td>
-		      <td>
-			Wang Julienne
-		      </td>
-		    </tr>
+		  <tbody id="template_anchor">
 		  </tbody>
 		</table>
-	    </div>-->
+	      </form>
+	    </div>
+
 	  </div>
     </form>
     <div class="container-fluid">
@@ -315,7 +251,7 @@
 	      <tr>
 		<td></td>
 		<td>
-		  <button type="submit" class="btn btn-default center-block" form="edit_form">
+		  <button type="submit" onclick="if(checkLoggedAsCCO()) submit_form()" class="btn btn-default center-block" form="edit_form">
 		    Confirm
 		  </button>
 		</td>
@@ -338,11 +274,5 @@
 	</div>
       </div>
     </div>
-
-    <script src="bootstrap/js/jquery.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-    <script src="bootstrap/js/underscore.js"></script>
-    <script src="js/ws_client.js"></script>
-    <script src="js/editFlight.js"></script>
   </body>
 </html>

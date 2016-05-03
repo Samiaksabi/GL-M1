@@ -30,3 +30,4 @@ function deleteServerData(url){
 	url: url
     });
 }
+

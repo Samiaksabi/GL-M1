@@ -1,1 +1,0 @@
-2016-05-03 01:02:39,701 ERROR [main] dao.FlightDAOImpl (FlightDAOImpl.java:108) - This flight already exist in the database.

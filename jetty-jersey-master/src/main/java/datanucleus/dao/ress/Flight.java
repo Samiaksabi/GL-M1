@@ -26,8 +26,8 @@ public class Flight{
     public String plane;
 
     @Persistent(defaultFetchGroup = "true")
-    @Join
-    public Collection<String> crew_members=new LinkedHashSet<String>();
+//    @Join
+    public Collection<String> crew_members=new ArrayList<String>();
     
     public String departure_airport;
     

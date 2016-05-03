@@ -71,6 +71,33 @@ public class CrewDAOImpl implements CrewDAO{
 		return detached;
 
 	}
+	
+	public Crew getElement(String firstName, String lastName) {
+		Crew detached;
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			
+			Query q = pm.newQuery(Crew.class);
+			q.declareParameters("String firstname, String lastname");
+			q.setFilter("firstName == firstname && lastName == lastname");
+			q.setUnique(true);
+			
+			Crew crew = (Crew) q.execute(firstName,lastName);
+			detached = (Crew) pm.detachCopy(crew);
+
+			tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
+		
+		return detached;
+
+	}
 
 	public void addElement(Crew elt) {
 		

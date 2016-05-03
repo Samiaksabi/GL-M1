@@ -18,6 +18,36 @@
 
 </head>
 <body>
+
+  <script src="js/lib/jquery.min.js"></script>
+  <script src="js/lib/jquery.cookie.js"></script>
+  <script src="js/login_utilities.js"></script>
+
+  <script id="crewListTemplate" type="texte/template">
+    <tr id=<%= crew_table_id %>>
+      <th>
+	<%= name %>
+      </th>
+      <th>
+	<%= profession %>
+      </th>
+      <th>
+	<button type="submit" onclick="$(<%=crew_table_id_removal%>).remove();currentCrew.splice(<%=id%>,1)" form="add_crew">
+	  Remove
+	</button>
+      </th>
+    </tr>
+  </script>
+
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+  <script src="js/lib/underscore.js"></script>
+  <script src="js/ws_client.js"></script>
+  <script src="js/addFlight.js"></script>
+
+  <script>
+    checkLoggedAsCCO();
+  </script>
+
   <div class="containerE">
     <div class="content">
       <div class="container-fluid">
@@ -44,7 +74,9 @@
 	      <a href="index.html">
 		<div id="login">
 		  <div class="wrap">
-		    <input id="login" type="submit" value="Log out" class="login" />
+		    <form id="logout_form">
+		      <input id="login" type="submit" value="Log out" class="login" />
+		    </form>
 		  </div>
 		</div>
 	      </a>
@@ -174,6 +206,34 @@
 	      </tbody>
 	    </table>
 	  </div>
+
+	  <div class="col-md-6">
+	    <form id="add_crew">
+	      <table class="table">
+		<thead>
+		  <tr>
+		    <th>
+		      Crew
+		    </th>
+		  </tr>
+		  <tr>
+		    <td>Name</td>
+		    <td>Profession</td>
+		    <td>Remove</td>
+		  </tr>
+		  <tr>
+		    <input type="text" id="new_crew" placeholder="FirstName SurName">
+		    <button type="submit" onclick="onCrewSubmit();" form="add_crew">
+		      Add Crew Member
+		    </button>
+		  </tr>
+		</thead>
+		<tbody id="template_anchor">
+		</tbody>
+	      </table>
+	    </form>
+	  </div>
+
 <!--	  <div class="col-md-6">
 	    <table class="table">
 	      <thead>
@@ -301,7 +361,7 @@
 	      <tr>
 		<td></td>
 		<td>
-		  <button type="submit" class="btn btn-default center-block" form="add_form">
+		  <button type="submit" onclick="if(checkLoggedAsCCO()) submit_form()" class="btn btn-default center-block" form="add_form">
 		    Confirm
 		  </button>
 		</td>
@@ -326,10 +386,6 @@
     </div>
   </div>
 
-  <script src="bootstrap/js/jquery.min.js"></script>
-  <script src="bootstrap/js/bootstrap.min.js"></script>
-  <script src="bootstrap/js/underscore.js"></script>
-  <script src="js/ws_client.js"></script>
-  <script src="js/addFlight.js"></script>
+
 </body>
 </html>
