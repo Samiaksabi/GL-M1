@@ -56,4 +56,9 @@ public class FlightDAOFakeImpl implements FlightDAO{
 		// TODO Auto-generated method stub
 		
 	}
+
+	public void importWeatherMap(InputStream stream, String id) throws FileNotFoundException, IOException {
+		// TODO Auto-generated method stub
+		
+	}
 }

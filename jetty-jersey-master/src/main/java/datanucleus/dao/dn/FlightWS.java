@@ -1,6 +1,7 @@
 package datanucleus.dao.dn;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -95,6 +96,13 @@ public class FlightWS implements FlightDAO{
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	public void importOfpFile(@FormDataParam("file") InputStream stream, @PathParam("id") String id) throws FileNotFoundException, IOException {
 		DAOAccessor.getFlightDAO().importOfpFile(stream,id);
+	}
+	
+	@POST
+	@Path("/flight/{id}/uploadweathermap")
+	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	public void importWeatherMap(@FormDataParam("file") InputStream stream, @PathParam("id") String id) throws FileNotFoundException, IOException {
+		DAOAccessor.getFlightDAO().importWeatherMap(stream, id);
 	}
 	/*public void editElement(String name, Flight elt) {
 		// TODO Auto-generated method stub

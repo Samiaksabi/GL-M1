@@ -31,6 +31,7 @@ function fill(flight){
     $("#arrival_date_td").append(html);
     for(var i = 0; i<flight.crew_members.length;i++)
 	getServerData("/ws/crew/"+flight.crew_members[i],addCrew);
+
     if(flight.ofp_url != null){
 	var html = '<a href=' + flight.ofp_url + '>OFP</a>';
 	$("#ofp_td").append(html);
@@ -38,6 +39,15 @@ function fill(flight){
     else{
 	var html = 'None';
 	$("#ofp_td").append(html);
+    }
+
+    if(flight.weather_maps_url != null){
+	var html = '<a href=' + flight.weather_maps_url + '>Weather Map</a>';
+	$("#weather_map_td").append(html);
+    }
+    else{
+	var html = 'None';
+	$("#weather_map_td").append(html);
     }
 }
 

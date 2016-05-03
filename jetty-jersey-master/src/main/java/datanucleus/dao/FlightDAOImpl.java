@@ -4,9 +4,11 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -317,10 +319,11 @@ public class FlightDAOImpl implements FlightDAO {
 	}
 
 	public void importOfpFile(InputStream stream, String id) throws FileNotFoundException, IOException {
-		String url = "src/main/webapp/data/" + id + "_ofp.txt";
-		File f = new File(url);
 		try
 		{
+			String url = "src/main/webapp/data/" + id + "_ofp.txt";
+			File f = new File(url);
+
 		    PrintWriter pw = new PrintWriter (new BufferedWriter (new FileWriter (f)));
 		    int i = 0;
 		    while(true){
@@ -335,6 +338,24 @@ public class FlightDAOImpl implements FlightDAO {
 		catch (IOException exception)
 		{
 		    logger.error("Error while uploading ofp : " + exception.getMessage());
+		}
+	}
+
+	public void importWeatherMap(InputStream stream, String id) throws FileNotFoundException, IOException {
+		try
+		{
+			String url = "src/main/webapp/data/" + id + "_weather_map.jpg";
+			File f = new File(url);
+			OutputStream os = new FileOutputStream(f);
+			byte[] b = new byte[2048];
+			int length;
+			while ((length = stream.read(b)) != -1) {
+				os.write(b, 0, length);
+			}
+		}
+		catch (IOException exception)
+		{
+		    logger.error("Error while uploading weather map : " + exception.getMessage());
 		}
 	}
 	
