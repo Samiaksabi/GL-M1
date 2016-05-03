@@ -32,7 +32,7 @@
 	<%= profession %>
       </th>
       <th>
-	<button type="submit" onclick="$(<%=crew_table_id_removal%>).remove();currentCrew.splice(<%=id%>,1)" form="add_crew">
+	<button type="submit" onclick="$(<%=crew_table_id_removal%>).remove();currentCrew[<%=id%>] = undefined" form="add_crew">
 	  Remove
 	</button>
       </th>

@@ -40,22 +40,19 @@ function onCrewSubmit(){
 }
 
 function crewMembersToString(){
-    var res = "[";
+    var crew = [];
     for(var i = 0; i<currentCrew.length;i++){
-	/*res = res + "{" +
-	'"userName":' + string(currentCrew[i].userName) +
-	',"firstName":' + string(currentCrew[i].firstName) +
-	',"lastName":' + string(currentCrew[i].lastName) +
-	',"password":' + string(currentCrew[i].password) +
-	',"mail":' + string(currentCrew[i].mail) +
-	',"status":' + string(currentCrew[i].status) +
-	',"crewStatus":' + string(currentCrew[i].crewStatus) +
-	"}";*/
-	res += string(currentCrew[i].userName);
-	if(i!=currentCrew.length-1)
-	    res += ",";
+	if(currentCrew[i]!=undefined){
+	    crew.push(currentCrew[i]);
+	}
     }
-    //{"userName":"AlbertLepilote","firstName":"Albert","lastName":"Pilote","password":"password","mail":"albert@pilote.com","status":"CREW","crewStatus":"PILOT"}
+
+    var res = "[";
+    for(var i = 0; i<crew.length;i++){
+	res += string(crew[i].userName);
+	    if(i!=crew.length-1)
+		res += ",";
+    }
     res += "]";
     return res;
 }

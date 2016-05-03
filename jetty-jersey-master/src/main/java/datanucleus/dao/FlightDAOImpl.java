@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
@@ -237,7 +238,7 @@ public class FlightDAOImpl implements FlightDAO {
 
 	public Collection<Flight> getAll(String crew_name) {
 		
-		Collection<Flight> detached;
+		/*Collection<Flight> detached;
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
@@ -261,7 +262,16 @@ public class FlightDAOImpl implements FlightDAO {
 			return null;
 		}
 		
-		return detached;
+		return detached;*/
+		Collection<Flight> flights = getAll();
+		Collection<Flight> res = new ArrayList<Flight>();
+		Iterator<Flight> it = flights.iterator();
+		while(it.hasNext()){
+			Flight f = it.next();
+			if(f.hasCrew(crew_name))
+				res.add(f);
+		}
+		return res;
 	}
 
 	public void importExcelFile(File excelFile) throws FileNotFoundException, IOException{

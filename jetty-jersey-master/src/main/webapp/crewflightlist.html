@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <title>Flight planning</title>
+  <link rel="shortcut icon" href="images/avion1.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="css/layout.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="css/menu.css" type="text/css" media="screen">
+  
+  <meta name="description" content="Source code generated using layoutit.com">
+  <meta name="author" content="LayoutIt!">
+  
+  <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+  <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+  <!--<link href="bootstrap/css/style.css" rel="stylesheet">-->
+</head>
+<body>
+
+  <script src="js/lib/jquery.min.js"></script>
+  <script src="js/lib/jquery.cookie.js"></script>
+  <script src="js/login_utilities.js"></script>
+  <script>
+    checkLoggedAsCrew();
+  </script>
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+  <script src="js/lib/underscore.js"></script>
+  <script src="js/ws_client.js"></script>
+  <script src="js/crewflightlist.js"></script>
+
+  <script id="flightListTemplate" type="texte/template">
+    <tr>
+      <th>
+	<a href="viewflight.html"><button onclick="$.cookie('view_id',<%=view_id%>)"><%= commercial_number %></button></a>
+      </th>
+      <th>
+	<%= departure_airport %>
+      </th>
+      <th>
+	<%= arrival_airport %>
+      </th>
+      <th>
+	<%= departure_time %>
+      </th>
+      <th>
+	<%= arrival_time %>
+      </th>
+    </tr>
+  </script>
+
+  <div class="containerE">
+    <div class="content">
+      <div class="container-fluid">
+	<div class="row">
+	  
+	  <div class="col-md-6">
+	  </div>
+	  <div class="col-md-3"></div>
+	  <div class="col-md-3">
+	    <aside>
+	      <a href="login.html">
+		<div id="login">
+		  <div class="wrap">
+		    <form id="logout_form">
+		      <input id="login" type="submit" value="Log out" class="login" />
+		    </form>
+		  </div>
+		</div>
+	      </a>
+	    </aside>
+	  </div>
+	</div>
+      </div>
+    </div>
+  </div>
+  <div class="div_center">
+    <div class="container-fluid col-md-10 col-md-offset-1">
+      <div class="row">
+	<div class="col-md-12 fond">
+	  <div class="page-header">
+	    <h1 align="center">
+	      Flights List
+	    </h1>
+	  </div>
+
+	  <div class="table-responsive " >
+	    
+	    <table class="table  table-bordered ">
+	      <thead>
+		<tr>
+		  <th>
+		    n° commercial
+		  </th>
+		  <th>
+		    Departure Airport
+		  </th>
+		  <th>
+		    Arrival Airport
+		  </th>
+		  <th>
+		    Departure : Date & Time(Zulu)
+		  </th>
+		  <th>
+		    Arrival : Date & Time(Zulu)
+		  </th>
+		</tr>
+	      </thead>
+	      <tbody id="template_anchor">
+	      </tbody>
+	    </table>
+	  </div>
+	</div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

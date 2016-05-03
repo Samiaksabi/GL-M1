@@ -2,6 +2,7 @@ package datanucleus.dao.ress;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 
@@ -170,6 +171,16 @@ public class Flight{
 		this.ofp_url=elt.ofp_url;
 		this.weather_maps_url=elt.weather_maps_url;
 		return true;
+	}
+	
+	public boolean hasCrew(String crew_name){
+		Iterator<String> it = crew_members.iterator();
+		while(it.hasNext()){
+			String s = it.next();
+			if(s.equals(crew_name))
+				return true;
+		}
+		return false;
 	}
 	
 	/*

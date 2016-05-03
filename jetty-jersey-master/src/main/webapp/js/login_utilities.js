@@ -2,6 +2,8 @@ function login(user){
     console.log(user);
     if(user.status == "CCO")
 	$(location).attr('href',"CCOflightlist.html");
+    else if(user.status == "CREW")
+	$(location).attr('href',"crewflightlist.html");
     $.cookie("status", user.status);
     $.cookie("username", user.userName);
     $.cookie("pwd", user.password);
