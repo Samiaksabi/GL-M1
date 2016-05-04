@@ -3,10 +3,6 @@ var ofpIsSet = false;
 var wmIsSet = false;
 var notamIsSet = false;
 
-var ofpok = true;
-var wmok = true;
-var notamok = true;
-
 function string(e){
     return '"' + e + '"';
 }
@@ -69,14 +65,11 @@ function submit_form(){
 	console.log(json_str);
 	editServerData("/ws/flight/" + $.cookie("edit_id") + "/edit",json_str);
 
-	//while(!(ofpok && wmok && notamok)){}
-
 	$(location).attr('href',"CCOflightlist.html");
     });
 }
 
 function uploadOfp(){
-    ofpok = false;
     var formData = new FormData();
     formData.append('file', $('#ofpInputFile')[0].files[0]);
     var url = '/ws/flight/' + $.cookie('edit_id') + '/uploadofp';
@@ -87,13 +80,11 @@ function uploadOfp(){
 	processData: false,  // tell jQuery not to process the data
 	contentType: false,  // tell jQuery not to set contentType
 	success : function(data) {
-	    ofpok = true;
 	}
     });
 }
 
 function uploadNotam(){
-    notamok = false;
     var formData = new FormData();
     formData.append('file', $('#notamInputFile')[0].files[0]);
     var url = '/ws/flight/' + $.cookie('edit_id') + '/uploadnotam';
@@ -104,13 +95,11 @@ function uploadNotam(){
 	processData: false,  // tell jQuery not to process the data
 	contentType: false,  // tell jQuery not to set contentType
 	success : function(data) {
-	    notamok = true;
 	}
     });
 }
 
 function uploadWeatherMap(){
-    wmok = false;
     var formData = new FormData();
     formData.append('file', $('#weatherMapInputFile')[0].files[0]);
     var url = '/ws/flight/' + $.cookie('edit_id') + '/uploadweathermap';
@@ -121,7 +110,6 @@ function uploadWeatherMap(){
 	processData: false,  // tell jQuery not to process the data
 	contentType: false,  // tell jQuery not to set contentType
 	success : function(data) {
-	    wmok = true;
 	}
     });
 }
