@@ -24,9 +24,7 @@ public class CrewCheckJob extends AlertSystemJob{
 	
 	@Override
 	public void execute(JobExecutionContext context) throws JobExecutionException {
-		System.out.println("CrewCheckJob - OK");
 		String flightIdentifier=context.getJobDetail().getKey().getName();
-		System.out.println("CrewCheckJob - OK");
 		Flight flight=DAOAccessor.getFlightDAO().getElement(flightIdentifier);
 		if(flight==null){
 			logger.info("Can't execute Job because the Flight doesn't exist in the database.");

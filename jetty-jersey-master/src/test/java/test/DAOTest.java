@@ -1,5 +1,7 @@
 package test;
 
+import static org.junit.Assert.*;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
@@ -18,6 +20,7 @@ import org.junit.Test;
 import alertSystem.AlertSystem;
 import datanucleus.dao.*;
 import datanucleus.dao.ress.*;
+import junit.framework.Assert;
 
 public class DAOTest {
 	
@@ -114,7 +117,7 @@ public class DAOTest {
 		for(Airport air:b){
 			System.out.println(air);
 		}
-		
+		assertEquals(2, b.size());
 	}
 /*
 	@Test
@@ -161,6 +164,7 @@ public class DAOTest {
 		for(Plane p:c){
 			System.out.println(p);
 		}
+		assertEquals(1,c.size());
 	}
 	
 	@Test
@@ -176,6 +180,8 @@ public class DAOTest {
 		crewDAO.addElement(new Crew("Si","Si","Chen","pass","test@eu.com",UserStatus.CREW,CrewStatus.PILOT));
 		//crewDAO.deleteElement("Si");
 		System.out.println(crewDAO.getAll());
+		
+		assertEquals(2,userDAO.getAll().size());
 	}
 	
 	@Test
@@ -214,17 +220,14 @@ public class DAOTest {
 		flightDAO.addCrew("Si", "1");
 		
 		flightDAO.addCrew("test", "3");
-		System.out.println("Main - OK");
-		Collection<Flight> flight=flightDAO.getAll("test");
-		System.out.println("Main - OK");
 
+		Collection<Flight> flight=flightDAO.getAll("Si");
+
+		assertEquals(1,flight.size());
+		
 		/*for(Flight f:flight){
 			System.out.println(f);
 		}*/
-
-		AlertSystem a=new AlertSystem();
-		System.out.println("main - OK");
-		a.scheduleFlight("1");
 		
 		/*
 		flight=flightDAO.getAll(null);

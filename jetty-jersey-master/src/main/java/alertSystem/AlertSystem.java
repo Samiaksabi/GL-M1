@@ -40,7 +40,7 @@ public class AlertSystem {
 		
 		Trigger trigger = newTrigger()
 			      .withIdentity(name,group)
-			      .startNow()//.startAt(startDate)
+			      .startAt(startDate)
 			      .build();
 		
 		try {
@@ -58,7 +58,6 @@ public class AlertSystem {
 		
 		try {
 			scheduler.scheduleJob(job, trigger);
-			System.out.println("AlertSystem - OK");
 		} catch (SchedulerException e) {
 			logger.error("Can't schedule the job "+name);
 		}

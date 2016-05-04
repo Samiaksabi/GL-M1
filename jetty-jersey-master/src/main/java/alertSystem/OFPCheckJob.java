@@ -19,7 +19,6 @@ public class OFPCheckJob extends AlertSystemJob {
 	@Override
 	public void execute(JobExecutionContext context) throws JobExecutionException {
 		String flightIdentifier=context.getJobDetail().getKey().getName();
-		System.out.println("OFPCheckJob - OK");
 		Flight flight=DAOAccessor.getFlightDAO().getElement(flightIdentifier);
 		if(flight==null){
 			logger.info("Can't execute Job because the Flight doesn't exist in the database.");
