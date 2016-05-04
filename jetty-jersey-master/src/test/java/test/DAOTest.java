@@ -15,6 +15,7 @@ import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 
+import alertSystem.AlertSystem;
 import datanucleus.dao.*;
 import datanucleus.dao.ress.*;
 
@@ -173,8 +174,8 @@ public class DAOTest {
 		System.out.println(userDAO.getElement("alex2"));
 		
 		crewDAO.addElement(new Crew("Si","Si","Chen","pass","test@eu.com",UserStatus.CREW,CrewStatus.PILOT));
-		crewDAO.deleteElement("Si");
-		System.out.println(userDAO.getAll());
+		//crewDAO.deleteElement("Si");
+		System.out.println(crewDAO.getAll());
 	}
 	
 	@Test
@@ -207,18 +208,23 @@ public class DAOTest {
 		//flightDAO.deleteElement("AF057");
 		//flightDAO.addNotam("AF057", "Super");
 		
-		flightDAO.addCrew("test", "1");
-		flightDAO.addCrew("te", "1");
-		flightDAO.addCrew("tes", "1");
-		flightDAO.addCrew("test", "1");
+		flightDAO.addCrew("Si", "1");
+		flightDAO.addCrew("Si", "1");
+		flightDAO.addCrew("Si", "1");
+		flightDAO.addCrew("Si", "1");
 		
 		flightDAO.addCrew("test", "3");
-		
+		System.out.println("Main - OK");
 		Collection<Flight> flight=flightDAO.getAll("test");
-		
-		for(Flight f:flight){
+		System.out.println("Main - OK");
+
+		/*for(Flight f:flight){
 			System.out.println(f);
-		}
+		}*/
+
+		AlertSystem a=new AlertSystem();
+		System.out.println("main - OK");
+		a.scheduleFlight("1");
 		
 		/*
 		flight=flightDAO.getAll(null);
