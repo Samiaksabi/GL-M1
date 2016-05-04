@@ -1,0 +1,10 @@
+2016-05-04 09:11:18,451 ERROR [qtp88498987-24] dao.FlightDAOImpl (FlightDAOImpl.java:307) - IllegalStateException on line 0
+2016-05-04 09:11:18,453 ERROR [qtp88498987-24] dao.FlightDAOImpl (FlightDAOImpl.java:307) - IllegalStateException on line 1
+2016-05-04 09:11:18,453 ERROR [qtp88498987-24] dao.FlightDAOImpl (FlightDAOImpl.java:307) - IllegalStateException on line 2
+2016-05-04 09:11:18,454 ERROR [qtp88498987-24] dao.FlightDAOImpl (FlightDAOImpl.java:307) - IllegalStateException on line 3
+2016-05-04 09:11:18,454 ERROR [qtp88498987-24] dao.FlightDAOImpl (FlightDAOImpl.java:307) - IllegalStateException on line 4
+2016-05-04 09:11:24,890 ERROR [qtp88498987-22] dao.FlightDAOImpl (FlightDAOImpl.java:307) - IllegalStateException on line 0
+2016-05-04 09:11:24,890 ERROR [qtp88498987-22] dao.FlightDAOImpl (FlightDAOImpl.java:307) - IllegalStateException on line 1
+2016-05-04 09:11:24,891 ERROR [qtp88498987-22] dao.FlightDAOImpl (FlightDAOImpl.java:307) - IllegalStateException on line 2
+2016-05-04 09:11:24,891 ERROR [qtp88498987-22] dao.FlightDAOImpl (FlightDAOImpl.java:307) - IllegalStateException on line 3
+2016-05-04 09:11:24,892 ERROR [qtp88498987-22] dao.FlightDAOImpl (FlightDAOImpl.java:307) - IllegalStateException on line 4
