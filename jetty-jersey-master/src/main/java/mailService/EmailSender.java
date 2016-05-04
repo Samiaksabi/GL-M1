@@ -39,6 +39,7 @@ public class EmailSender {
 		transport.connect("smtp.gmail.com", this.senderMailAddress, this.senderMailPassword);
 		transport.sendMessage(mail, mail.getAllRecipients());
 		transport.close();
+		System.out.println("Email sent");
 		
 	}
 	

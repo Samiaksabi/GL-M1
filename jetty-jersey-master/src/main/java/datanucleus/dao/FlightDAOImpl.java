@@ -204,6 +204,11 @@ public class FlightDAOImpl implements FlightDAO {
 	}
 	
 	public void addCrew(String crew_name, String id){
+		if(DAOAccessor.getCrewDAO().getElement(crew_name)==null){
+			logger.error("Unknown crew");
+			return;
+		}
+		
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
