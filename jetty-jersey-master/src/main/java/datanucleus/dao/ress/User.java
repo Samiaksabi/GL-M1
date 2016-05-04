@@ -26,6 +26,10 @@ public class User{
     	this.status=status;	
     }
     
+    public String getPassword(){
+    	return this.password;
+    }
+    
 	public String getUserName() {
 		return userName;
 	}

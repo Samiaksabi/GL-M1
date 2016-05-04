@@ -1,0 +1,58 @@
+!SESSION 2016-05-02 15:35:33.038 -----------------------------------------------
+eclipse.buildId=4.5.2.M20160212-1500
+java.version=1.7.0_95
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=fr_FR
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -data /home/stefan/EIDD/2A/genie logiciel/GL-M1/jetty-jersey-master -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.equinox.p2.updatesite 2 0 2016-05-02 15:38:35.787
+!MESSAGE Error parsing feature stream. The unique identifier or the version is null or empty for the State: "Description / Site": unique identifier="null" version="1.0.0.m1".
+
+!ENTRY org.eclipse.equinox.p2.updatesite 2 0 2016-05-02 15:38:35.801
+!MESSAGE Error parsing feature stream. The unique identifier or the version is null or empty for the State: "Category": unique identifier="null" version="1.0.0.m2".
+
+!ENTRY org.eclipse.equinox.p2.updatesite 2 0 2016-05-02 15:38:35.801
+!MESSAGE Error parsing feature stream. The unique identifier or the version is null or empty for the State: "Category": unique identifier="null" version="1.0.0.final".
+
+!ENTRY org.eclipse.equinox.p2.updatesite 2 0 2016-05-02 15:38:35.802
+!MESSAGE Error parsing feature stream. The unique identifier or the version is null or empty for the State: "Category": unique identifier="null" version="2.0.0.release".
+
+!ENTRY org.eclipse.equinox.p2.updatesite 2 0 2016-05-02 15:38:35.802
+!MESSAGE Error parsing feature stream. The unique identifier or the version is null or empty for the State: "Category": unique identifier="null" version="2.0.1".
+
+!ENTRY org.eclipse.equinox.p2.updatesite 2 0 2016-05-02 15:38:35.802
+!MESSAGE Error parsing feature stream. The unique identifier or the version is null or empty for the State: "Category": unique identifier="null" version="2.0.2".
+
+!ENTRY org.eclipse.equinox.p2.updatesite 2 0 2016-05-02 15:38:35.802
+!MESSAGE Error parsing feature stream. The unique identifier or the version is null or empty for the State: "Category": unique identifier="null" version="2.0.3".
+
+!ENTRY org.eclipse.equinox.p2.updatesite 2 0 2016-05-02 15:38:35.803
+!MESSAGE Error parsing feature stream. The unique identifier or the version is null or empty for the State: "Category": unique identifier="null" version="2.0.4".
+
+!ENTRY org.eclipse.equinox.p2.updatesite 2 0 2016-05-02 15:38:35.803
+!MESSAGE Error parsing feature stream. The unique identifier or the version is null or empty for the State: "Category": unique identifier="null" version="3.0.0.m1".
+
+!ENTRY org.eclipse.equinox.p2.updatesite 2 0 2016-05-02 15:38:35.803
+!MESSAGE Error parsing feature stream. The unique identifier or the version is null or empty for the State: "Category": unique identifier="null" version="3.0.0.release".
+
+!ENTRY org.eclipse.equinox.p2.updatesite 2 0 2016-05-02 15:38:35.804
+!MESSAGE Error parsing feature stream. The unique identifier or the version is null or empty for the State: "Category": unique identifier="null" version="3.0.1".
+
+!ENTRY org.eclipse.equinox.p2.updatesite 2 0 2016-05-02 15:38:35.804
+!MESSAGE Error parsing feature stream. The unique identifier or the version is null or empty for the State: "Category": unique identifier="null" version="3.0.2".
+
+!ENTRY org.eclipse.equinox.p2.updatesite 2 0 2016-05-02 15:38:35.804
+!MESSAGE Error parsing feature stream. The unique identifier or the version is null or empty for the State: "Category": unique identifier="null" version="3.0.4".
+
+!ENTRY org.eclipse.equinox.p2.updatesite 2 0 2016-05-02 15:38:35.805
+!MESSAGE Error parsing feature stream. The unique identifier or the version is null or empty for the State: "Category": unique identifier="null" version="4.0.0.m1".
+
+!ENTRY org.eclipse.equinox.p2.updatesite 2 0 2016-05-02 15:38:35.805
+!MESSAGE Error parsing feature stream. The unique identifier or the version is null or empty for the State: "Category": unique identifier="null" version="4.0.0.m2".
+
+!ENTRY org.eclipse.equinox.p2.updatesite 2 0 2016-05-02 15:38:35.805
+!MESSAGE Error parsing feature stream. The unique identifier or the version is null or empty for the State: "Category": unique identifier="null" version="4.0.0.m3".
+
+!ENTRY org.eclipse.equinox.p2.updatesite 2 0 2016-05-02 15:38:35.806
+!MESSAGE Error parsing feature stream. The unique identifier or the version is null or empty for the State: "Category": unique identifier="null" version="4.0.0.release".

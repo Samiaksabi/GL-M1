@@ -1,5 +1,8 @@
 package datanucleus.dao.fake;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Collection;
 
 import database.Database;
@@ -40,6 +43,31 @@ public class FlightDAOFakeImpl implements FlightDAO{
 	}
 
 	public void addCrew(String crew_name, String id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void importExcelFile(InputStream stream) throws FileNotFoundException, IOException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void importOfpFile(InputStream stream, String id) throws FileNotFoundException, IOException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void importWeatherMap(InputStream stream, String id) throws FileNotFoundException, IOException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void importLeafletFile(InputStream stream) throws FileNotFoundException, IOException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void importNotamFile(InputStream stream, String id) throws FileNotFoundException, IOException {
 		// TODO Auto-generated method stub
 		
 	}

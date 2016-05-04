@@ -10,6 +10,7 @@ import javax.jdo.Transaction;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.eclipse.jetty.server.session.JDBCSessionManager.Session;
 
 import datanucleus.dao.ress.User;
 
@@ -152,6 +153,12 @@ public class UserDAOImpl implements UserDAO {
 	public boolean login(String user_name, String password) {
 		User user=this.getElement(user_name);
 		return user.isCorrectPassword(password);
+	}
+	
+	//A CHANGER
+	public Session logout(){
+		return null;
+		
 	}
 
 }

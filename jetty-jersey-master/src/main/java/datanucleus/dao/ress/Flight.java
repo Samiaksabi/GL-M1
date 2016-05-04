@@ -2,6 +2,7 @@ package datanucleus.dao.ress;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 
@@ -26,8 +27,8 @@ public class Flight{
     public String plane;
 
     @Persistent(defaultFetchGroup = "true")
-    @Join
-    public Collection<String> crew_members=new LinkedHashSet<String>();
+//    @Join
+    public Collection<String> crew_members=new ArrayList<String>();
     
     public String departure_airport;
     
@@ -38,17 +39,17 @@ public class Flight{
 
     public String ofp_url;
     public String weather_maps_url;
-   
-    @Persistent(defaultFetchGroup = "true")
-    @Join
-    public List<String> notam =new ArrayList<String>();
+  
+    public String notam;
     
     public Flight(){
     	
     }
     
-    public Flight(String commercialNumber,String departureAirport,String arrivalAirport, Date departureTime, Date arrivalTime){
+    public Flight(String commercialNumber, String ATC_code, String plane,String departureAirport,String arrivalAirport, Date departureTime, Date arrivalTime){
     	this.commercial_number=commercialNumber;
+    	this.ATC_code = ATC_code;
+    	this.plane = plane;
     	this.departure_airport=departureAirport;
     	this.arrival_airport=arrivalAirport;
     	this.departure_time=departureTime;
@@ -140,11 +141,11 @@ public class Flight{
 		this.weather_maps_url = weather_maps_url;
 	}
 
-	public List<String> getNotam() {
+	public String getNotam() {
 		return notam;
 	}
 
-	public void setNotam(List<String> notam) {
+	public void setNotam(String notam) {
 		this.notam = notam;
 	}
 
@@ -167,9 +168,21 @@ public class Flight{
 		this.arrival_airport=elt.arrival_airport;
 		this.departure_time=elt.departure_time;
 		this.arrival_time=elt.arrival_time;
+		this.crew_members=elt.crew_members;
 		this.ofp_url=elt.ofp_url;
 		this.weather_maps_url=elt.weather_maps_url;
+		this.notam = elt.notam;
 		return true;
+	}
+	
+	public boolean hasCrew(String crew_name){
+		Iterator<String> it = crew_members.iterator();
+		while(it.hasNext()){
+			String s = it.next();
+			if(s.equals(crew_name))
+				return true;
+		}
+		return false;
 	}
 	
 	/*

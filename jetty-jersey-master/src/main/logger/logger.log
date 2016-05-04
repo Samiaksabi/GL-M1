@@ -1,2 +1,0 @@
-2016-05-04 02:54:07,326 ERROR [main] dao.FlightDAOImpl (FlightDAOImpl.java:108) - This flight already exist in the database.
-2016-05-04 02:54:07,388 ERROR [main] dao.FlightDAOImpl (FlightDAOImpl.java:208) - Unknown crew

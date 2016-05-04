@@ -10,6 +10,7 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.glassfish.jersey.filter.LoggingFilter;
 import org.glassfish.jersey.jackson.JacksonFeature;
+import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.servlet.ServletContainer;
 
@@ -35,6 +36,7 @@ public class FpsServer {
 		rc.packages(true, "datanucleus/dao/dn");
 		rc.register(JacksonFeature.class);
 		rc.register(LoggingFilter.class);
+		rc.register(MultiPartFeature.class);
 
 		// Add a servlet handler for web services
 		ServletHolder servletHolder = new ServletHolder(new ServletContainer(rc));

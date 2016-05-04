@@ -1,6 +1,10 @@
 package datanucleus.dao.dn;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Collection;
 
 import javax.ws.rs.Consumes;
@@ -18,7 +22,8 @@ import datanucleus.dao.FlightDAO;
 import datanucleus.dao.ress.Flight;
 import server.FpsServer;
 import datanucleus.dao.ress.User;
-
+import org.glassfish.jersey.media.multipart.MultiPart;
+import org.glassfish.jersey.media.multipart.FormDataParam;
 
 @Path("")
 public class FlightWS implements FlightDAO{
@@ -78,17 +83,42 @@ public class FlightWS implements FlightDAO{
 	public void addCrew(@PathParam("crew_name") String crew_name, @PathParam("id") String id) {
 		DAOAccessor.getFlightDAO().addCrew(crew_name, id);
 	}
+
+	@POST
+	@Path("/flight/uploadxls")
+	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	public void importExcelFile(@FormDataParam("file") InputStream stream) throws FileNotFoundException, IOException {
+		DAOAccessor.getFlightDAO().importExcelFile(stream);
+	}
 	
-	@GET
-	@Produces("text/plain")
-	@Path("/login/{name}/{password}")
-	public String login(@PathParam("name") String name, @PathParam("password") String password) throws Exception{
-		if (DAOAccessor.getUserDAO().login(name, password))
-			return "SUCCESS";
-		else
-			throw new Exception();
+	@POST
+	@Path("/flight/uploadleaflet")
+	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	public void importLeafletFile(@FormDataParam("file") InputStream stream) throws FileNotFoundException, IOException {
+		DAOAccessor.getFlightDAO().importLeafletFile(stream);
 	}
 
+	@POST
+	@Path("/flight/{id}/uploadofp")
+	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	public void importOfpFile(@FormDataParam("file") InputStream stream, @PathParam("id") String id) throws FileNotFoundException, IOException {
+		DAOAccessor.getFlightDAO().importOfpFile(stream,id);
+	}
+	
+	@POST
+	@Path("/flight/{id}/uploadnotam")
+	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	public void importNotamFile(@FormDataParam("file") InputStream stream, @PathParam("id") String id) throws FileNotFoundException, IOException {
+		DAOAccessor.getFlightDAO().importNotamFile(stream,id);
+	}
+	
+	
+	@POST
+	@Path("/flight/{id}/uploadweathermap")
+	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	public void importWeatherMap(@FormDataParam("file") InputStream stream, @PathParam("id") String id) throws FileNotFoundException, IOException {
+		DAOAccessor.getFlightDAO().importWeatherMap(stream, id);
+	}
 	/*public void editElement(String name, Flight elt) {
 		// TODO Auto-generated method stub
 		
